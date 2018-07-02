@@ -50,8 +50,8 @@ MOSI = 24
 CS   = 25
 mcp = Adafruit_MCP3008.MCP3008(clk=CLK, cs=CS, miso=MISO, mosi=MOSI)
 channel = 0
-threshold = 800
-delayTime = 3
+threshold = 450
+delayTime = 15
 incTime = 1
 
 # Program runs infinitely
