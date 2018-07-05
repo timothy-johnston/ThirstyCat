@@ -51,7 +51,7 @@ CS   = 25
 mcp = Adafruit_MCP3008.MCP3008(clk=CLK, cs=CS, miso=MISO, mosi=MOSI)
 channel = 0
 threshold = 650
-delayTime = 15
+#delayTime = 15
 incTime = 1
 
 # Program runs infinitely
@@ -63,17 +63,17 @@ while True:
     # Read FSR value
     value = mcp.read_adc(channel)
 
-    # If FSR goes above threshold, delay several seconds and check again
+    # If FSR goes above threshold, take a photo and check again
     if value >= threshold:
-        timeStampStart = datetime.datetime.now()
+	os.system("raspistill -n -rot -90 -q 10 -o catWasHere.jpg")       
+	timeStampStart = datetime.datetime.now()
 	dateStart = datetime.datetime.now().isoformat(' ')
 	dateStart = dateStart.split(" ")[0]
-        time.sleep(delayTime)
+        #time.sleep(delayTime)
         value = mcp.read_adc(channel)
         # If FSR still above threshold, assume cat is drinking
         if value >= threshold:
             catWasDrinking = True
-            os.system("raspistill -n -rot -90 -q 10 -o catWasHere.jpg")
             totalDrinks = totalDrinks + 1
 
             if dateStartLast == dateStart:
