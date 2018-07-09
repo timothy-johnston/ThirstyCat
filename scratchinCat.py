@@ -152,11 +152,11 @@ while True:
         print lineToWrite
 	
 	#Format output
-	tableOutput = "Time:  " + str(fullTimeStampStart) + "\nNumber of uses today:  " + str(usesThisDay) + "\nAverage uses per day this month (prior to today):  " + str(avgUsesPerDayThisMonth) + "\n"
+	tableOutput = "Time:  " + str(fullTimeStampStart) + "\nNumber of uses today:  " + str(usesThisDay) + "\n"
 	print tableOutput
 
 	# Share to twitter and follow any new followers
-	twitterMessage = "Hey look, a cat! Shasta just used her scratching board.\n" + tableOutput
+	twitterMessage = "Alert, cat detected! Shasta just used her scratching board.\n" + tableOutput
         for follower in tweepy.Cursor(api.followers).items():
 	    follower.follow()
         photoPath = "/home/pi/projects_2018/shastacam/catWasHere.jpg"
