@@ -31,16 +31,16 @@ if os.path.isfile("/home/pi/projects_2018/shastacam/data/scratchinCatDataLog.txt
     
     #To determine how many days of data have been collected this month, iterate over the list of records
     for record in contentsList:
-    	#Get the timestamp, month, and day of the current record
-	fullTimestampCurrentRecord = record.split(",")[0]
+        #Get the timestamp, month, and day of the current record
+        fullTimestampCurrentRecord = record.split(",")[0]
         yearMonthDayCurrentRecord = fullTimestampCurrentRecord.split(" ")[0]
         monthCurrentRecord = yearMonthDayCurrentRecord.split("-")[1]
 	
 	#Check if the month of the current record matches the current month
 	#If so, save the day as firstDayWithDataThisMonth. This will be used for averaging later (total days = thisDay - firstDay)
 	#If no records with this month exist, the firstDayWithDataThisMonth will be the current day
-	fullTimestampToday = datetime.datetime.now().isoformat(' ')
-	yearMonthDayToday = fullTimestampToday.split(" ")[0]
+        fullTimestampToday = datetime.datetime.now().isoformat(' ')
+        yearMonthDayToday = fullTimestampToday.split(" ")[0]
 	monthToday = yearMonthDayToday.split("-")[1]
 	dayToday = yearMonthDayToday.split("-")[2]
 	firstDayWithDataThisMonth = dayToday
@@ -84,9 +84,13 @@ MOSI = 24
 CS   = 25
 mcp = Adafruit_MCP3008.MCP3008(clk=CLK, cs=CS, miso=MISO, mosi=MOSI)
 channel = 0
-threshold = 750
-delayTime = 3
+threshold = 375
+
+delayTime = 15
 incTime = 1
+firstTimeInLoop = True
+
+value = mcp.read_adc(channel)
 
 # Program runs infinitely
 while True:
@@ -95,7 +99,8 @@ while True:
     catWasHere = False
     
     # Read FSR value
-    value = mcp.read_adc(channel)
+    lastValue = value
+    value = mcp.read_adc(channel)   
 
     # If FSR goes above threshold, take a photo and check again
     if value >= threshold:
@@ -110,7 +115,8 @@ while True:
        
 	 # If FSR still above threshold, assume cat is on platform
         if value >= threshold:
-            catWasHere = True
+	#if value - lastValue > 15:
+	    catWasHere = True
             totalUses = totalUses + 1
 
             if yearMonthDayLast == yearMonthDay:
@@ -131,7 +137,8 @@ while True:
 	    monthStartLast = monthStart
 
             # Wait until cat finishes drinking to move on
-            while value >= threshold:
+            #while value - lastValue > 15:
+	    while value >= threshold:
                 value = mcp.read_adc(channel)
                 time.sleep(incTime)
 
@@ -152,11 +159,11 @@ while True:
         print lineToWrite
 	
 	#Format output
-	tableOutput = "Time:  " + str(fullTimeStampStart) + "\nNumber of uses today:  " + str(usesThisDay) + "\n"
+	tableOutput = "Time:  " + str(fullTimeStampStart) + "\nNumber of drinks today:  " + str(usesThisDay) + "\n"
 	print tableOutput
 
 	# Share to twitter and follow any new followers
-	twitterMessage = "Alert, cat detected! Shasta just used her scratching board.\n" + tableOutput
+	twitterMessage = "Alert, cat detected! Shasta just took a drink.\n" + tableOutput
         for follower in tweepy.Cursor(api.followers).items():
 	    follower.follow()
         photoPath = "/home/pi/projects_2018/shastacam/catWasHere.jpg"
@@ -165,15 +172,3 @@ while True:
     # Pause
     print "Finished loop at " + str(datetime.datetime.now()) +", FSR reading was " + str(value)
     time.sleep(incTime)
-        
-        
-
-
-
-
-
-
-
-
-
-    
