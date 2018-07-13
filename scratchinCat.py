@@ -104,7 +104,7 @@ while True:
 
     # If FSR goes above threshold, take a photo and check again
     if value >= threshold:
-	os.system("raspistill -rot 90 -n -q 10 -o catWasHere.jpg")       
+	os.system("raspistill -rot 180 -n -q 10 -o catWasHere.jpg")       
 	timeStampStartDatetime = datetime.datetime.now()
 	fullTimeStampStart = datetime.datetime.now().isoformat(' ')
 	yearMonthDay = fullTimeStampStart.split(" ")[0]
@@ -172,3 +172,4 @@ while True:
     # Pause
     print "Finished loop at " + str(datetime.datetime.now()) +", FSR reading was " + str(value)
     time.sleep(incTime)
+    threshold = lastValue + 100
