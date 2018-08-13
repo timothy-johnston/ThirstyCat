@@ -84,7 +84,7 @@ MOSI = 24
 CS   = 25
 mcp = Adafruit_MCP3008.MCP3008(clk=CLK, cs=CS, miso=MISO, mosi=MOSI)
 channel = 0
-threshold = 275
+threshold = 500
 
 delayTime = 15
 incTime = 1
@@ -104,7 +104,7 @@ while True:
 
     # If FSR goes above threshold, take a photo and check again
     if value >= threshold:
-	os.system("raspistill -rot 180 -n -q 10 -o catWasHere.jpg")       
+	os.system("raspistill -n -q 10 -o catWasHere.jpg")       
 	timeStampStartDatetime = datetime.datetime.now()
 	fullTimeStampStart = datetime.datetime.now().isoformat(' ')
 	yearMonthDay = fullTimeStampStart.split(" ")[0]
@@ -172,4 +172,4 @@ while True:
     # Pause
     print "Finished loop at " + str(datetime.datetime.now()) +", FSR reading was " + str(value)
     time.sleep(incTime)
-    threshold = lastValue + 100
+    #threshold = lastValue + 100
