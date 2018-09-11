@@ -84,7 +84,7 @@ MOSI = 24
 CS   = 25
 mcp = Adafruit_MCP3008.MCP3008(clk=CLK, cs=CS, miso=MISO, mosi=MOSI)
 channel = 0
-threshold = 500
+threshold = 840
 
 delayTime = 15
 incTime = 1
@@ -170,6 +170,6 @@ while True:
 	api.update_with_media(photoPath, twitterMessage)
 
     # Pause
-    print "Finished loop at " + str(datetime.datetime.now()) +", FSR reading was " + str(value)
+    print "Finished loop at " + str(datetime.datetime.now()) +", FSR reading was: " + str(value) + ", threshold is: " + str(threshold)
     time.sleep(incTime)
     #threshold = lastValue + 100
