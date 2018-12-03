@@ -84,7 +84,7 @@ MOSI = 24
 CS   = 25
 mcp = Adafruit_MCP3008.MCP3008(clk=CLK, cs=CS, miso=MISO, mosi=MOSI)
 channel = 0
-threshold = 840
+threshold = 600
 
 delayTime = 15
 incTime = 1
