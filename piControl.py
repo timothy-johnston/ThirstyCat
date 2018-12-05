@@ -5,6 +5,8 @@ import datetime
 import Adafruit_MCP3008
 import tweepy
 import Tkinter
+import urlib.request
+import urlib.parse
 
 
 # If data exists, read it in
@@ -158,6 +160,10 @@ while True:
         print "MOST RECENT USE:"
         print lineToWrite
 	
+    #Send data to REST API to add it to database
+    url = 'tewardj11.pythonanywhere.com/api/drinks/add/' + str(timeStampStartDatetime) + '+' str(timeStampEndDatetime) + '+' str(usesThisDay)
+    f = urlib.request.urlopen(url)
+
 	#Format output
 	tableOutput = "Time:  " + str(fullTimeStampStart) + "\nNumber of drinks today:  " + str(usesThisDay) + "\n"
 	print tableOutput
