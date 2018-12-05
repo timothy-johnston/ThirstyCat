@@ -5,12 +5,13 @@ import datetime
 # Create your models here.
 
 class Drinks(models.Model):
-    time_start = models.DateTimeField()
-    time_end = models.DateTimeField()
-    photo_path = models.CharField(max_length = 256)
-    drinks_today = models.IntegerField(default = 0)
+    timeStart = models.DateTimeField()
+    timeEnd = models.DateTimeField()
+    photoPath = models.CharField(max_length = 256)
+    drinksToday = models.IntegerField(default = 0)
+    objects = models.Manager()
     def __str__(self):
-        return self.photo_path
+        return self.photoPath
     def recentlyGotDrink(self):
-        return self.time_start >= timezone.now() - datetime.timedelta(days = 1)
+        return self.timeStart >= timezone.now() - datetime.timedelta(days = 1)
     

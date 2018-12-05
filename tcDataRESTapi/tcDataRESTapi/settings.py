@@ -25,7 +25,7 @@ SECRET_KEY = 'ux%!6jy458q53z=m73!w*lu!8nco(#c6k28yk6_cf!&&((j61t'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['tewardj11.pythonanywhere.com']
+ALLOWED_HOSTS = ['tewardj11.pythonanywhere.com', 'localhost']
 
 
 # Application definition
