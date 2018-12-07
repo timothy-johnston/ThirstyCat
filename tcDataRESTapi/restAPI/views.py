@@ -16,7 +16,14 @@ def getPhotoOfLastDrink(request):
     return HttpResponse(Drinks.objects.latest('id').photoPath)
 
 def addDrink(request, startTime, endTime, numDrinks):
-    newdrink = Drinks(timeStart = timezone.now(), timeEnd = endTime, photoPath = '/photos/img+startTime', drinksToday = numDrinks)
+    newdrink = Drinks(timeStart = startTime, timeEnd = endTime, photoPath = '/photos/img+startTime', drinksToday = numDrinks)
     newdrink.save()
     return HttpResponse('New entry added: ' + newdrink)
+
+def addDrinkBasic(request, numDrinks):
+    #Use dummy data for the dates and photo path for the time being
+    #TODO: Remove this method, fix date formatting in addDrink
+    newdrink = Drinks(timeStart = timezone.now(), timeEnd = timezone.now(), photoPath = '/photos/img+startTime', drinksToday = numDrinks)
+    newdrink.save()
+    return HttpResponse('New entry added: ' + str(newdrink.drinksToday))
  
