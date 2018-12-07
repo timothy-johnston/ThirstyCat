@@ -5,8 +5,7 @@ import datetime
 import Adafruit_MCP3008
 import tweepy
 import Tkinter
-import urlib.request
-import urlib.parse
+import urllib2
 
 
 # If data exists, read it in
@@ -86,7 +85,7 @@ MOSI = 24
 CS   = 25
 mcp = Adafruit_MCP3008.MCP3008(clk=CLK, cs=CS, miso=MISO, mosi=MOSI)
 channel = 0
-threshold = 600
+threshold = 615
 
 delayTime = 15
 incTime = 1
@@ -160,12 +159,14 @@ while True:
         print "MOST RECENT USE:"
         print lineToWrite
 	
-    #Send data to REST API to add it to database
-    url = 'tewardj11.pythonanywhere.com/api/drinks/add/' + str(timeStampStartDatetime) + '+' str(timeStampEndDatetime) + '+' str(usesThisDay)
-    f = urlib.request.urlopen(url)
+    	#Send data to REST API to add it to database
+    	url = 'tewardj11.pythonanywhere.com/api/drinks/add/' + str(timeStampStartDatetime) + '+' + str(timeStampEndDatetime) + '+' + str(usesThisDay)
+    	urlBasic = 'https://tewardj11.pythonanywhere.com/api/drinks/addBasic/' + str(usesThisDay)
+	f = urllib2.urlopen(urlBasic).read()
+	#f = urllib.urlopen(url)
 
 	#Format output
-	tableOutput = "Time:  " + str(fullTimeStampStart) + "\nNumber of drinks today:  " + str(usesThisDay) + "\n"
+        tableOutput = "Time: " + str(fullTimeStampStart) + "\nNumber of drinks today:  " + str(usesThisDay) + "\n"
 	print tableOutput
 
 	# Share to twitter and follow any new followers
