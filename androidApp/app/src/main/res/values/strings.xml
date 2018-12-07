@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">ThirstyCatAndroid</string>
+    <string name="edit_message">NUMBER</string>
+    <string name="button_refresh">REFRESH</string>
+</resources>
