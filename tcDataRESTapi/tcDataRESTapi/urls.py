@@ -16,11 +16,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 from restAPI.resources import DrinksResource
+from django.conf import settings
+from django.conf.urls.static import static
+from rest_framework.parsers import FileUploadParser
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
 drinks_resource = DrinksResource()
 
 urlpatterns = [
     path('api/', include('restAPI.urls')),
-    path('api2/', include(drinks_resource.urls)),
     path('admin/', admin.site.urls),
-]
+] 
