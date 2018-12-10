@@ -3,9 +3,12 @@ package com.tj.thirstycatandroid;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.TextView;
 
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
+import com.squareup.okhttp.RequestBody;
+import com.squareup.okhttp.Response;
 
 import java.io.IOException;
 
@@ -18,34 +21,45 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-    //Called when user presses button to refresh the count
-    public void reloadCountAndPicture(View view) {
 
-        //Hit the thirstycat api to get most recent drink count
-        int count = Integer.parseInt(makeGetRequest("https://www.pythonanywhere.com/drinksToday"));
+    final OkHttpClient client = new OkHttpClient();
+    final Request request = new Request.Builder()
+            .url("http://tewardj11.pythonanywhere.com/api/drinks/drinkstoday")
+            .build();
 
-        //Hit the thirstycat api to get most recent drink pic
-        //type?? drinkPicture = getDrinkPicture();
+    public void onClick (View v) {
+        new Thread(new Runnable() {
 
-        //Update the count and picture
-        //updateCountAndPicture(drinkCount, drinkPicture);
+            public void run() {
+                Response response = null;
+                try {
+                    response = client.newCall(request).execute();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                String responseString = "hi";
+                try {
+                    responseString = response.body().string();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                final String responseBodyString = responseString;
+                //int responseInt = Integer.parseInt(responseString);
+                final TextView countText;
+                countText = (TextView) findViewById(R.id.countText);
+
+
+
+                runOnUiThread(new Runnable() {
+                   @Override
+                   public void run() {
+                       countText.setText("Drinks today: " + responseBodyString);
+                   }
+                });
+
+
+            }
+        }).start();
     }
 
-    private String makeGetRequest(String url) {
-
-        OkHttpClient client = new OkHttpClient();
-
-        Request request = new Request.Builder().url(url).build();
-
-        String response = null;
-
-        try {
-            response = client.newCall(request).execute().toString();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return response;
-
-    }
 }
