@@ -7,34 +7,52 @@
     tools:context=".MainActivity">
 
     <EditText
-        android:id="@+id/countText"
+        android:id="@+id/editText3"
+        android:layout_width="wrap_content"
+        android:layout_height="46dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="She's now taken"
+        tools:layout_editor_absoluteX="98dp"
+        tools:layout_editor_absoluteY="290dp" />
+
+    <EditText
+        android:id="@+id/countText_old"
         android:layout_width="0dp"
-        android:layout_height="96dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
+        android:layout_height="138dp"
+        android:layout_marginStart="23dp"
+        android:layout_marginLeft="23dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="NUMBER"
-        android:textSize="36sp"
+        android:textSize="60sp"
         android:textStyle="bold"
         android:typeface="sans"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="243dp" />
+        tools:layout_editor_absoluteY="348dp" />
 
     <Button
         android:id="@+id/button"
         android:layout_width="0dp"
-        android:layout_height="80dp"
-        android:layout_marginBottom="88dp"
-        android:onClick="onClick"
+        android:layout_height="50dp"
+        android:onClick="loadNewData"
         android:text="Refresh"
         android:typeface="sans"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/editText2"
+        android:layout_width="wrap_content"
+        android:layout_height="46dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="drinks today."
+        tools:layout_editor_absoluteX="98dp"
+        tools:layout_editor_absoluteY="496dp" />
 </android.support.constraint.ConstraintLayout>

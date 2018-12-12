@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        loadNewData();
     }
 
 
@@ -27,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
             .url("http://tewardj11.pythonanywhere.com/api/drinks/drinkstoday")
             .build();
 
-    public void onClick (View v) {
+    public void loadNewData () {
         new Thread(new Runnable() {
 
             public void run() {
