@@ -87,7 +87,7 @@ mcp = Adafruit_MCP3008.MCP3008(clk=CLK, cs=CS, miso=MISO, mosi=MOSI)
 channel = 0
 threshold = 600
 
-delayTime = 15
+delayTime = 25    #Wait when going above/below threshold
 incTime = 1
 firstTimeInLoop = True
 
@@ -141,7 +141,7 @@ while True:
             #while value - lastValue > 15:
 	    while value >= threshold:
                 value = mcp.read_adc(channel)
-                time.sleep(incTime)
+                time.sleep(delayTime)
 
     # If cat was on platform, write data
     if catWasHere:
