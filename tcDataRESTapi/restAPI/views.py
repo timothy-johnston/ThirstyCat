@@ -9,6 +9,7 @@ import datetime
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 from braces.views import CsrfExemptMixin
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 
 lastPingTime = timezone.now() - timezone.now()
 
@@ -62,15 +63,22 @@ class FileUploadView(CsrfExemptMixin, APIView):
     parser_classes = (FileUploadParser,)
 
     #@csrf_exempt
-    def put(self, request, filename, format = None):
-        print ("about to do request.data-----------------------------")
+    def post(self, request, filename, format = 'png'):
+        if request.method == 'POST' and 'myfile' in request.FILES:
+            print("HELLO!!!!!!!!!!!!!!!!!")
+        
+        
+        print ("------------about to do request.data-----------------------------")
         #file_obj = request.data['file']
-        filepath = request.FILES.get('filename')
+        filepath = request.FILES.get('file')
+        print(filename)
         print(filepath)
-        print(request.body)
-        print("-----------------")
+        print(request.data)
+        # print(request.body)
+        # print(request.data)
+        print("-----------finished printing------------")
         up_file = request.FILES['file']
-        destination = open('/Users/Username/' + up_file.name, 'wb+')
+        destination = open(up_file.name, 'wb+')
         for chunk in up_file.chunks():
             destination.write(chunk)
             destination.close()

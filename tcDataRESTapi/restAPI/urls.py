@@ -12,7 +12,7 @@ urlpatterns = [
     #path('drinks/photooflastdrink', views.getPhotoOfLastDrink, name= 'photooflastdrink'),
     path('drinks/add/<str:startTime>+<str:endTime>+<int:numDrinks>', views.addDrink),
     path('drinks/addBasic/<int:numDrinks>', views.addDrinkBasic, name = 'addDrinkBasic'),
-    path('drinks/imageupload/<str:filename>', views.FileUploadView),
+    path('drinks/imageupload/<str:filename>', views.FileUploadView.as_view()),
     path("health/ping", views.healthCheckPing),
     path('health/status', views.healthCheckStatus),
 ]
