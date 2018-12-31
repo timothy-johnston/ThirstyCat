@@ -10,6 +10,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 from braces.views import CsrfExemptMixin
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+import base64
 
 lastPingTime = timezone.now() - timezone.now()
 
@@ -64,7 +65,7 @@ class FileUploadView(CsrfExemptMixin, APIView):
 
     #@csrf_exempt
     def post(self, request, filename, format = 'png'):
-        if request.method == 'POST' and 'myfile' in request.FILES:
+        if request.method == 'POST':
             print("HELLO!!!!!!!!!!!!!!!!!")
         
         
@@ -73,7 +74,8 @@ class FileUploadView(CsrfExemptMixin, APIView):
         filepath = request.FILES.get('file')
         print(filename)
         print(filepath)
-        print(request.data)
+        print(filepath)
+        print('OK')
         # print(request.body)
         # print(request.data)
         print("-----------finished printing------------")
@@ -85,6 +87,16 @@ class FileUploadView(CsrfExemptMixin, APIView):
         print ("----------got past request.data-----------------------")
 
         #DO STUFF WITH FILE HERE
+        # imageStr
+        # f = open('file', 'rb')
+        # binaryText = f.read()
+        # uploadedPic = open("uploadedPic.png", "wb")
+        # uploadedPic.write(binaryText.decode('base64'))
+        # uploadedPic.close()
+        with open('file') as f:
+            lines = f.readlines()
+        for line in lines[:-1]:
+            print(line)
 
 
         return Response(status = 204)
