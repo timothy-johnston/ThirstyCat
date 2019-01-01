@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from restAPI.models import Drinks
+from restAPI.models import Images
 from django.utils import timezone
 from rest_framework.parsers import FileUploadParser
 from rest_framework.response import Response
@@ -11,6 +12,13 @@ from django.utils.decorators import method_decorator
 from braces.views import CsrfExemptMixin
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 import base64
+import os
+from django.core.files.storage import default_storage
+from django.core.files.base import ContentFile
+from django.conf import settings
+from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseNotAllowed
+from django import forms
+
 
 lastPingTime = timezone.now() - timezone.now()
 
@@ -86,6 +94,10 @@ class FileUploadView(CsrfExemptMixin, APIView):
         for chunk in up_file.chunks():
             destination.write(chunk)
             destination.close()
+        img = Images()
+        img.image.save(up_file.name, File(open(up_file.name, 'r')))
+        img.save()
+
         print ("----------got past request.data-----------------------")
 
         #Look at this next
@@ -93,6 +105,14 @@ class FileUploadView(CsrfExemptMixin, APIView):
         #https://stackoverflow.com/questions/505868/django-how-do-you-turn-an-inmemoryuploadedfile-into-an-imagefields-fieldfile
 
         #DO STUFF WITH FILE HERE
+
+        data = request.FILES['file'].file
+        path = default_storage.save('savedimage.png', ContentFile(data.read()))
+        tmp_file = os.path.join(settings.MEDIA_ROOT, path)
+
+
+
+
         # imageStr
         # f = open('file', 'rb')
         # binaryText = f.read()

@@ -16,6 +16,6 @@ class Drinks(models.Model):
         return self.timeStart >= timezone.now() - datetime.timedelta(days = 1)
 
 class Images(models.Model):
-    image = models.ImageField('Uploaded image')     #stores image filename
+    image = models.ImageField(upload_to = '', default = 'testimg.png')     #stores image filename
     objects = models.Manager()
     

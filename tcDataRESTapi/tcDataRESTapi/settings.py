@@ -139,6 +139,11 @@ REST_FRAMEWORK = {
     )
 }
 
+# only use TemporaryFileUploadHandler for file uploads
+FILE_UPLOAD_HANDLERS = (
+    'django.core.files.uploadhandler.TemporaryFileUploadHandler',
+)
+
 CORS_ORIGIN_ALLOW_ALL = 'ALL'
 CORS_ALLOW_METHODS = (
         'GET',
