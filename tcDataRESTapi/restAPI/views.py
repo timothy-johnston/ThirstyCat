@@ -74,8 +74,10 @@ class FileUploadView(CsrfExemptMixin, APIView):
         filepath = request.FILES.get('file')
         print(filename)
         print(filepath)
-        print(filepath)
+        print(request.FILES)
         print('OK')
+        print(request.POST.keys())
+        print(request.FILES.keys())
         # print(request.body)
         # print(request.data)
         print("-----------finished printing------------")
@@ -86,6 +88,10 @@ class FileUploadView(CsrfExemptMixin, APIView):
             destination.close()
         print ("----------got past request.data-----------------------")
 
+        #Look at this next
+        #https://stackoverflow.com/questions/16905724/post-an-inmemoryuploadedfile-from-a-file-input-field-to-another-external-server
+        #https://stackoverflow.com/questions/505868/django-how-do-you-turn-an-inmemoryuploadedfile-into-an-imagefields-fieldfile
+
         #DO STUFF WITH FILE HERE
         # imageStr
         # f = open('file', 'rb')
@@ -93,10 +99,10 @@ class FileUploadView(CsrfExemptMixin, APIView):
         # uploadedPic = open("uploadedPic.png", "wb")
         # uploadedPic.write(binaryText.decode('base64'))
         # uploadedPic.close()
-        with open('file') as f:
-            lines = f.readlines()
-        for line in lines[:-1]:
-            print(line)
+        # with open('file') as f:
+        #     lines = f.readlines()
+        # for line in lines[:-1]:
+        #     print(line)
 
 
         return Response(status = 204)
