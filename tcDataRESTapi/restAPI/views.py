@@ -17,7 +17,12 @@ from django.core.files.storage import default_storage
 from django.core.files.base import ContentFile
 from django.conf import settings
 from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseNotAllowed
-from django import forms
+from django.http import HttpResponseRedirect
+from django.shortcuts import render
+from django.shortcuts import render_to_response
+from django.template import RequestContext
+from .forms import UploadFileForm, UploadImageForm
+from .models import UploadedImage
 
 
 lastPingTime = timezone.now() - timezone.now()
@@ -73,10 +78,33 @@ class FileUploadView(CsrfExemptMixin, APIView):
 
     #@csrf_exempt
     def post(self, request, filename, format = 'png'):
+        # if request.method == 'POST':
+        #     print("HELLO!!!!!!!!!!!!!!!!!")
+        #     form = UploadFileForm(request.POST, request.FILES)
+        #     if form.is_valid():
+        #         print("FORM WAS VALID!!!!!!!!!!!!!!!!!!!!!!!1")
+        #         handle_uploaded_file(request.FILES['file'])
+        #         return HttpResponseRedirect('/success/url/')
+        # else:
+        #     form = UploadFileForm()
+        # return render(request, 'upload.html', {'form':form})
+        
         if request.method == 'POST':
-            print("HELLO!!!!!!!!!!!!!!!!!")
+            print('About to instantiate form')
+            form = UploadImageForm(request.POST or None)
+            print(form.errors)
+            #if form.is_valid():
+            form.save()
+            newimg = UploadedImage(imgfile = request.FILES['file'])
+            newimg.save()
+
+            return Response('You did it you absolute unit')
+
+        else:
+            return Response('yeah that didnt work')
+
         
-        
+        #For debugging. Currently won't get here:
         print ("------------about to do request.data-----------------------------")
         #file_obj = request.data['file']
         filepath = request.FILES.get('file')
@@ -86,17 +114,15 @@ class FileUploadView(CsrfExemptMixin, APIView):
         print('OK')
         print(request.POST.keys())
         print(request.FILES.keys())
-        # print(request.body)
-        # print(request.data)
         print("-----------finished printing------------")
         up_file = request.FILES['file']
         destination = open(up_file.name, 'wb+')
         for chunk in up_file.chunks():
             destination.write(chunk)
             destination.close()
-        img = Images()
-        img.image.save(up_file.name, File(open(up_file.name, 'r')))
-        img.save()
+        # img = Images()
+        # img.image.save(up_file.name, File(open(up_file.name, 'r')))
+        # img.save()
 
         print ("----------got past request.data-----------------------")
 
@@ -110,20 +136,9 @@ class FileUploadView(CsrfExemptMixin, APIView):
         path = default_storage.save('savedimage.png', ContentFile(data.read()))
         tmp_file = os.path.join(settings.MEDIA_ROOT, path)
 
-
-
-
-        # imageStr
-        # f = open('file', 'rb')
-        # binaryText = f.read()
-        # uploadedPic = open("uploadedPic.png", "wb")
-        # uploadedPic.write(binaryText.decode('base64'))
-        # uploadedPic.close()
-        # with open('file') as f:
-        #     lines = f.readlines()
-        # for line in lines[:-1]:
-        #     print(line)
-
-
         return Response(status = 204)
  
+def handle_uploaded_file(f):
+    with open('testfilename.png', 'wb+') as destination:
+        for chunk in f.chunks():
+            destination.write(chunk)

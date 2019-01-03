@@ -18,4 +18,8 @@ class Drinks(models.Model):
 class Images(models.Model):
     image = models.ImageField(upload_to = '', default = 'testimg.png')     #stores image filename
     objects = models.Manager()
+
+class UploadedImage(models.Model):
+    upImage = models.FileField(upload_to='')
+
     
