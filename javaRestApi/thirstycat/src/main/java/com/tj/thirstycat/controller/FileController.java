@@ -22,7 +22,7 @@ public class FileController {
 	private FileStorageService fileStorageService;
 	
 	@PostMapping("/uploadImage")
-	public UploadImageResponse uploadFile(@RequestParam("file") MultipartFile file) throws FileStorageException {
+	public UploadImageResponse uploadFile(@RequestParam("image") MultipartFile file) throws FileStorageException {
 		
 		String fileName = fileStorageService.storeFile(file);
 		

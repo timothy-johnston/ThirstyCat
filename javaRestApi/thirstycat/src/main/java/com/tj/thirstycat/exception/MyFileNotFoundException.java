@@ -1,9 +1,13 @@
 package com.tj.thirstycat.exception;
 
-public class MyFileNotFoundException extends Exception {
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
-	public MyFileNotFoundException(String string) {
-		// TODO Auto-generated constructor stub
+@ResponseStatus(HttpStatus.NOT_FOUND)			//Will respond with 404
+public class MyFileNotFoundException extends RuntimeException {
+
+	public MyFileNotFoundException(String message) {
+		super(message);
 	}
 
 }
