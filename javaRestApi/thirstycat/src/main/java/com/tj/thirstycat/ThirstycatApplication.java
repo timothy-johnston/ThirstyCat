@@ -14,6 +14,8 @@ public class ThirstycatApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(ThirstycatApplication.class, args);
 	}
+	
+	
 
 }
 

@@ -1,5 +1,8 @@
 package com.tj.thirstycat.controller;
 
+import java.awt.List;
+import java.util.ArrayList;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +16,10 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.tj.thirstycat.exception.FileStorageException;
 import com.tj.thirstycat.payload.UploadImageResponse;
+import com.tj.thirstycat.repository.DrinkRepository;
 import com.tj.thirstycat.service.FileStorageService;
+
+import entity.Drink;
 
 @RestController
 public class DataTransferController {
@@ -22,6 +28,9 @@ public class DataTransferController {
 	
 	@Autowired
 	private FileStorageService fileStorageService;
+	
+	@Autowired
+	private DrinkRepository drinkRepository;
 	
 	//Endpoint for uploading an image
 	//piControl script will hit this after the PiCam takes a picture
@@ -41,7 +50,10 @@ public class DataTransferController {
 	@GetMapping("/api/addDrink")
 	@ResponseBody
 	public String addDrink(@RequestParam(name = "drinks", required = true) String drinks) {
-		//TODO: Update model
+
+		Drink newDrink = new Drink(Integer.parseInt(drinks));
+		drinkRepository.save(newDrink);
+	
 		return "Number of drinks updated.";
 	}
 	
@@ -49,9 +61,11 @@ public class DataTransferController {
 	//Users will hit this when checking # of drinks taken today
 	@GetMapping("/api/drinkstoday")
 	@ResponseBody
-	public String getDrinksToday() {
-		//TODO: Implement model
-		return null;
+	public int getDrinksToday() {
+		ArrayList<Drink> allDrinks = new ArrayList<Drink>();
+		allDrinks = (ArrayList<Drink>) drinkRepository.findAll();
+		
+		return allDrinks.get(allDrinks.size()).getDrinksToday();
 	}
 	
 }
