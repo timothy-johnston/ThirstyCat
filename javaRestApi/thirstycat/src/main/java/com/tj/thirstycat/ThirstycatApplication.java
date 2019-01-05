@@ -3,9 +3,12 @@ package com.tj.thirstycat;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.ComponentScan;
+
 import com.tj.thirstycat.property.FileStorageProperties;
 
 @SpringBootApplication
+@ComponentScan("com.tj.thirstycat")
 @EnableConfigurationProperties({
 	FileStorageProperties.class
 })
