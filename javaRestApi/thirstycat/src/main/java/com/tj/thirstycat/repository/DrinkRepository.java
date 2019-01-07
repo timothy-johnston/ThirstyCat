@@ -10,8 +10,5 @@ import entity.Drink;
 
 @Repository
 public interface DrinkRepository extends CrudRepository<Drink, Long> {
-
-	//Below method commented out because I think it's impelmentation is in CrudRepository
-	//List<Drink> findAll();
 	
 }

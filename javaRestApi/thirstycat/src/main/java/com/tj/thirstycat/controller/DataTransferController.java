@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -45,45 +46,37 @@ public class DataTransferController {
 
 	}
 	
-	//Endpoint for updating number of drinks taken today
-	//piControl script will hit this after Shasta takes a drink
-	@GetMapping("/api/addDrink")
-	@ResponseBody
-	public String addDrink(@RequestParam(name = "drinks", required = true) String drinks) {
+//	//Endpoint for updating number of drinks taken today
+//	//piControl script will hit this after Shasta takes a drink
+//	@GetMapping("/api/addDrink")
+//	@ResponseBody
+//	public String addDrink(@RequestParam(name = "drinks", required = true) String drinks) {
+//
+//		Drink newDrink = new Drink(Integer.parseInt(drinks));
+//		drinkRepository.save(newDrink);
+//	
+//		return "Number of drinks updated.";
+//	}
+//	
+//	//Endpoint for getting number of drinks taken today
+//	//Users will hit this when checking # of drinks taken today
+//	@GetMapping("/api/drinkstoday")
+//	@ResponseBody
+//	public int getDrinksToday() {
+//		ArrayList<Drink> allDrinks = new ArrayList<Drink>();
+//		allDrinks = (ArrayList<Drink>) drinkRepository.findAll();
+//		
+//		return allDrinks.get(allDrinks.size()).getDrinksToday();
+//	}
+//	
+//	//Check service status
+//	@GetMapping("/api/status")
+//	@ResponseBody
+//	public String getServiceStatus() {
+//
+//		return "Service is up. Yay!";
+//	}
 
-		Drink newDrink = new Drink(Integer.parseInt(drinks));
-		drinkRepository.save(newDrink);
-	
-		return "Number of drinks updated.";
-	}
-	
-	//Endpoint for getting number of drinks taken today
-	//Users will hit this when checking # of drinks taken today
-	@GetMapping("/api/drinkstoday")
-	@ResponseBody
-	public int getDrinksToday() {
-		ArrayList<Drink> allDrinks = new ArrayList<Drink>();
-		allDrinks = (ArrayList<Drink>) drinkRepository.findAll();
-		
-		return allDrinks.get(allDrinks.size()).getDrinksToday();
-	}
-	
-	//Check service status
-	@GetMapping("/api/status")
-	@ResponseBody
-	public String getServiceStatus() {
-
-		return "Service is up. Yay!";
-	}
-	
-	//Check service status
-	@GetMapping("/")
-	@ResponseBody
-	public String getServiceStatus2() {
-
-		return "Service is up. Yay!";
-	}
-	
 	@GetMapping("/hello-world")
     @ResponseBody
     public String sayHello(@RequestParam(name="name", required=false, defaultValue="Stranger") String name) {
