@@ -68,4 +68,26 @@ public class DataTransferController {
 		return allDrinks.get(allDrinks.size()).getDrinksToday();
 	}
 	
+	//Check service status
+	@GetMapping("/api/status")
+	@ResponseBody
+	public String getServiceStatus() {
+
+		return "Service is up. Yay!";
+	}
+	
+	//Check service status
+	@GetMapping("/")
+	@ResponseBody
+	public String getServiceStatus2() {
+
+		return "Service is up. Yay!";
+	}
+	
+	@GetMapping("/hello-world")
+    @ResponseBody
+    public String sayHello(@RequestParam(name="name", required=false, defaultValue="Stranger") String name) {
+        return ("sup " + name);
+    }
+	
 }
