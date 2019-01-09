@@ -17,6 +17,6 @@ public class ImageUploadController {
 		return "I live!";
 	}
 	
-	
+	//Comment for test commit
 	
 }
