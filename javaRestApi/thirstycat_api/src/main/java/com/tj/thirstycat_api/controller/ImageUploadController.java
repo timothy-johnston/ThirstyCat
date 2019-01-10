@@ -1,5 +1,8 @@
 package com.tj.thirstycat_api.controller;
 
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,7 +31,23 @@ public class ImageUploadController {
 			//Read file to byte array
 			byte[] fileBytes = file.getBytes();
 			//TODO: Continue following tutorial at http://www.mkyong.com/spring-boot/spring-boot-file-upload-example/
+			
+			if (file.isEmpty()) {
+				redirectAttributes.addFlashAttribute("message", "Please select a file to upload");				//Might not need this
+				return "rediret:api/uploadStatus";
+			}
+			
+			Path path = Paths.get(upload_dir + file.getOriginalFilename());
+			
+			Files.write(path,  fileBytes);
+			
+			redirectAttributes.addFlashAttribute("message", "You successfully uploaded '" + file.getOriginalFilename() + "'");
+			
+		} catch (IOEception e) {
+			e.printStackTrace();
 		}
+			
+		return "redirect:/uploadStatus";
 		
 	}
 	
