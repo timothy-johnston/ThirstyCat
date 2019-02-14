@@ -29,7 +29,7 @@
 	<div class="container">
 		<div class="starter-template">
 			<h1>This will be ThirstyCat!</h1>
-			<h2>Message: ${message}</h2>
+			<h2>neat ${message}</h2>
 		</div>
 	</div>
 
