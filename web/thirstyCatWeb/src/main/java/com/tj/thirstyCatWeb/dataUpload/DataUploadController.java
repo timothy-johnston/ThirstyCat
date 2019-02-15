@@ -52,7 +52,7 @@ public class DataUploadController {
 		
 	}
 	
-	@PostMapping("/api/addnewdrink")
-	public String addNewDrink(
+//	@PostMapping("/api/addnewdrink")
+//	public String addNewDrink(
 	
 }
