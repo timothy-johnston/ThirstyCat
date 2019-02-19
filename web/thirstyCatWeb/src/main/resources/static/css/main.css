@@ -3,8 +3,10 @@ body {
 }
 
 div{
-	border-style:solid;
-	border-color:black;
+	
+	align-items:center;
+  	display:flex;
+  	justify-content:center;
 }
 
 div[id*="Section"]{
@@ -26,8 +28,16 @@ div[id*="Section"]{
 	clear:both;
 }
 
+/* Nav bar formatting */
+.navbarCustom {
+	background:transparent;
+	height:15px;
+}
 
 /* Toggle button formatting */
+#toggleSection {
+	margin:10px 15% 10px 15%;
+}
 .btn {
 	border-style:solid;
 	border-color:black;

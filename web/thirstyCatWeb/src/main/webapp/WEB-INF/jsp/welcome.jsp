@@ -11,41 +11,30 @@
 <body>
 
 	<!--  NAVBAR -->
-	<nav class="navbar navbar-inverse">
-		<div class-"container>
-			<div class="navbar-header">
-				<a class="navbar-brand" href="#">ThirstyCat</a>
-			</div>
-			<div id="navbar" class="collapse navbar-collapse">
-				<ul class="nav navbar-nav">
-					<li class="active"><a href="#">Home</a></li>
-				</ul>
-			</div>
-		</div>
-	</nav>
+	
 	
 	<!-- DIV to contain toggle bar to switch from cat image to cat stats -->
-	<div class="container row" id="toggleSection">
-		<div class="toggleColumn text-center">
+	<div id="toggleSection">
+		<span class="toggleColumn text-center">
 			<button type="button" class="btn btn-block buttonSelected" id="toggleButtonTC">ThirstyCat</button>
-		</div>
-		<div class="toggleColumn text-center">
+		</span>
+		<span class="toggleColumn text-center">
 			<button type="button" class="btn btn-block buttonUnselected" id="toggleButtonCatStats">Cat Stats</button>
-		</div>
+		</span>
 	</div>
 	
 	<!--  DIV to contain the most recent thirstycat image -->
-	<div class="container" id="thirstyCatImageSection">
+	<div id="thirstyCatImageSection">
 		<img class="center-block" src="https://media.mnn.com/assets/images/2017/02/cat-drinking-faucet.jpg.653x0_q80_crop-smart.jpg" alt="Most recent picture of cat drinking water">
 	</div>
 	
 	<!--  DIV to contain thirstycat cat stats -->
-	<div class="container" id="catStatsSection">
+	<div id="catStatsSection">
 		<img class="center-block" src="https://datavizcatalogue.com/methods/images/top_images/line_graph.png" alt="a cat stat graph">
 	</div>
 	
 	<!-- DIV to contain Cats Of ThirstyCat -->
-	<div class="container" id="catsOfTCSection">
+	<div id="catsOfTCSection">
 		<h1>This will be cats of thirstycat</h1>
 	</div>
 
