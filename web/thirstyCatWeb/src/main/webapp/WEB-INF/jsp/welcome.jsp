@@ -24,27 +24,23 @@
 		</div>
 	</nav>
 	
-	<!-- Placeholder for any additional page header/tile text i may want -->
-	<div class="container">
-		<h1>This will be ThirstyCat!</h1>
-		<h2>neat ${message}</h2>
-	</div>
-	
 	<!-- DIV to contain toggle bar to switch from cat image to cat stats -->
 	<div class="container row" id="toggleSection">
-		<div class="toggleColumn text-center">ThirstyCat</div>
-		<div class="toggleColumn text-center">Cat Stats</div>
+		<div class="toggleColumn text-center">
+			<button type="button" class="btn btn-block buttonSelected" id="toggleButtonTC">ThirstyCat</button>
+		</div>
+		<div class="toggleColumn text-center">
+			<button type="button" class="btn btn-block buttonUnselected" id="toggleButtonCatStats">Cat Stats</button>
+		</div>
 	</div>
 	
 	<!--  DIV to contain the most recent thirstycat image -->
 	<div class="container" id="thirstyCatImageSection">
-		<h1>This will be the most recent ThirstyCat image</h1>
 		<img class="center-block" src="https://media.mnn.com/assets/images/2017/02/cat-drinking-faucet.jpg.653x0_q80_crop-smart.jpg" alt="Most recent picture of cat drinking water">
 	</div>
 	
 	<!--  DIV to contain thirstycat cat stats -->
 	<div class="container" id="catStatsSection">
-		<h1>This will be cat stats</h1>
 		<img class="center-block" src="https://datavizcatalogue.com/methods/images/top_images/line_graph.png" alt="a cat stat graph">
 	</div>
 	

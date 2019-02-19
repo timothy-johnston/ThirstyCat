@@ -1,16 +1,10 @@
-
+body {
+	background-image:radial-gradient(circle, #fffbd5, #1D2671);
+}
 
 div{
 	border-style:solid;
 	border-color:black;
-}
-
-h1 {
-	color:#0000FF;
-}
-
-h2 {
-	color:#FF0000;
 }
 
 div[id*="Section"]{
@@ -30,4 +24,17 @@ div[id*="Section"]{
 	content:"";
 	display:table;
 	clear:both;
+}
+
+
+/* Toggle button formatting */
+.btn {
+	border-style:solid;
+	border-color:black;
+}
+.buttonSelected{
+	background:blue;
+}
+.buttonUnselected {
+	background:transparent;
 }
