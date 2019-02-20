@@ -20,28 +20,55 @@
 <body>
 
 	<!--  NAVBAR -->
-	<nav class="navbar navbar-inverse">
-		<div class="container-fluid navbar-left">
-			<div class="navbar-header">
-		      <a class="navbar-brand" href="#">ThirstyCat</a>
-		    </div>
-	    </div>
-	    <div class="container-fluid navbar-right">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbarLinks">
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-			</div>
-			<div class="collapse navbar-collapse" id="navbarLinks">
-				<ul class="nav navbar-nav">
-					<li><a href="/login">Sign Up</a></li>
-					<li><a href="/register">Login</a></li>
-				</ul>
-			</div>
-		</div>
-	</nav> 
+
+
+    <nav class="navbar navbar-default">
+
+        <!-- Brand and toggle get grouped for better mobile display -->
+
+        <div class="navbar-header">
+
+            <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
+
+                <span class="sr-only">Toggle navigation</span>
+
+                <span class="icon-bar"></span>
+
+                <span class="icon-bar"></span>
+
+                <span class="icon-bar"></span>
+
+            </button>
+
+            <a href="#" class="navbar-brand">Brand</a>
+
+        </div>
+
+        <!-- Collection of nav links and other content for toggling -->
+
+        <div id="navbarCollapse" class="collapse navbar-collapse">
+
+            <ul class="nav navbar-nav">
+
+                <li class="active"><a href="#">Home</a></li>
+
+                <li><a href="#">Profile</a></li>
+
+                <li><a href="#">Messages</a></li>
+
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+
+                <li><a href="#">Login</a></li>
+
+            </ul>
+
+        </div>
+
+    </nav>
+
+
 	
 	<!-- DIV to contain toggle bar to switch from cat image to cat stats -->
 	<div id="toggleSection">
