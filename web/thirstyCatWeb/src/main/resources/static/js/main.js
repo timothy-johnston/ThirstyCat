@@ -1,6 +1,8 @@
 $(document).ready(function() {
 	console.log("halloooo")
 	
+//	JS Fiddle sliding example: http://jsfiddle.net/jtbowden/ykbgT/2/
+	
 	$("#catStatsSection").hide();
 	
 	/* When toggle buttons are clicked, change their appearance */

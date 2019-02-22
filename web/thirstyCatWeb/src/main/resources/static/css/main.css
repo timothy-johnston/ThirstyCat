@@ -3,6 +3,8 @@ body {
 	padding:0px 0px 0px 0px;
 }
 
+
+
 div{
 	
 	align-items:center;
@@ -30,9 +32,21 @@ div[id*="Section"]{
 }
 
 /* Nav bar formatting */
-.navbarCustom {
-	background:transparent;
-	height:15px;
+.navbar{
+	background-color:rgba(0,0,0,.25);
+	border-bottom:2px solid #c0c0c0;
+}
+
+.navbar .navbar-toggler{
+	background-color:white;
+}
+
+#brandText{
+	color:white;
+}
+
+.navbar .navbar-collapse li a.nav-link {
+	color:white;
 }
 
 /* Toggle button formatting */
