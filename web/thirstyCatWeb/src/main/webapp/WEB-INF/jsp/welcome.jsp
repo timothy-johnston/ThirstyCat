@@ -51,12 +51,12 @@
 	</div>
 	
 	<!--  DIV to contain the most recent thirstycat image -->
-	<div id="thirstyCatImageSection">
+	<div class="card" id="thirstyCatImageSection">
 		<img class="center-block" src="https://media.mnn.com/assets/images/2017/02/cat-drinking-faucet.jpg.653x0_q80_crop-smart.jpg" alt="Most recent picture of cat drinking water">
 	</div>
 	
 	<!--  DIV to contain thirstycat cat stats -->
-	<div id="catStatsSection">
+	<div class="card" id="catStatsSection">
 		<img class="center-block" src="https://datavizcatalogue.com/methods/images/top_images/line_graph.png" alt="a cat stat graph">
 	</div>
 	
