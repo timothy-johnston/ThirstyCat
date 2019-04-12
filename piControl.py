@@ -105,7 +105,7 @@ while True:
 
     # If FSR goes above threshold, take a photo and check again
     if value >= threshold:
-	os.system("raspistill -n -q 10 -o catWasHere.jpg")       
+	os.system("raspistill -w 2464 -h 3280 -rot 90 -n -q 10 -o catWasHere.jpg")       
 	timeStampStartDatetime = datetime.datetime.now()
 	fullTimeStampStart = datetime.datetime.now().isoformat(' ')
 	yearMonthDay = fullTimeStampStart.split(" ")[0]
@@ -160,9 +160,10 @@ while True:
         print lineToWrite
 	
     	#Send data to REST API to add it to database
-    	url = 'tewardj11.pythonanywhere.com/api/drinks/add/' + str(timeStampStartDatetime) + '+' + str(timeStampEndDatetime) + '+' + str(usesThisDay)
-    	urlBasic = 'https://tewardj11.pythonanywhere.com/api/drinks/addBasic/' + str(usesThisDay)
-	f = urllib2.urlopen(urlBasic).read()
+    	#TODO: Update this to new spring boot web service when complete
+	#url = 'tewardj11.pythonanywhere.com/api/drinks/add/' + str(timeStampStartDatetime) + '+' + str(timeStampEndDatetime) + '+' + str(usesThisDay)
+    	#urlBasic = 'https://tewardj11.pythonanywhere.com/api/drinks/addBasic/' + str(usesThisDay)
+	#f = urllib2.urlopen(urlBasic).read()
 	#f = urllib.urlopen(url)
 
 	#Format output
@@ -171,8 +172,8 @@ while True:
 
 	# Share to twitter and follow any new followers
 	twitterMessage = "Alert, cat detected! Shasta just took a drink.\n" + tableOutput
-        for follower in tweepy.Cursor(api.followers).items():
-	    follower.follow()
+#        for follower in tweepy.Cursor(api.followers).items():             #Follow logic commented out temporarily - some issue with Twitter capping number of follows
+#	    follower.follow()
         photoPath = "/home/pi/projects_2018/shastacam/catWasHere.jpg"
 	api.update_with_media(photoPath, twitterMessage)
 
