@@ -2,7 +2,11 @@ package com.tj.thirstyCat.controller;
 
 import static org.junit.Assert.*;
 
+import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito;
+
+import com.tj.thirstyCat.repository.DrinkRepository;
 
 public class DrinkControllerTest {
 
@@ -10,6 +14,9 @@ public class DrinkControllerTest {
 	//These tests are related specifically to retrieving & persisting drink info
 	@Test
 	public void newDrinkEndpointCallsAddDrink() {
+		
+//		DrinkRepository drinkRepositorySpy = Mockito.spy(new DrinkRepository());
+		
 		fail("Not yet implemented");
 	}
 	
