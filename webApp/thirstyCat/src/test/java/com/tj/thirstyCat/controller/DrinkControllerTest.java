@@ -6,8 +6,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import com.tj.thirstyCat.repository.DrinkRepository;
-
 public class DrinkControllerTest {
 
 	//Drink tests---------------------------------------------------------------
