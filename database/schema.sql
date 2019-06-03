@@ -32,25 +32,11 @@ CREATE TABLE city(
 */
 
 
-CREATE TABLE app_user (
+CREATE TABLE drinks (
   id SERIAL PRIMARY KEY,
-  user_name varchar(32) NOT NULL UNIQUE,
-  password varchar(32) NOT NULL,
-  role varchar(32) DEFAULT 'user',
-  salt varchar(255) NOT NULL,
-  phone VARCHAR(10),
---  default_city_id INTEGER,
-  default_city varchar(32) NOT NULL,
-  default_visualization VARCHAR(16) DEFAULT 'bar',
-  default_units CHAR DEFAULT 'F',
-  default_region varchar(32) NOT NULL,
-  default_latitude NUMERIC(9,4) NOT NULL,
-  default_longitude NUMERIC(9,4) NOT NULL,
-  default_population INTEGER,
-  default_timezone varchar(32) NOT NULL
-
-
---  ,CONSTRAINT fk_default_city_id FOREIGN KEY (default_city_id) REFERENCES city (id)
+  start_date date NOT NULL,
+  end_date date NOT NULL
+--  ,CONSTRAINT fk_default_city_id FOREIGN KEY (default_city_id) REFERENCES city (id)  #TODO: read more about constraints
 );
 
 CREATE TABLE user_alert (

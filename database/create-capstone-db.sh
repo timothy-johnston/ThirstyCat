@@ -8,3 +8,7 @@
 # psql -U postgres -d capstone -f "$BASEDIR/user.sql" &&
 # psql -U postgres -d capstone -f "$BASEDIR/data.sql"
 #---------------------------------------------------------------------#
+
+
+BASEDIR=$(dirname $0)
+createdb -U postgres thirstyCat &&
