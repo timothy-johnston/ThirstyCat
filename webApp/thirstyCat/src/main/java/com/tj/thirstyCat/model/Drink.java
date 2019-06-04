@@ -13,8 +13,8 @@ import javax.persistence.Table;
 public class Drink {
 	
 	@Id
-	@GeneratedValue(generator = "image_generator")
-	@SequenceGenerator(name = "image_generator", sequenceName = "image_sequence", initialValue = 1)
+	@GeneratedValue(generator = "drink_generator")
+	@SequenceGenerator(name = "drink_generator", sequenceName = "drink_sequence", initialValue = 1)
 	private Long id;
 	private Date startTime;
 	private Date endTime;
