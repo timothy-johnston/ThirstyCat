@@ -71,7 +71,6 @@ public class DrinkControllerTest {
 		verify(drinkService, times(1)).getAllDrinks();
 		assertEquals(expectedDrinks, returnedDrinks);
 		
-		fail("Not yet implemented");
 	}
 	
 	
