@@ -21,3 +21,13 @@ TO capstone_appuser;
 GRANT USAGE, SELECT
 ON ALL SEQUENCES IN SCHEMA public
 TO capstone_appuser; 
+
+CREATE USER postgres WITH PASSWORD 'postgres1';
+
+GRANT ALL 
+ON ALL TABLES IN SCHEMA public
+TO postgres1;
+
+GRANT ALL 
+ON ALL SEQUENCES IN SCHEMA public
+TO postgres1;
