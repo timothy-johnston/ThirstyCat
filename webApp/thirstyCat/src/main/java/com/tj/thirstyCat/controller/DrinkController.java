@@ -45,10 +45,9 @@ public class DrinkController {
 			"startTime": "2019-06-04T03:57:53.558",
 			"endTime": "2019-06-04T03:59:53.558"
 		}
-	 * 
 	 */
 	@PostMapping("/newDrink")
-	public String persistDrink(@Valid @RequestBody Drink drink) {
+	public Drink persistDrink(@Valid @RequestBody Drink drink) {
 		
 		try {
 			drinkRepository.save(drink);
@@ -56,7 +55,20 @@ public class DrinkController {
 			AppUtil.logError(e, UUID.randomUUID());
 		}
 		
-		return "good job man idk";
+		return null;
+	}
+
+	public Drink retrieveLastDrink() {
+		
+		// TODO Auto-generated method stub
+		
+		return null;
+		
+	}
+
+	public Drink getDrink(int drinkId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }
