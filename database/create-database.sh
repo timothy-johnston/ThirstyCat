@@ -11,5 +11,6 @@
 
 BASEDIR='C:\Users\tedwa\workspace\ThirstyCat\database'
 psql -U postgres -f "$BASEDIR/createdb.sql" &&
-psql -U postgres -d thirstycat -f "$BASEDIR/schema.sql" &&
+# psql -U postgres -d thirstycat -f "$BASEDIR/schema.sql" && #Commented out because
+                                                             #Spring Boot JPA app creates tables based on model classes
 psql -U postgres -d thirstycat -f "$BASEDIR/user.sql"
