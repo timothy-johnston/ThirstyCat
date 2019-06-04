@@ -17,8 +17,8 @@ public class DrinkService {
 	private DrinkRepository drinkRepository;
 
 	//Add drink info to database
-	public void addDrink(Drink drink) {
-		drinkRepository.save(drink);
+	public Drink addDrink(Drink drink) {
+		return drinkRepository.save(drink);
 	}
 
 	public Drink getLastDrink() {

@@ -18,12 +18,13 @@ import org.springframework.web.bind.annotation.RestController;
 import com.tj.thirstyCat.common.AppUtil;
 import com.tj.thirstyCat.model.Drink;
 import com.tj.thirstyCat.repository.DrinkRepository;
+import com.tj.thirstyCat.service.DrinkService;
 
 @RestController
 public class DrinkController {
 
 	@Autowired
-	private DrinkRepository drinkRepository;
+	private DrinkService drinkService;
 	
 	//Returns csrf token
 	//Is this secure? Will probably need to fix/remove this entirely. TODO: Research
@@ -36,7 +37,7 @@ public class DrinkController {
 	
 	@GetMapping("/allDrinks")
 	public List<Drink> getAllDrinks() {
-		return drinkRepository.findAll();
+		return drinkService.getAllDrinks();
 	}
 	
 	/*
@@ -48,14 +49,7 @@ public class DrinkController {
 	 */
 	@PostMapping("/newDrink")
 	public Drink persistDrink(@Valid @RequestBody Drink drink) {
-		
-		try {
-			drinkRepository.save(drink);
-		} catch (Exception e) {
-			AppUtil.logError(e, UUID.randomUUID());
-		}
-		
-		return null;
+		return(drinkService.addDrink(drink));
 	}
 
 	public Drink retrieveLastDrink() {
