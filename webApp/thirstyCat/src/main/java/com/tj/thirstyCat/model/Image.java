@@ -1,11 +1,15 @@
 package com.tj.thirstyCat.model;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 @Table(name = "images")
@@ -17,6 +21,8 @@ public class Image {
 	private Long id;
 	private Long drinkId;
 	
+	@CreationTimestamp
+	private Date createdDate;
 	@Lob
 	private byte[] imageByteArray;
 

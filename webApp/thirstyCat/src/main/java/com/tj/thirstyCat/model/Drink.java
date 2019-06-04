@@ -7,6 +7,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 @Table(name = "drinks")
@@ -16,8 +20,15 @@ public class Drink {
 	@GeneratedValue(generator = "drink_generator")
 	@SequenceGenerator(name = "drink_generator", sequenceName = "drink_sequence", initialValue = 1)
 	private Long id;
+	
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date startTime;
+	
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date endTime;
+	
+	@CreationTimestamp
+	private Date createDate;
 	
 	public Drink() {
 		
