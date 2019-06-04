@@ -26,8 +26,8 @@ CREATE USER postgres WITH PASSWORD 'postgres1';
 
 GRANT ALL 
 ON ALL TABLES IN SCHEMA public
-TO postgres1;
+TO postgres;
 
 GRANT ALL 
 ON ALL SEQUENCES IN SCHEMA public
-TO postgres1;
+TO postgres;
