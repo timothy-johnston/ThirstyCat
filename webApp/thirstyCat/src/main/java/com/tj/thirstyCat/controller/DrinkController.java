@@ -1,6 +1,8 @@
 package com.tj.thirstyCat.controller;
 
 import java.util.List;
+import java.util.Optional;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -49,7 +51,7 @@ public class DrinkController {
 
 	@GetMapping("/drink/{drinkId}")
 	@ResponseBody
-	public Drink getDrink(@PathVariable Long drinkId) {
+	public Optional<Drink> getDrink(@PathVariable Long drinkId) {
 		return drinkService.getDrinkById(drinkId);
 	}
 	

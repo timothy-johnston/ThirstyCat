@@ -1,6 +1,7 @@
 package com.tj.thirstyCat.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,19 +21,15 @@ public class DrinkService {
 	}
 
 	public Drink getLastDrink() {
-		return null;
-		// TODO Auto-generated method stub
-		
+		return drinkRepository.findLastDrink();
 	}
 
 	public List<Drink> getAllDrinks() {
-		// TODO Auto-generated method stub
-		return null;
+		return drinkRepository.findAll();
 	}
 
-	public Drink getDrinkById(Long drinkId) {
-		// TODO Auto-generated method stub
-		return null;
+	public Optional<Drink> getDrinkById(Long drinkId) {
+		return drinkRepository.findById(drinkId);
 	}
 	
 }

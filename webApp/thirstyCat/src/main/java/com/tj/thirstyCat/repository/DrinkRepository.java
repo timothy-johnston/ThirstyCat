@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.tj.thirstyCat.model.Drink;
 
 @Repository
-public interface DrinkRepository extends JpaRepository<Drink, Long> {
-
+public interface DrinkRepository extends JpaRepository<Drink, Long>, DrinkRepositoryCustom {
+	
 }
