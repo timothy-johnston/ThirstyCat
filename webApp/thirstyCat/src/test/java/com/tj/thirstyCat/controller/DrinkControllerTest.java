@@ -89,30 +89,5 @@ public class DrinkControllerTest {
 		assertEquals(expectedDrink, returnedDrink);
 		
 	}
-	
-	
-	//Image tests---------------------------------------------------------------
-	//These tests are related specifically to retrieving & favoriting images
-	
-//	@Test
-//	public void retrieveLastImageEndpointCallsRetrieveLastImage() {
-//		fail("Not yet implemented");
-//	}
-//	
-//	@Test
-//	public void retrieveAllImagesEndpointCallsRetrieveAllImages() {
-//		fail("Not yet implemented");
-//	}
-//	
-//	@Test
-//	public void retrieveImage_ID_EndpointCallsRetrieveImage_ID() {
-//		fail("Not yet implemented");
-//	}
-//	
-//	@Test
-//	public void favoriteImage_ID_EndpointCallsFavoriteImage_ID() {
-//		fail("Not yet implemented");
-//	}
-	
 
 }

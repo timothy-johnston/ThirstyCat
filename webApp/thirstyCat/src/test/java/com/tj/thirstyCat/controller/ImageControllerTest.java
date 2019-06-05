@@ -74,18 +74,28 @@ public class ImageControllerTest {
 		
 	}
 	
-	
 	@Test
 	public void retrieveImage_ID_EndpointCallsRetrieveImage_ID_Service() {
 
 		Image expectedImage = new Image(testDrinkId, new byte[] {});
-		int ImageId = 3;
-		when(ImageService.getImageById(ImageId)).thenReturn(expectedImage);
+		int imageId = 3;
+		when(ImageService.getImageById(imageId)).thenReturn(expectedImage);
 		
-		Image returnedImage = ImageController.getImage(ImageId);
+		Image returnedImage = ImageController.getImage(imageId);
 		
-		verify(ImageService, times(1)).getImageById(ImageId);
+		verify(ImageService, times(1)).getImageById(imageId);
 		assertEquals(expectedImage, returnedImage);
+		
+	}
+	
+	@Test
+	public void favoriteImage_ID_EndpointCallsFavoriteImageService() {
+		
+		int imageId = 3;
+		
+		ImageController.favoriteImage(imageId);
+		
+		verify(ImageService, times(1)).favoriteImage(imageId);
 		
 	}
 
