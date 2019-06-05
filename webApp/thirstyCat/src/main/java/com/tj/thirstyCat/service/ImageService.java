@@ -36,7 +36,7 @@ public class ImageService {
 		return null;
 	}
 
-	public Image getImageById(int imageId) {
+	public Image getImageById(Long imageId) {
 		// TODO Auto-generated method stub
 		return null;
 	}

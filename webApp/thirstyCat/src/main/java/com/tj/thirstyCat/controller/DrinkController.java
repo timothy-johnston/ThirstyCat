@@ -60,7 +60,7 @@ public class DrinkController {
 		
 	}
 
-	public Drink getDrink(int drinkId) {
+	public Drink getDrink(Long drinkId) {
 		// TODO Auto-generated method stub
 		return null;
 	}

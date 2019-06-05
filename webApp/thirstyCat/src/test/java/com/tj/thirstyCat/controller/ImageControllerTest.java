@@ -22,10 +22,10 @@ import com.tj.thirstyCat.service.ImageService;
 public class ImageControllerTest {
 
 	@InjectMocks
-	ImageController ImageController;
+	ImageController imageController;
 	
 	@Mock
-	ImageService ImageService;
+	ImageService imageService;
 	
 	private Long testDrinkId = 1L;
 	
@@ -34,9 +34,9 @@ public class ImageControllerTest {
 		
 		Image testImage = new Image(testDrinkId, new byte[] {});
 		
-		ImageController.persistImage(testImage);
+		imageController.persistImage(testImage);
 		
-		verify(ImageService, times(1)).addImage(testImage);
+		verify(imageService, times(1)).addImage(testImage);
 		
 	}
 	
@@ -46,11 +46,11 @@ public class ImageControllerTest {
 		Date startDate = new Date();
 		Date endDate = new Date();
 		Image expectedImage = new Image(testDrinkId, new byte[] {});
-		when(ImageService.getLastImage()).thenReturn(expectedImage);
+		when(imageService.getLastImage()).thenReturn(expectedImage);
 		
-		Image returnedImage = ImageController.retrieveLastImage();
+		Image returnedImage = imageController.retrieveLastImage();
 		
-		verify(ImageService, times(1)).getLastImage();
+		verify(imageService, times(1)).getLastImage();
 		assertEquals(expectedImage, returnedImage);
 
 	}
@@ -65,11 +65,11 @@ public class ImageControllerTest {
 		expectedImages.add(expected1);
 		expectedImages.add(expected2);
 		expectedImages.add(expected3);
-		when(ImageService.getAllImages()).thenReturn(expectedImages);
+		when(imageService.getAllImages()).thenReturn(expectedImages);
 		
-		List<Image> returnedImages = ImageController.getAllImages();
+		List<Image> returnedImages = imageController.getAllImages();
 		
-		verify(ImageService, times(1)).getAllImages();
+		verify(imageService, times(1)).getAllImages();
 		assertEquals(expectedImages, returnedImages);
 		
 	}
@@ -78,12 +78,12 @@ public class ImageControllerTest {
 	public void retrieveImage_ID_EndpointCallsRetrieveImage_ID_Service() {
 
 		Image expectedImage = new Image(testDrinkId, new byte[] {});
-		int imageId = 3;
-		when(ImageService.getImageById(imageId)).thenReturn(expectedImage);
+		Long imageId = 3L;
+		when(imageService.getImageById(imageId)).thenReturn(expectedImage);
 		
-		Image returnedImage = ImageController.getImage(imageId);
+		Image returnedImage = imageController.getImage(imageId);
 		
-		verify(ImageService, times(1)).getImageById(imageId);
+		verify(imageService, times(1)).getImageById(imageId);
 		assertEquals(expectedImage, returnedImage);
 		
 	}
@@ -93,9 +93,9 @@ public class ImageControllerTest {
 		
 		int imageId = 3;
 		
-		ImageController.favoriteImage(imageId);
+		imageController.favoriteImage(imageId);
 		
-		verify(ImageService, times(1)).favoriteImage(imageId);
+		verify(imageService, times(1)).favoriteImage(imageId);
 		
 	}
 

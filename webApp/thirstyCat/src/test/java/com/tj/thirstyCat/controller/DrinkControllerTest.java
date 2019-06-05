@@ -80,7 +80,7 @@ public class DrinkControllerTest {
 		Date startDate = new Date();
 		Date endDate = new Date();
 		Drink expectedDrink = new Drink(startDate, endDate);
-		int drinkId = 3;
+		Long drinkId = 3L;
 		when(drinkService.getDrinkById(drinkId)).thenReturn(expectedDrink);
 		
 		Drink returnedDrink = drinkController.getDrink(drinkId);

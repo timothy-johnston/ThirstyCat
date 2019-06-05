@@ -25,7 +25,7 @@ public class ImageController {
 		return null;
 	}
 
-	public Image getImage(int imageId) {
+	public Image getImage(Long imageId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
