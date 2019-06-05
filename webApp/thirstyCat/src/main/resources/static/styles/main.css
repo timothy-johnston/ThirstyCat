@@ -1,3 +1,51 @@
-h1 {
-	border: 2px solid black;
+
+body:before {
+    height: 50vh;
+    width: 100%;
+    position: absolute;
+    background: rgb(113, 20, 121);
+	content: "";
+	z-index: -1;
 }
+
+body {
+	background: black;
+}
+
+#section-home {
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+}
+
+#title-container {
+
+}
+
+/* Placeholder, delete this */
+#title-container h1 {
+	color: white;
+	text-align: center;
+}
+
+#drink-container {
+	display: flex;
+	justify-content: space-around;
+}
+
+#drinkPic-container {
+
+}
+
+#drinkPic {
+	border: 8px solid black;
+}
+
+#drinkInfo-container {
+	width: 300px;
+	height: 500px;
+	border: 8px solid black;
+	background: #8f8f8f;
+}
+
