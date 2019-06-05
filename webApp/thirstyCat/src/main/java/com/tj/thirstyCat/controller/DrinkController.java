@@ -45,7 +45,7 @@ public class DrinkController {
 	
 	@GetMapping("/last")
 	@ResponseBody
-	public Drink retrieveLastDrink() {
+	public Optional<Drink> retrieveLastDrink() {
 		return drinkService.getLastDrink();
 	}
 

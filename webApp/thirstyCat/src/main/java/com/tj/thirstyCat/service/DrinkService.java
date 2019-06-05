@@ -20,7 +20,7 @@ public class DrinkService {
 		return drinkRepository.save(drink);
 	}
 
-	public Drink getLastDrink() {
+	public Optional<Drink> getLastDrink() {
 		return drinkRepository.findLastDrink();
 	}
 

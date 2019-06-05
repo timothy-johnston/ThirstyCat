@@ -34,8 +34,6 @@ public class DrinkRepositoryImpl implements DrinkRepositoryCustom {
 		//Use largest id to retrieve latest drink
 		return drinkRepository.findById(idList.get(0));
 		
-		return null;
-		
 	}
 	
 }
