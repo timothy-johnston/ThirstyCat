@@ -74,7 +74,7 @@ public class DrinkServiceTest {
 
 		Long drinkId = 3L;
 		
-		Drink returnedDrink = drinkService.getDrinkById(drinkId);
+		drinkService.getDrinkById(drinkId);
 		
 		verify(drinkRepository, times(1)).findById(drinkId);
 		

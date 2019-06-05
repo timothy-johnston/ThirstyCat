@@ -6,7 +6,6 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.junit.Test;
@@ -75,7 +74,7 @@ public class ImageServiceTest {
 
 		Long imageId = 3L;
 		
-		Image returnedImage = imageService.getImageById(imageId);
+		imageService.getImageById(imageId);
 		
 		verify(imageRepository, times(1)).findById(imageId);
 		

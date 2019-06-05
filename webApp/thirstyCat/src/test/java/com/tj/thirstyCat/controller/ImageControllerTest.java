@@ -6,7 +6,6 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.junit.Test;
@@ -43,8 +42,6 @@ public class ImageControllerTest {
 	@Test
 	public void retrieveLastImageEndpointCallsRetriveLastImageServiceAndReturnsImage() {
 		
-		Date startDate = new Date();
-		Date endDate = new Date();
 		Image expectedImage = new Image(testDrinkId, new byte[] {});
 		when(imageService.getLastImage()).thenReturn(expectedImage);
 		
