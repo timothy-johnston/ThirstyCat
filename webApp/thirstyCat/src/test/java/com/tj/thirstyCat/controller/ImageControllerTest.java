@@ -88,7 +88,7 @@ public class ImageControllerTest {
 	@Test
 	public void favoriteImage_ID_EndpointCallsFavoriteImageService() {
 		
-		int imageId = 3;
+		Long imageId = 3L;
 		
 		imageController.favoriteImage(imageId);
 		

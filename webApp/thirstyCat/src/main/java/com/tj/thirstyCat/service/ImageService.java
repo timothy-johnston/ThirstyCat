@@ -39,7 +39,7 @@ public class ImageService {
 		return null;
 	}
 
-	public void favoriteImage(int imageId) {
+	public void favoriteImage(Long imageId) {
 		// TODO Auto-generated method stub
 		
 	}

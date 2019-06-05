@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -15,25 +16,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.tj.thirstyCat.model.Drink;
 import com.tj.thirstyCat.service.DrinkService;
 
-@RestController
+@RestController("/api/drink")
 public class DrinkController {
 
 	@Autowired
 	private DrinkService drinkService;
-	
-	//Returns csrf token
-	//Is this secure? Will probably need to fix/remove this entirely. TODO: Research
-	//Following https://stackoverflow.com/questions/33125598/how-to-handle-csrf-protection-with-spring-restful-web-services
-	@GetMapping(value="/csrf-token")
-	public @ResponseBody String getCsrfToken(HttpServletRequest request) {
-	    CsrfToken token = (CsrfToken) request.getAttribute(CsrfToken.class.getName());
-	    return token.getToken();
-	}
-	
-	@GetMapping("/allDrinks")
-	public List<Drink> getAllDrinks() {
-		return drinkService.getAllDrinks();
-	}
 	
 	/*
 	 * Post request format:
@@ -42,22 +29,28 @@ public class DrinkController {
 			"endTime": "2019-06-04T03:59:53.558"
 		}
 	 */
-	@PostMapping("/newDrink")
+	@PostMapping("/add")
+	@ResponseBody
 	public Drink persistDrink(@Valid @RequestBody Drink drink) {
 		return(drinkService.addDrink(drink));
 	}
-
+	
+	@GetMapping("/all")
+	@ResponseBody
+	public List<Drink> getAllDrinks() {
+		return drinkService.getAllDrinks();
+	}
+	
+	@GetMapping("/last")
+	@ResponseBody
 	public Drink retrieveLastDrink() {
-		
-		// TODO Auto-generated method stub
-		
-		return null;
-		
+		return drinkService.getLastDrink();
 	}
 
-	public Drink getDrink(Long drinkId) {
-		// TODO Auto-generated method stub
-		return null;
+	@GetMapping("/drink/{drinkId}")
+	@ResponseBody
+	public Drink getDrink(@PathVariable Long drinkId) {
+		return drinkService.getDrinkById(drinkId);
 	}
 	
 }
