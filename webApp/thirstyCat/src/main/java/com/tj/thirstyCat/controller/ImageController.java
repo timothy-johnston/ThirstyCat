@@ -18,25 +18,25 @@ public class ImageController {
 	@Autowired
 	ImageService imageService;
 	
-	@PostMapping("/add")
+	@PostMapping("/addImage")
 	@ResponseBody
 	public Long[] persistImage(Image image) {
 		return imageService.addImage(image);
 	}
 
-	@GetMapping("/last")
+	@GetMapping("/lastImage")
 	@ResponseBody
 	public Image retrieveLastImage() {
 		return imageService.getLastImage();
 	}
 
-	@GetMapping("/all")
+	@GetMapping("/allImages")
 	@ResponseBody
 	public List<Image> getAllImages() {
 		return imageService.getAllImages();
 	}
 
-	@GetMapping("/get/{imageId}")
+	@GetMapping("/image/{imageId}")
 	@ResponseBody
 	public Image getImage(@PathVariable Long imageId) {
 		return imageService.getImageById(imageId);

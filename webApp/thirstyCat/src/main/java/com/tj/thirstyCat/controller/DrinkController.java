@@ -31,19 +31,19 @@ public class DrinkController {
 			"endTime": "2019-06-04T03:59:53.558"
 		}
 	 */
-	@PostMapping("/add")
+	@PostMapping("/addDrink")
 	@ResponseBody
 	public Drink persistDrink(@Valid @RequestBody Drink drink) {
 		return(drinkService.addDrink(drink));
 	}
 	
-	@GetMapping("/all")
+	@GetMapping("/allDrinks")
 	@ResponseBody
 	public List<Drink> getAllDrinks() {
 		return drinkService.getAllDrinks();
 	}
 	
-	@GetMapping("/last")
+	@GetMapping("/lastDrink")
 	@ResponseBody
 	public Optional<Drink> retrieveLastDrink() {
 		return drinkService.getLastDrink();

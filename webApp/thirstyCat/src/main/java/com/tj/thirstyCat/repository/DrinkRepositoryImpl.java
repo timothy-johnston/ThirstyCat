@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.tj.thirstyCat.model.Drink;
+import com.tj.thirstyCat.service.DrinkService;
 
 @Repository
 public class DrinkRepositoryImpl implements DrinkRepositoryCustom {
@@ -22,7 +23,7 @@ public class DrinkRepositoryImpl implements DrinkRepositoryCustom {
 	EntityManager entityManager;
 	
 	@Autowired
-	DrinkRepository drinkRepository;
+	DrinkService drinkService;
 	
 	@Override
 	public Optional<Drink> findLastDrink() {
@@ -32,7 +33,7 @@ public class DrinkRepositoryImpl implements DrinkRepositoryCustom {
 		List<Long> idList = query.getResultList();
 		
 		//Use largest id to retrieve latest drink
-		return drinkRepository.findById(idList.get(0));
+		return drinkService.getDrinkById(idList.get(0));
 		
 	}
 	
