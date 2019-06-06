@@ -176,7 +176,7 @@ while True:
 #        for follower in tweepy.Cursor(api.followers).items():             #Follow logic commented out temporarily - some issue with Twitter capping number of follows
 #	    follower.follow()
         photoPath = "/home/pi/projects_2018/shastacam/catWasHere.jpg"
-	api.update_with_media(photoPath, twitterMessage)
+#	api.update_with_media(photoPath, twitterMessage)
 
     # Pause
     print "Finished loop at " + str(datetime.datetime.now()) +", FSR reading was: " + str(value) + ", threshold is: " + str(threshold)
