@@ -9,18 +9,19 @@ body:before {
 }
 
 body {
-	background: black;
+	background: white;
 }
 
 #section-home {
 	min-height: 100vh;
 	display: flex;
 	flex-direction: column;
-	justify-content: space-around;
+	justify-content: space-evenly;
+	border: 2px solid red;
 }
 
 #title-container {
-
+	border-bottom: 0px;
 }
 
 /* Placeholder, delete this */
@@ -30,22 +31,27 @@ body {
 }
 
 #drink-container {
+	padding: 0px;
 	display: flex;
-	justify-content: space-around;
+	justify-content: space-between;
+	align-items: center;
 }
 
 #drinkPic-container {
-
+	border: 6px solid white;
+	border-radius: 45px;
+	overflow: hidden;
 }
 
 #drinkPic {
-	border: 8px solid black;
+	
 }
 
 #drinkInfo-container {
 	width: 300px;
 	height: 500px;
-	border: 8px solid black;
+	border: 6px solid white;
+	border-radius: 25px;
 	background: #8f8f8f;
 }
 
