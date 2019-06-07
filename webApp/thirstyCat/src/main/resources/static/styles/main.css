@@ -1,67 +1,109 @@
+/* font-family: 'Patua One', cursive;
+font-family: 'Maven Pro', sans-serif; */
+
+h1 {
+	font-family: 'Patua One', cursive;
+}
 
 body:before {
-    height: 45vh;
+    height: 50vh;
     width: 100%;
     position: absolute;
-    background: rgb(113, 20, 121);
+    background: #b8b8ff;
 	content: "";
 	z-index: -1;
 }
 
 body {
-	background: black;
+	background: #ffd8be;
 }
 
 #nav-home {
-	height: 65px;
-	box-shadow: 0px 1px 3px black;
+	/* border: 2px solid blue; */
+	height: 35px;
+	top: 10vh;
+	width: 80%;
+	margin-left: auto;
+	margin-right: auto;
+	border-radius: 9000px;	
+}
+
+#nav-ul {
+	width: 100%;
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
 }
 
 .nav-link {
-	font-size: 1.1rem !important;
+	font-size: 1.3rem !important;
+	font-family: 'Maven Pro', sans-serif;
+	color: #f8f7ff !important;
+}
+
+#logo-placeholder {
+	margin-right: 0px;
+}
+
+#logo-placeholder-text {
+	font-size: 8rem;
+	color: #f8f7ff;
 }
 
 #section-home {
 	min-height: calc(100vh - 65px);
 }
 
-#title-container {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	height: 25vh;
-}
-
-/* Placeholder, delete this */
-#title-container h1 {
-	color: white;
-	text-align: center;
-	padding: 0px;
-	font-size: 5rem;
-}
-
 #drink-container {
+	margin-top: 250px;
 	padding: 0px;
 	display: flex;
 	justify-content: space-between;
+	flex-wrap: wrap;
 	align-items: center;
 }
 
 #drinkPic-container {
-	border: 6px solid black;
-	border-radius: 45px;
+	border: 6px solid #b8b8ff;
+	border-radius: 15px;
 	overflow: hidden;
 }
 
 #drinkPic {
-	
+	width: 800px;
+	height: 600px;
+	object-fit: contain;
 }
 
 #drinkInfo-container {
 	width: 300px;
-	height: 500px;
-	border: 6px solid black;
-	border-radius: 25px;
-	background: #8f8f8f;
+	height: 600px;
+	border: 6px solid #b8b8ff;
+	border-radius: 15px;
+	background: #796ad1;
+	overflow: hidden;
+}
+
+#drinkInfo-header {
+	/* background: #f8f7ff; */
+	height: 90px;
+	border: 3px solid #ffd8be;
+	border-top-left-radius: 8px;
+	border-top-right-radius: 8px;
+}
+
+#drinkInfo-header h2 {
+	text-align: center;
+	color: #f8f7ff;
+	font-size: 3rem;
+	font-family: 'Maven Pro', sans-serif;
+	margin: 0px;
+}
+
+.drinkInfo {
+	color: #f8f7ff;
+	font-size: 1.3rem;
+	font-family: 'Maven Pro', sans-serif;
+	margin: 10px 10px 10px 10px;
 }
 
