@@ -1,3 +1,4 @@
+
 import config
 import os
 import time
@@ -105,7 +106,7 @@ while True:
 
     # If FSR goes above threshold, take a photo and check again
     if value >= threshold:
-	os.system("raspistill -w 2464 -h 3280 -rot 90 -n -q 10 -o catWasHere.jpg")       
+	os.system("raspistill -w 3280 -h 2646 -rot 0 -n -q 10 -o catWasHere.jpg")       
 	timeStampStartDatetime = datetime.datetime.now()
 	fullTimeStampStart = datetime.datetime.now().isoformat(' ')
 	yearMonthDay = fullTimeStampStart.split(" ")[0]
