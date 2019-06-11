@@ -1,6 +1,14 @@
 /* font-family: 'Patua One', cursive;
 font-family: 'Maven Pro', sans-serif; */
 
+#test {
+	border: 2px solid red;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	min-height: 100vh;
+}
+
 h1 {
 	font-family: 'Patua One', cursive;
 }
@@ -39,8 +47,8 @@ body {
 
 #nav-home {
 	/* border: 2px solid blue; */
-	height: 35px;
-	top: 10vh;
+	/* height: 35px;
+	top: 10vh; */
 	width: 100%;
 	margin-left: auto;
 	margin-right: auto;
@@ -98,7 +106,6 @@ color: white;
 }
 
 #drink-container {
-	margin-top: 250px;
 	padding: 0px;
 	display: flex;
 	justify-content: space-between;
