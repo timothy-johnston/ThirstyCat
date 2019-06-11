@@ -29,6 +29,12 @@ body {
 	  background: #b8b8ff;
 	  margin-top: -50px
 	}
+
+	#drink-info-container {
+		width: 100% !important;
+		height: 100% !important;
+		text-align: center;
+	}
   }
 
 #nav-home {
@@ -55,6 +61,27 @@ body {
 	font-family: 'Damion', cursive;
 	color: #f8f7ff !important;
 }
+
+.social-icon-container {
+	display: flex;
+	justify-content: center;
+}
+
+.fa {
+	padding: 20px;
+	text-align: center;
+	text-decoration: none;
+	border-radius: 50%;
+	background: #55ACEE;
+  	color: white;
+}
+
+.fa:hover {
+background: rgb(85, 172, 238, .8);
+text-decoration: none;
+color: white;
+}
+
 
 #logo-placeholder {
 	margin-right: 0px;
@@ -92,7 +119,7 @@ body {
 	object-fit: contain;
 }
 
-#drinkInfo-container {
+#drink-info-container {
 	width: 300px;
 	height: 600px;
 	margin: 10px auto;
