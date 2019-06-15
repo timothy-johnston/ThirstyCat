@@ -235,5 +235,10 @@ color: white;
 	background: silver;
 }
 
+#footer-section {
+	min-height: 25vh;
+	background:#796ad1;
+}
+
 
 
