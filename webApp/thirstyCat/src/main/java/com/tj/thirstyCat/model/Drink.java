@@ -30,6 +30,8 @@ public class Drink {
 	@CreationTimestamp
 	private Date createDate;
 	
+	private String createdBy;
+	
 	public Drink() {
 		
 	}
@@ -61,6 +63,14 @@ public class Drink {
 
 	public void setEndTime(Date endTime) {
 		this.endTime = endTime;
+	}
+
+	public String getCreatedBy() {
+		return createdBy;
+	}
+
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
 	}
 	
 

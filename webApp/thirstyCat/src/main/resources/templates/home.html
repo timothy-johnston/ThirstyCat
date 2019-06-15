@@ -3,7 +3,7 @@
     <head>
         <title>ThirstyCat</title>
 
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta http-equiv="X-UA-Compatible" content="text/html" />
 
         <!-- Bootstrap required meta tags -->
         <meta charset="utf-8">
@@ -20,12 +20,13 @@
         <!-- Bootstrap stylesheet goes before any other stylesheets -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <link rel="stylesheet" href="../static/styles/main.css" />
+        <!-- <link rel="stylesheet" type="text/css" th:href="@{/styles/main.css}" /> -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
 
     <body>
 
-        <div id="test">
+        <div id="test" class="section">
 
         <!-- Navbar -->
         <nav id="nav-home" class="navbar navbar-expand-lg bg-transparent navbar-dark">
@@ -91,9 +92,16 @@
 
         </div>
 
+        <section id="section-stats" class="section">
+            <div id="stats-header-container" class="container">
+                <h1 id="stats-header">Cat Stats</h1>
+        </div>
+            <div id="graph-container" class="container">
 
-        <section>
+            </div>
+            <div id="options-container" class="container">
 
+            </div>
         </section>
     
     

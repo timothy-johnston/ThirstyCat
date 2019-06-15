@@ -1,12 +1,12 @@
 /* font-family: 'Patua One', cursive;
 font-family: 'Maven Pro', sans-serif; */
 
-#test {
-	/* border: 2px solid red; */
+.section {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-evenly;
 	min-height: 100vh;
+	
 }
 
 h1 {
@@ -194,4 +194,46 @@ color: white;
 	margin: 25px 25px 25px 25px;
 	/* font-family: 'Damion', cursive; */
 }
+
+#section-stats {
+	background: linear-gradient( 180deg, #ffd8be 50%, #b8b8ff 50%)
+}
+
+/* #section-stats::before {
+	height: 50vh;
+    width: 100%;
+    position: absolute;
+    background: #ffd8be;
+	content: "";
+	z-index: -1;
+} */
+
+#stats-header {
+	font-size: 8rem;
+	color: #f8f7ff;
+	text-align: center;
+}
+
+#graph-container {
+	width: 80%;
+	height: 40vh;
+
+	margin-left: auto;
+	margin-right: auto;
+	border: 12px solid #ffd8be;
+	border-radius: 15px;
+	background: silver;
+}
+
+#options-container {
+	width: 80%;
+	height: 20vh;
+
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 50px;
+	background: silver;
+}
+
+
 

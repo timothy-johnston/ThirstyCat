@@ -25,6 +25,8 @@ public class Image {
 	private Date createdDate;
 	@Lob
 	private byte[] imageByteArray;
+	
+	private String createdBy;
 
 	public Image() {
 		
@@ -57,6 +59,14 @@ public class Image {
 
 	public void setImageByteArray(byte[] imageByteArray) {
 		this.imageByteArray = imageByteArray;
+	}
+	
+	public String getCreatedBy() {
+		return createdBy;
+	}
+
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
 	}
 	
 }
