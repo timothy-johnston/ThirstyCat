@@ -240,5 +240,16 @@ color: white;
 	background:#796ad1;
 }
 
+#footer-content-container {
+	display: flex;
+	/* flex-direction: column; */
+	align-items: space-around;
+}
+
+.footer-content {
+	text-align: center;
+	color: #f8f7ff
+}
+
 
 
