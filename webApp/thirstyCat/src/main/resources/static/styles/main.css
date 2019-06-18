@@ -101,8 +101,9 @@ body {
 	text-align: center;
 	text-decoration: none;
 	border-radius: 50%;
-	/* background: #55ACEE; */
-  	color: white;
+	color: white;
+	width: 48px;
+	height: 48px;
 }
 
 .fa-twitter {
@@ -118,9 +119,20 @@ body {
 }
 
 .fa:hover {
-background: rgb(85, 172, 238, .8);
 text-decoration: none;
 color: white;
+}
+
+.fa-twitter:hover {
+	background: #55aceecc;
+}
+
+.fa-github:hover {
+	background: #000000a2;
+}
+
+.fa-linkedin:hover {
+	background: rgba(49, 120, 158, 0.635);
 }
 
 #logo-placeholder-container {
