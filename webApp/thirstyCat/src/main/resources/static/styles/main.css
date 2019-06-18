@@ -96,12 +96,25 @@ body {
 }
 
 .fa {
-	padding: 20px;
+	padding: 13px;
+	font-size: 1.4rem !important;
 	text-align: center;
 	text-decoration: none;
 	border-radius: 50%;
-	background: #55ACEE;
+	/* background: #55ACEE; */
   	color: white;
+}
+
+.fa-twitter {
+	background: #55ACEE;
+}
+
+.fa-github {
+	background: #000000;
+}
+
+.fa-linkedin {
+	background: #0077B5;
 }
 
 .fa:hover {
@@ -252,6 +265,15 @@ color: white;
 .footer-content {
 	text-align: center;
 	color: #f8f7ff
+}
+
+#portfolio-link {
+	color: #f8f7ff !important;
+	font-weight: bold;
+}
+
+.footer-icon {
+	margin: 0px 3px;
 }
 
 
