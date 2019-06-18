@@ -238,12 +238,15 @@ color: white;
 #footer-section {
 	min-height: 25vh;
 	background:#796ad1;
+	display: flex;
+	flex-direction: colun;
+	justify-content: center;
 }
 
 #footer-content-container {
 	display: flex;
-	/* flex-direction: column; */
-	align-items: space-around;
+	flex-direction: column;
+	justify-content: center;
 }
 
 .footer-content {
