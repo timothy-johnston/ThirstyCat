@@ -26,7 +26,6 @@ public class ImageController {
 	@PostMapping(value="/addImage", consumes="multipart/form-data")
 	@ResponseBody
 	public Image persistImage(@Valid @RequestBody MultipartFile image, String createdBy, Long drinkId) throws IOException {
-		System.out.println("In the image upload controller");
 		return imageService.addImage(new Image(drinkId, image.getBytes(), createdBy));
 	}
 
