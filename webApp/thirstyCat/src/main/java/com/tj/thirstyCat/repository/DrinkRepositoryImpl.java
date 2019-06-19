@@ -29,7 +29,7 @@ public class DrinkRepositoryImpl implements DrinkRepositoryCustom {
 	public Optional<Drink> findLastDrink() {
 		
 		//Get list of drinks sorted by decreasing drink id
-		Query query = entityManager.createQuery("SELECT id FROM drinks ORDER BY id DESC");
+		Query query = entityManager.createQuery("SELECT id FROM Drink ORDER BY id DESC");
 		List<Long> idList = query.getResultList();
 		
 		//Use largest id to retrieve latest drink
