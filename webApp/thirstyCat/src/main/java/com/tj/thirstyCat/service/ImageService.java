@@ -18,10 +18,8 @@ public class ImageService {
 		imageRepository.save(image);
 	}
 
-	public Long[] addImage(Image testImage) {
-		// TODO Auto-generated method stub
-		return null;
-		
+	public Image addImage(Image testImage) {
+		return imageRepository.save(testImage);
 	}
 
 	public Image getLastImage() {
@@ -30,8 +28,7 @@ public class ImageService {
 	}
 
 	public List<Image> getAllImages() {
-		// TODO Auto-generated method stub
-		return null;
+		return imageRepository.findAll();
 	}
 
 	public Image getImageById(Long imageId) {

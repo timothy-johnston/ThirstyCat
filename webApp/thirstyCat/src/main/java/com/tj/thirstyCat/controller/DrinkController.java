@@ -29,7 +29,7 @@ public class DrinkController {
 		{
 		"startTime": "2019-06-04T03:57:53.558",
 		"endTime": "2019-06-04T03:59:53.558",
-		"createdBy": "test2"
+		"createdBy": "test"
 		}
 	 */
 	@PostMapping("/addDrink")

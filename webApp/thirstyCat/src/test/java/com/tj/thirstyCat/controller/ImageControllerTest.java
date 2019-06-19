@@ -33,7 +33,7 @@ public class ImageControllerTest {
 		
 		Image testImage = new Image(testDrinkId, new byte[] {});
 		
-		imageController.persistImage(testImage);
+//		imageController.persistImage(testImage);
 		
 		verify(imageService, times(1)).addImage(testImage);
 		
@@ -43,7 +43,7 @@ public class ImageControllerTest {
 	public void retrieveLastImageEndpointCallsRetriveLastImageServiceAndReturnsImage() {
 		
 		Image expectedImage = new Image(testDrinkId, new byte[] {});
-		when(imageService.getLastImage()).thenReturn(expectedImage);
+//		when(imageService.getLastImage()).thenReturn(expectedImage);
 		
 		Image returnedImage = imageController.retrieveLastImage();
 		
