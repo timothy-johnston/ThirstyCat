@@ -50,7 +50,7 @@ function getMostRecentDrinkId() {
 function getMostRecentDrinkImage(drinkInfo) {
 	console.log("In ajax call: Get most recent image");
 	$.ajax({
-		url: apiURL + apiPathLastDrinkImage + drinkInfo.id,
+		url: apiURL + apiPathLastDrinkImage,
 		type: "GET",
 		success: function(result) {
 			updateDrinkInfo(drinkInfo, result);
@@ -58,6 +58,10 @@ function getMostRecentDrinkImage(drinkInfo) {
 	});
 }
 
-updateDrinkInfo(drinkInfo, result) {
-	console.log("----------made it!----------");
+function updateDrinkInfo(drinkInfo, imageBytes) {
+	console.log("made it down here!");
+	console.log("The drink info: ");
+	console.log(drinkInfo);
+	console.log("The image byte array: ");
+	console.log(imageBytes);
 }

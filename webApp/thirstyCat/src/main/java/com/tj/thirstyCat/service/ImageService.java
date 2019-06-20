@@ -23,9 +23,8 @@ public class ImageService {
 		return imageRepository.save(testImage);
 	}
 
-	public Image getLastImage() {
-		// TODO Auto-generated method stub
-		return null;
+	public byte[] getLastImage() {
+		return imageRepository.getLastImage();
 	}
 
 	public List<Image> getAllImages() {

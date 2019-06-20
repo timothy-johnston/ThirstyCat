@@ -7,6 +7,7 @@ import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -45,7 +46,7 @@ public class ImageControllerTest {
 		Image expectedImage = new Image(testDrinkId, new byte[] {});
 //		when(imageService.getLastImage()).thenReturn(expectedImage);
 		
-		Image returnedImage = imageController.retrieveLastImage();
+		byte[] returnedImage = imageController.retrieveLastImage();
 		
 		verify(imageService, times(1)).getLastImage();
 		assertEquals(expectedImage, returnedImage);

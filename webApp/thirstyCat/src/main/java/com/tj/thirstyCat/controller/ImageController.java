@@ -32,7 +32,7 @@ public class ImageController {
 
 	@GetMapping("/lastImage")
 	@ResponseBody
-	public Image retrieveLastImage() {
+	public byte[] retrieveLastImage() {
 		return imageService.getLastImage();
 	}
 
