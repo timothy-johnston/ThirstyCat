@@ -2,6 +2,7 @@ package com.tj.thirstyCat.controller;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -46,6 +47,12 @@ public class ImageController {
 	@ResponseBody
 	public Image getImage(@PathVariable Long imageId) {
 		return imageService.getImageById(imageId);
+	}
+	
+	@GetMapping("/imageByDrink/{imageId}")
+	@ResponseBody
+	public Optional<byte[]> getImageByDrinkId(@PathVariable Long drinkId) {
+		return imageService.getImageByDrinkId(drinkId);
 	}
 
 	@GetMapping("/favorite/{imageId}")

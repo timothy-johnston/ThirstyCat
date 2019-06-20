@@ -27,7 +27,9 @@ public class ImageRepositoryImpl implements ImageRepositoryCustom {
 		String queryString = "SELECT image_byte_array FROM Image where drink_id = ?";
 		Query query = entityManager.createQuery(queryString);
 		query.setParameter(1, drinkId);
-		byte[] imageBytes = (byte[]) query.getResultList().get(0);
+		Optional<byte[]> imageBytes = (Optional<byte[]>) query.getResultList().get(0);
+		
+		return imageBytes;
 		
 	}
 	
