@@ -60,11 +60,14 @@
                         <div id="drinkInfo-header">
                             <h2 class="drinkInfo">Log In</h2>
                         </div>
-                        <div id="drink-info-body">
+                        <div id="login-form-container">
                             <form id="login-form" class="form" method="POST" action="LoginUrl">
-                                <input type="text" name="usernmae" placeholder="Username" required>
-                                <input type="text" name="password" placeholder="Password" required>
-                                <input type="submit" value="Log In">
+                                <input class="form-input" type="text" name="username" placeholder="Username" required>
+                                <input class="form-input" type="text" name="password" placeholder="Password" required>
+                                <input class="form-input submit-btn"type="submit" value="Log In">
+                                <p id="login-p">
+                                    <a id="register-link" class="formatted-link" target="_blank" href="#">No account? Click here to register.</a>
+                                </p>
                             </form>
                             <!-- <div>
                             <h5 class="drink-info">Shasta took this drink at _time_ EST.</h5>

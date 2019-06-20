@@ -150,7 +150,6 @@ color: white;
 
 #section-home {
 	min-height: calc(85vh - 10vh - 34px);
-	/* border-bottom: 4px solid red; */
 }
 
 #drink-container {
@@ -176,7 +175,7 @@ color: white;
 	object-fit: contain;
 }
 
-#drink-info-container {
+.info-card {
 	width: 300px;
 	height: 600px;
 	margin: 10px auto;
@@ -278,7 +277,7 @@ color: white;
 	color: #f8f7ff
 }
 
-#portfolio-link {
+.formatted-link {
 	color: #f8f7ff !important;
 	font-weight: bold;
 }
