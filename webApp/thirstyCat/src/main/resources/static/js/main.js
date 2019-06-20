@@ -59,9 +59,27 @@ function getMostRecentDrinkImage(drinkInfo) {
 }
 
 function updateDrinkInfo(drinkInfo, imageBytes) {
+	
+	//Update drink time
+	var drinkTime = formatDateToTime(new Date(drinkInfo.startTime));
+	var drinkTimeString = "Shasta took this drink at " + drinkTime + " EST.";
+	$('#drinkTime').text(drinkTimeString);
+	
 	console.log("made it down here!");
 	console.log("The drink info: ");
 	console.log(drinkInfo);
 	console.log("The image byte array: ");
 	console.log(imageBytes);
+}
+
+//Format time to be shown on screen
+function formatDateToTime(jsDate) {
+
+	//Determine AM PM
+	var amPm = (jsDate.getHours() < 12) ? " AM" : " PM";
+
+	//Format from 24H to 12H time & concatenate minutes + AM||PM
+	var timeString = ((jsDate.getHours() + 11) % 12 + 1) + ":" + jsDate.getMinutes() + amPm;
+
+	return timeString;
 }
