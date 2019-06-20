@@ -56,12 +56,17 @@
         
             <div id="section-login">
                 <!-- <div id="login-container" class="container"> -->
-                    <div id="login-container">
+                    <div id="login-container" class="container">
                         <div id="drinkInfo-header">
                             <h2 class="drinkInfo">Log In</h2>
                         </div>
                         <div id="drink-info-body">
-                            <div>
+                            <form id="login-form" class="form" method="POST" action="LoginUrl">
+                                <input type="text" name="usernmae" placeholder="Username" required>
+                                <input type="text" name="password" placeholder="Password" required>
+                                <input type="submit" value="Log In">
+                            </form>
+                            <!-- <div>
                             <h5 class="drink-info">Shasta took this drink at _time_ EST.</h5>
                             <h5 class="drink-info">It was her _count_ drink of the day.</h5>
                             <h5 class="drink-info">It had been _time-elapsed_ since her last drink, and she was at the water bowl for _duration_.</h5>
@@ -71,7 +76,7 @@
                                 <div class="social-icon-container">
                                     <a class="fa fa-twitter" href="https://twitter.com/TimJohnston_11" target="_blank"></a>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 <!-- </div> -->
@@ -80,7 +85,7 @@
 
 
 
-
+ 
 
 
 
