@@ -11,5 +11,10 @@ public class RoutingController {
 	String home() {
 		return "home";
 	}
+	
+	@RequestMapping("/login")
+	String login() {
+		return "login";
+	}
 
 }

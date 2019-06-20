@@ -1,0 +1,14 @@
+#section-login {
+	min-height: calc(85vh - 10vh - 34px);
+}
+
+#login-container {
+	width: 300px;
+	height: 600px;
+	margin: 10px auto;
+	border: 12px solid #b8b8ff;
+	border-radius: 15px;
+	background: #796ad1;
+	overflow: hidden;
+	background: linear-gradient( 180deg, #f8f7ff 90px, #796ad1 90px);
+}
