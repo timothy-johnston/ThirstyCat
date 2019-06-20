@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.tj.thirstyCat.model.User;
 import com.tj.thirstyCat.service.UserService;
 
-@RestController("/api/image")
+@RestController("/api/user")
 //Need to add @ResourceMapping annotation here, put url here instead of in @RestController?
 public class UserController {
 	

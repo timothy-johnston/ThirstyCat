@@ -1,5 +1,63 @@
+var currentDrinkId;
+var apiURL = "http://localhost:8080";
+var apiPathLastDrink = "/lastDrink";
+var apiPathLastDrinkImage = "/lastImage/";
+
 $( document ).ready(function() {
 	
-	console.log("test");
+	//On initial page load, grab the most recent drink info + picture
+	initiateDrinkUpdate();
+
+
 	
 })
+
+
+//AJAX call to our REST service for daily forecast
+console.log("about to make ajax call");
+function ajaxGetAllDrinks(endpoint) {
+	console.log("in ajax call");
+	return $.ajax({
+		url: endpoint,
+		type:"GET",
+		success: function(result) {
+			console.log("result is: ");
+			console.log(result);
+		}
+	});
+}
+
+//Check for new drink info/picture
+//If so, retrieve new data & update page
+function initiateDrinkUpdate() {
+	getMostRecentDrinkId();
+}
+
+function getMostRecentDrinkId() {
+	console.log("In ajax call: Get most recent drink");
+	$.ajax({
+		url: apiURL + apiPathLastDrink,
+		type: "GET",
+		success: function(result) {
+			//If most recent drink id differs from current drink id, update drink
+			if (result.id != currentDrinkId) {
+				getMostRecentDrinkImage(result);
+			}
+		}
+	});
+}
+
+function getMostRecentDrinkImage(drinkInfo) {
+	console.log("In ajax call: Get most recent image");
+	$.ajax({
+		url: apiURL + apiPathLastDrinkImage + drinkInfo.id,
+		type: "GET",
+		success: function(result) {
+			updateDrinkInfo(drinkInfo, result);
+		}
+	});
+}
+
+updateDrinkInfo(drinkInfo, result) {
+	console.log("----------made it!----------");
+}
