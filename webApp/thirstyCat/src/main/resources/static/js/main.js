@@ -71,6 +71,16 @@ function updateDrinkInfo(drinkInfo, imageBytes) {
 	console.log("Now, in updateDrinkInfo--------------");
 	console.log(allDrinks);
 	var drinkStats = calculateDrinkStats();
+	console.log("----------Drink stats calculated----------");
+	console.log(drinkStats);
+
+	//Update drink count, time since last, and duration
+	var drinkCountString = "She has taken " + drinkStats[0] + " drinks today.";
+	var elapsedTimeString = drinkStats[1] + ", and she was at the fountain for " + drinkStats[2] + ((drinkStats[2] > 1) ? " minutes." : "minute.");
+	$('#drinkCount').text(drinkCountString);
+	$('#elapsedTime').text(elapsedTimeString);
+
+
 }
 
 //Format time to be shown on screen
@@ -91,13 +101,20 @@ function calculateDrinkStats() {
 	//Calculate drinks taken today & set html text
 	var drinksToday = getDrinksToday();
 	
-	//Calculate time since last drink;
-	var timeSinceLastDrink = getTimeSinceLastDrink();
+	//Calculate time since last drink
+	var timeSinceLastDrinkString = getTimeSinceLastDrink();
+
+	//Calculate duration of drink
+	var durationOfDrink= getDurationOfDrink();
+
+	return [drinksToday, timeSinceLastDrinkString, durationOfDrink];
 
 }
 
 function getDrinksToday() {
 	
+	var drinksToday = 0;
+
 	//Current time
 	var currentDate = new Date();
 	
@@ -111,21 +128,34 @@ function getDrinksToday() {
 	return drinksToday;
 }
 
+//Calculate time between trips to the water fountain
 function getTimeSinceLastDrink() {
 
-	elapsedMillis = allDrinks(allDrinks.length -1) - allDrinks(allDrinks.length - 2);
+	var elapsedMillis = new Date(allDrinks[allDrinks.length -1].startTime) - new Date(allDrinks[allDrinks.length - 2].endTime);
 
 	//Calculate hours and minutes
-	hours = Math.floor(elapsedMillis / (1000 * 60 * 60));
-	minuteRemainder = Math.round(elaspedMillis / (1000 * 60) % (Math.floor(hours) * 60));
+	var hours = Math.floor(elapsedMillis / (1000 * 60 * 60));
+	var minuteRemainder = Math.round(elapsedMillis / (1000 * 60) % (Math.floor(hours) * 60));
 
 	//Format string
 	//I am nesting ternaries and I do expect to regret this in the future
 	//In fact I already regret it
-	hoursString = (hours >= 1) ? hours + ((hours > 1) ? " hours" : " hour") : "";
-	minutesString = (minues >= 1) ? minutes + " minutes" : minute + " minute";
-
-	elapsedTimeString = "It had been " + hoursString + " and " + minutesString + " since her last drink";
+	var hoursString = (hours >= 1) ? hours + ((hours > 1) ? " hours and " : " hour and ") : "";
+	var minutesString = (minuteRemainder >= 1) ? minuteRemainder + " minutes" : minuteRemainder + " minute";
+	var elapsedTimeString = "It had been " + hoursString + minutesString + " since her last drink";
 
 	return elapsedTimeString;
+}
+
+//Calculate time shasta was at water bowl
+function getDurationOfDrink() {
+
+	var lastDrink = allDrinks[allDrinks.length -1];
+
+	var durationMillis = new Date(lastDrink.endTime) - new Date(lastDrink.startTime);
+
+	var durationMinutes = Math.round(durationMillis / (1000 * 60));
+
+	return durationMinutes
+
 }
