@@ -239,13 +239,12 @@ color: white;
 
 #graph-container {
 	width: 80%;
-	height: 40vh;
-
+	height: 450px;
 	margin-left: auto;
 	margin-right: auto;
 	border: 12px solid #ffd8be;
-	border-radius: 15px;
-	background: silver;
+	border-radius: 25px;
+	background: #f8f7ff;
 }
 
 #options-container {

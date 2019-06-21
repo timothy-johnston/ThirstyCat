@@ -13,6 +13,9 @@ $( document ).ready(function() {
 	//Get all drink data
 	getAllDrinks();
 
+	//Create catstat chart
+	initiateChartCreation();
+
 })
 
 //Check for new drink info/picture
@@ -29,7 +32,7 @@ function getMostRecentDrinkId() {
 		success: function(result) {
 			//If most recent drink id differs from current drink id, update drink
 			if (result.id != currentDrinkId) {
-				// getMostRecentDrinkImage(result);
+				getMostRecentDrinkImage(result);
 			}
 		}
 	});
@@ -69,11 +72,7 @@ function updateDrinkInfo(drinkInfo, imageBytes) {
 
 	//Perform calculations for stats, charts, etc.
 	//First ensure that historical drink data has been loaded
-	console.log("Now, in updateDrinkInfo--------------");
-	console.log(allDrinks);
 	var drinkStats = calculateDrinkDetails();
-	console.log("----------Drink stats calculated----------");
-	console.log(drinkStats);
 
 	//Update drink count, time since last, and duration
 	var drinkCountString = "She has taken " + drinkStats[0] + " drinks today.";
@@ -163,13 +162,13 @@ function getDurationOfDrink() {
 function performStats() {
 
 	//Create array of days from first day of ThirstyCat data to present
-	var elapsedDates = createElapsedDatesArray()
-	console.log("made all the dates");
-	console.log(elapsedDates);
+	var elapsedDates = createElapsedDatesArray();
+	var test2 = getDrinksPerDay(elapsedDates);
+	var arrayDrinksPerDay = [elapsedDates, getDrinksPerDay(elapsedDates)];
 
 	//Create array: number of drinks per day
 		//Chart : Bar Chart : Drinks vs Day
-	var statArrayDrinksPerDay = getDrinksPerDay(elapsedDates);
+	createDrinkVsDay(arrayDrinksPerDay, 0);
 
 
 	//Create array: avg number of drinks by day, grouped by day of week
@@ -229,17 +228,26 @@ function getDrinksPerDay(elapsedDates) {
 
 			var dateStartTime = new Date(drink.startTime);
 
-			console.log(dateStartTime);
-
 			if (dateStartTime >= dateBracketLow && dateStartTime < dateBracketHigh) {
 				drinkCount[i] ++;
 			}
 		}
 
-
-
 	}
 
+	return drinkCount;
+
+}
+
+
+
+
+
+
+
+
+function initiateChartCreation() {
+	createCharts(allDrinks, 0);
 }
 
 
