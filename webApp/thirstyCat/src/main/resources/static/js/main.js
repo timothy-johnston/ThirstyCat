@@ -29,7 +29,7 @@ function getMostRecentDrinkId() {
 		success: function(result) {
 			//If most recent drink id differs from current drink id, update drink
 			if (result.id != currentDrinkId) {
-				getMostRecentDrinkImage(result);
+				// getMostRecentDrinkImage(result);
 			}
 		}
 	});
@@ -206,4 +206,40 @@ function createElapsedDatesArray() {
 			break;
 		}
 	}
+
+	return allDates;
+
 }
+
+//Get the number of drinks taken each day from start of data collection
+function getDrinksPerDay(elapsedDates) {
+
+	//Hold count of drinks taken each day
+	var drinkCount = new Array(elapsedDates.length).fill(0);
+
+	//Loop over elapsed dates
+	//TODO: Poor performance here O(n^2), should refactor to not use nested loop
+	//Dear any potential employers looking at this.. please forgive me!
+	for (i = 1; i < elapsedDates.length - 1; i++) {
+		
+		var dateBracketLow = new Date(elapsedDates[i].getFullYear() + "-" + (elapsedDates[i].getMonth() + 1) + "-" + elapsedDates[i].getDate());
+		var dateBracketHigh = new Date(elapsedDates[i+1].getFullYear() + "-" + (elapsedDates[i+1].getMonth() + 1) + "-" + elapsedDates[i+1].getDate());
+		
+		for (let drink of allDrinks) {
+
+			var dateStartTime = new Date(drink.startTime);
+
+			console.log(dateStartTime);
+
+			if (dateStartTime >= dateBracketLow && dateStartTime < dateBracketHigh) {
+				drinkCount[i] ++;
+			}
+		}
+
+
+
+	}
+
+}
+
+
