@@ -13,8 +13,6 @@ $( document ).ready(function() {
 	//Get all drink data
 	getAllDrinks();
 
-
-	
 })
 
 //Check for new drink info/picture
@@ -55,6 +53,9 @@ function getAllDrinks() {
 		type: "GET",
 		success: function(result) {
 			allDrinks = result;
+			
+			//Perform statistics to populate catstats charts and data
+			performStats();
 		}
 	});
 }
@@ -70,7 +71,7 @@ function updateDrinkInfo(drinkInfo, imageBytes) {
 	//First ensure that historical drink data has been loaded
 	console.log("Now, in updateDrinkInfo--------------");
 	console.log(allDrinks);
-	var drinkStats = calculateDrinkStats();
+	var drinkStats = calculateDrinkDetails();
 	console.log("----------Drink stats calculated----------");
 	console.log(drinkStats);
 
@@ -79,7 +80,6 @@ function updateDrinkInfo(drinkInfo, imageBytes) {
 	var elapsedTimeString = drinkStats[1] + ", and she was at the fountain for " + drinkStats[2] + ((drinkStats[2] > 1) ? " minutes." : "minute.");
 	$('#drinkCount').text(drinkCountString);
 	$('#elapsedTime').text(elapsedTimeString);
-
 
 }
 
@@ -96,7 +96,7 @@ function formatDateToTime(jsDate) {
 }
 
 //Perform calculations on drink data
-function calculateDrinkStats() {
+function calculateDrinkDetails() {
 
 	//Calculate drinks taken today & set html text
 	var drinksToday = getDrinksToday();
@@ -158,4 +158,52 @@ function getDurationOfDrink() {
 
 	return durationMinutes
 
+}
+
+function performStats() {
+
+	//Create array of days from first day of ThirstyCat data to present
+	var elapsedDates = createElapsedDatesArray()
+	console.log("made all the dates");
+	console.log(elapsedDates);
+
+	//Create array: number of drinks per day
+		//Chart : Bar Chart : Drinks vs Day
+	var statArrayDrinksPerDay = getDrinksPerDay(elapsedDates);
+
+
+	//Create array: avg number of drinks by day, grouped by day of week
+		//Chart : Bar Chart : Avg # drinks vs Day of Week
+
+	//Create array: number of drinks per hour per day
+		//Chart : Heat Map : Drinks per Hour per Day [x =day, y=hour, z=drinks]
+
+	//Create array: avg number of drinks per hour per day, grouped by day of week
+		//Chart : Heat Map : Avg # drinks per Hour per Day of Week
+
+	//Calculate stat: Average number of drinks per day
+
+	//Calculate stat: Max number of drinks per day
+
+	//Calculate stat: Min number of drinks per day
+
+}
+
+//Builds and array of dates, 1 per day, beginning at the first data record until present
+function createElapsedDatesArray() {
+	var startDate = new Date(allDrinks[0].startTime);
+	var currentDate = new Date();
+	var allDates = [startDate];
+	while(true) {
+
+		var previousDate = allDates[allDates.length -1];
+		var dateToAdd = new Date(previousDate.getTime() + 24 * 60 * 60 * 1000);
+
+		//Compare dateToAdd to current date; add to array if it is less than current date
+		if (dateToAdd < currentDate) {
+			allDates.push(dateToAdd);
+		} else {
+			break;
+		}
+	}
 }
