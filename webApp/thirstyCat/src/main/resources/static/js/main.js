@@ -14,7 +14,7 @@ $( document ).ready(function() {
 	getAllDrinks();
 
 	//Create catstat chart
-	initiateChartCreation();
+//	initiateChartCreation();
 
 })
 
@@ -168,7 +168,7 @@ function performStats() {
 
 	//Create array: number of drinks per day
 		//Chart : Bar Chart : Drinks vs Day
-	createDrinkVsDay(arrayDrinksPerDay, 0);
+//	createCharts(arrayDrinksPerDay, 0);
 
 
 	//Create array: avg number of drinks by day, grouped by day of week
@@ -176,6 +176,7 @@ function performStats() {
 
 	//Create array: number of drinks per hour per day
 		//Chart : Heat Map : Drinks per Hour per Day [x =day, y=hour, z=drinks]
+	createCharts(arrayDrinksPerDay, 1);
 
 	//Create array: avg number of drinks per hour per day, grouped by day of week
 		//Chart : Heat Map : Avg # drinks per Hour per Day of Week
@@ -247,7 +248,7 @@ function getDrinksPerDay(elapsedDates) {
 
 
 function initiateChartCreation() {
-	createCharts(allDrinks, 0);
+	createCharts(allDrinks, 1);
 }
 
 
