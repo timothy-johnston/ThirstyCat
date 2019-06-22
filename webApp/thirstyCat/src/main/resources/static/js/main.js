@@ -1,50 +1,80 @@
 var currentDrinkId;
-var allDrinks;
+var allDrinks = [];
 var apiURL = "http://localhost:8080";
 var apiPathLastDrink = "/lastDrink";
 var apiPathAllDrinks = "/allDrinks";
 var apiPathLastDrinkImage = "/lastImage/";
+var apiPathImageByDrinkID = "/imageByDrink/"
 
 $( document ).ready(function() {
 	
 	//On initial page load, grab the most recent drink info + picture
+		//Flow is as follows, asynch rest api calls w/callback functions on success:
+			//initiateDrinkUpdate->getAllDrinks->getMostRecentDrinkId->updateDrinkInfo->
+				//getDrinkImage->performStats->createCharts
 	initiateDrinkUpdate();
 
-	//Get all drink data
-	getAllDrinks();
-
-	//Create catstat chart
-//	initiateChartCreation();
+	//Check to see if new drink has been taken every minute. If so, update info on page
+//	setInterval(function() {
+//		console.log("------starting set interval---------")
+//		initiateDrinkUpdate();
+//	}, (1000 * 60));
 
 })
 
 //Check for new drink info/picture
 //If so, retrieve new data & update page
 function initiateDrinkUpdate() {
-	getMostRecentDrinkId();
+	
+	//Get list of all drink data
+	getAllDrinks();
+	
 }
 
-function getMostRecentDrinkId() {
-	console.log("In ajax call: Get most recent drink");
+function getMostRecentDrinkId(allDrinks) {
+
+	var latestDrink = allDrinks[allDrinks.length - 1];
+
+	//If most recent drink id differs from current drink id, update drink
+	if (latestDrink.id != currentDrinkId) {
+		updateDrinkInfo(latestDrink);
+	}
+
+}
+
+function getDrinkImage(latestDrink) {
+	console.log("In ajax call: get current drink's image.");
 	$.ajax({
-		url: apiURL + apiPathLastDrink,
+		url: apiURL + apiPathImageByDrinkID + latestDrink.id,
 		type: "GET",
 		success: function(result) {
-			//If most recent drink id differs from current drink id, update drink
-			if (result.id != currentDrinkId) {
-				getMostRecentDrinkImage(result);
-			}
+
+			//Update the image displayed on the UI
+			updateDrinkImage(result);
+
+			//Initiate calculations for catstats section
+			performStats();
+
+		},
+		error: function() {
+			getMostRecentImage();
 		}
 	});
 }
 
-function getMostRecentDrinkImage(drinkInfo) {
-	console.log("In ajax call: Get most recent image");
+function getMostRecentImage() {
+	console.log("In ajax call: Get most recently available image.");
 	$.ajax({
 		url: apiURL + apiPathLastDrinkImage,
 		type: "GET",
 		success: function(result) {
-			updateDrinkInfo(drinkInfo, result);
+
+			//Update the image displayed on the UI
+			updateDrinkImage(result);
+
+			//Initiate calculations for catstats section
+			performStats();
+
 		}
 	});
 }
@@ -57,16 +87,16 @@ function getAllDrinks() {
 		success: function(result) {
 			allDrinks = result;
 			
-			//Perform statistics to populate catstats charts and data
-			performStats();
+			getMostRecentDrinkId(allDrinks);
+
 		}
 	});
 }
 
-function updateDrinkInfo(drinkInfo, imageBytes) {
+function updateDrinkInfo(latestDrink) {
 	
 	//Update drink time
-	var drinkTime = formatDateToTime(new Date(drinkInfo.startTime));
+	var drinkTime = formatDateToTime(new Date(latestDrink.startTime));
 	var drinkTimeString = "Shasta took this drink at " + drinkTime + " EST.";
 	$('#drinkTime').text(drinkTimeString);
 
@@ -80,6 +110,13 @@ function updateDrinkInfo(drinkInfo, imageBytes) {
 	$('#drinkCount').text(drinkCountString);
 	$('#elapsedTime').text(elapsedTimeString);
 
+	//Call function to update image
+	getDrinkImage(latestDrink);
+
+}
+
+function updateDrinkImage(latestImage) {
+	//TODO: IMPLEMENT
 }
 
 //Format time to be shown on screen
@@ -160,6 +197,12 @@ function getDurationOfDrink() {
 }
 
 function performStats() {
+
+	//DEBUG OUTPUT TO MAKE SURE FLOW IS CORRECT
+	//At this point, allDrinks should be populated with data
+	console.log("----------Checking that allDrinks is defined-------------");
+	console.log(allDrinks);
+
 
 	//Create array of days from first day of ThirstyCat data to present
 	var elapsedDates = createElapsedDatesArray();

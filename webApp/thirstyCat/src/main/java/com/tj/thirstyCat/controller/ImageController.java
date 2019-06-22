@@ -49,9 +49,9 @@ public class ImageController {
 		return imageService.getImageById(imageId);
 	}
 	
-	@GetMapping("/imageByDrink/{imageId}")
+	@GetMapping("/imageByDrink/{drinkId}")
 	@ResponseBody
-	public Optional<byte[]> getImageByDrinkId(@PathVariable Long drinkId) {
+	public Image getImageByDrinkId(@PathVariable Long drinkId) {
 		return imageService.getImageByDrinkId(drinkId);
 	}
 
