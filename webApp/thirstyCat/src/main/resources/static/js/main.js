@@ -211,7 +211,7 @@ function performStats() {
 
 	//Create array: number of drinks per day
 		//Chart : Bar Chart : Drinks vs Day
-//	createCharts(arrayDrinksPerDay, 0);
+//	createCharts(arrayDrinksPerDay, allDrinks, 0);
 
 
 	//Create array: avg number of drinks by day, grouped by day of week
@@ -219,7 +219,7 @@ function performStats() {
 
 	//Create array: number of drinks per hour per day
 		//Chart : Heat Map : Drinks per Hour per Day [x =day, y=hour, z=drinks]
-	createCharts(arrayDrinksPerDay, 1);
+	initiateChartCreation(arrayDrinksPerDay, allDrinks, 1);
 
 	//Create array: avg number of drinks per hour per day, grouped by day of week
 		//Chart : Heat Map : Avg # drinks per Hour per Day of Week
@@ -263,7 +263,7 @@ function getDrinksPerDay(elapsedDates) {
 	//Loop over elapsed dates
 	//TODO: Poor performance here O(n^2), should refactor to not use nested loop
 	//Dear any potential employers looking at this.. please forgive me!
-	for (i = 1; i < elapsedDates.length - 1; i++) {
+	for (i = 0; i < elapsedDates.length - 1; i++) {
 		
 		var dateBracketLow = new Date(elapsedDates[i].getFullYear() + "-" + (elapsedDates[i].getMonth() + 1) + "-" + elapsedDates[i].getDate());
 		var dateBracketHigh = new Date(elapsedDates[i+1].getFullYear() + "-" + (elapsedDates[i+1].getMonth() + 1) + "-" + elapsedDates[i+1].getDate());
@@ -290,8 +290,8 @@ function getDrinksPerDay(elapsedDates) {
 
 
 
-function initiateChartCreation() {
-	createCharts(allDrinks, 1);
+function initiateChartCreation(arrayDrinksPerDay, allDrinks, chartId) {
+	createCharts(arrayDrinksPerDay, allDrinks, chartId);
 }
 
 

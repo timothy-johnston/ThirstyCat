@@ -2,7 +2,7 @@ function testScript() {
     alert("success!");
 }
 
-function createCharts(drinkData, chartId) {
+function createCharts(drinkData, allDrinks, chartId) {
 
     //Determine function to call
     switch (chartId) {
@@ -10,7 +10,7 @@ function createCharts(drinkData, chartId) {
             createDrinkVsDay(drinkData);
             break;
         case 1:
-            createDrinkPerHourPerDay(drinkData);
+            createDrinkPerHourPerDay(drinkData, allDrinks);
             break;
     }
 
@@ -64,13 +64,23 @@ function createDrinkVsDay(drinkData) {
     });
 }
 
-function createDrinkPerHourPerDay(drinkData) {
+function createDrinkPerHourPerDay(drinkData, allDrinks) {
+
+    var arrayDrinkPerHourPerDay = calculateDrinkPerHourPerDay(drinkData, allDrinks);
+
+    console.log(arrayDrinkPerHourPerDay);
+
+    
+
+}
+
+function calculateDrinkPerHourPerDay(drinkData, allDrinks) {
 
     var arrayDrinkPerHourPerDay = [];
 
     //Format data into 3 column array
     //[x,y,z] = [date, hourBucket, # of drinks]
-    for (i = 0; i < drinkData.length; i++) {
+    for (var i = 0; i < drinkData[0].length; i++) {
 
         var dateIteration = drinkData[0][i];
         var dateMidnight = new Date(dateIteration.getFullYear() + "-" + (dateIteration.getMonth() + 1) + "-" + dateIteration.getDate());
@@ -80,28 +90,27 @@ function createDrinkPerHourPerDay(drinkData) {
 
         //Loop over all hour buckets through day
         //Count drinks taking place in that slice of the day
-        for (j = 0; j < timeBuckets; j ++) {
+        for (var j = 0; j < timeBuckets; j++) {
 
-            var bucketLowerBound = new Date(dateMidnight.getTime() + hourIncrement * (j * 2));
-            var bucketUpperBound = new Date(dateMidnight.getTime() + hourIncrement * ((j + 1) * 2));
+            var bucketLowerBound = new Date(dateMidnight.getTime() + hourIncrement * (j * timeBucketWidth));
+            var bucketUpperBound = new Date(dateMidnight.getTime() + hourIncrement * ((j + 1) * timeBucketWidth));
             var drinkCount = 0;
 
-            var xyz = [];
-            xyz[0] = dateIteration;
-            xyz[1] = bucketLowerBound.getHours();
-
             //Loop over drinks. When one falls in the current bucket, increment count
-            var drinkTimes = drinkData[0];
-            for (let drink of drinkTimes) {
+            for (var k = 0; k < allDrinks.length; k++) {
 
-                if (drink >= bucketLowerBound && drink < bucketUpperBound) {
+                var drinkStart = new Date(allDrinks[k].startTime);
+
+                if (drinkStart >= bucketLowerBound && drinkStart < bucketUpperBound) {
                     drinkCount++;
-                } else if (drink >= bucketUpperBound) {
+                } else if (drinkStart >= bucketUpperBound) {
 //                    break;
                 }
-
             }
 
+            var xyz = [];
+            xyz[0] = dateMidnight;
+            xyz[1] = bucketLowerBound;
             xyz[2] = drinkCount;
 
             arrayDrinkPerHourPerDay.push(xyz);
@@ -110,7 +119,6 @@ function createDrinkPerHourPerDay(drinkData) {
 
     }
 
-    console.log("-------------Should have fully formated arrayDrinkPerHourPerDay-------------");
-    console.log(arrayDrinkPerHourPerDay);
+    return arrayDrinkPerHourPerDay;
 
 }
