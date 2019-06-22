@@ -242,6 +242,8 @@ color: white;
 	height: 450px;
 	margin-left: auto;
 	margin-right: auto;
+	padding: 20px;
+	padding-bottom: 5px;
 	border: 12px solid #ffd8be;
 	border-radius: 25px;
 	background: #f8f7ff;
