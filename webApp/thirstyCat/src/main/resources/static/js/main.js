@@ -4,21 +4,53 @@ var apiURL = "http://localhost:8080";
 var apiPathLastDrink = "/lastDrink";
 var apiPathAllDrinks = "/allDrinks";
 var apiPathLastDrinkImage = "/lastImage/";
-var apiPathImageByDrinkID = "/imageByDrink/"
+var apiPathImageByDrinkID = "/imageByDrink/";
+var updateImage = true;
+var chartId = 1;
 
 $( document ).ready(function() {
 	
+	//Flow Control-------------------------------------------------------------------
+
 	//On initial page load, grab the most recent drink info + picture
 		//Flow is as follows, asynch rest api calls w/callback functions on success:
 			//initiateDrinkUpdate->getAllDrinks->getMostRecentDrinkId->updateDrinkInfo->
 				//getDrinkImage->performStats->createCharts
 	initiateDrinkUpdate();
 
-	//Check to see if new drink has been taken every minute. If so, update info on page
-//	setInterval(function() {
-//		console.log("------starting set interval---------")
-//		initiateDrinkUpdate();
-//	}, (1000 * 60));
+	// Check to see if new drink has been taken every minute. If so, update info on page
+	setInterval(function() {
+		console.log("------starting set interval---------")
+		initiateDrinkUpdate();
+	}, (1000 * 60));
+
+	//End Flow Control-----------------------------------------------------------------
+
+	//Event Listeners------------------------------------------------------------------
+
+	//Update graph on dropdown selection
+	$('.select-dropdown').change(function() {
+		
+		//Turn off image update
+		updateImage = false;
+
+		//Determine visualization to display based on selection
+		var option = $('.select-dropdown option:selected').val();
+
+		switch(option) {
+			case "drinksPerDay":
+				chartId = 0;
+				break;
+			case "drinksPerTimeSlice":
+				chartId = 1;
+				break;
+		}
+
+		performStats();
+
+	})
+
+
 
 })
 
@@ -110,8 +142,14 @@ function updateDrinkInfo(latestDrink) {
 	$('#drinkCount').text(drinkCountString);
 	$('#elapsedTime').text(elapsedTimeString);
 
-	//Call function to update image
-	getDrinkImage(latestDrink);
+	//Call function to update image (if image update flag is set to on)
+	if (updateImage == true) {
+		getDrinkImage(latestDrink);
+	} else {
+		performStats();
+		updateImage = true;
+	}
+	
 
 }
 
@@ -219,7 +257,7 @@ function performStats() {
 
 	//Create array: number of drinks per hour per day
 		//Chart : Heat Map : Drinks per Hour per Day [x =day, y=hour, z=drinks]
-	initiateChartCreation(arrayDrinksPerDay, allDrinks, 1);
+	initiateChartCreation(arrayDrinksPerDay, allDrinks);
 
 	//Create array: avg number of drinks per hour per day, grouped by day of week
 		//Chart : Heat Map : Avg # drinks per Hour per Day of Week
@@ -283,14 +321,7 @@ function getDrinksPerDay(elapsedDates) {
 
 }
 
-
-
-
-
-
-
-
-function initiateChartCreation(arrayDrinksPerDay, allDrinks, chartId) {
+function initiateChartCreation(arrayDrinksPerDay, allDrinks) {
 	createCharts(arrayDrinksPerDay, allDrinks, chartId);
 }
 

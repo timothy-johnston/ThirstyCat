@@ -212,7 +212,6 @@ color: white;
 .drink-info {
 	color: #f8f7ff;
 	font-size: 1.2rem;
-	font-family: 'Maven Pro', sans-serif;
 	font-family: 'Josefin Sans', sans-serif;
 	margin: 25px 25px 25px 25px;
 	/* font-family: 'Damion', cursive; */
@@ -238,7 +237,7 @@ color: white;
 }
 
 #graph-container {
-	width: 80%;
+/* 	width: 80%; */
 	height: 450px;
 	margin-left: auto;
 	margin-right: auto;
@@ -250,13 +249,23 @@ color: white;
 }
 
 #options-container {
-	width: 80%;
-	height: 20vh;
-
+/* 	width: 80%; */
 	margin-left: auto;
 	margin-right: auto;
 	margin-bottom: 50px;
-	background: silver;
+	/* background: silver; */
+}
+
+.select-label {
+	color: #f8f7ff;
+/* 	margin-top: 10px; */
+	margin-bottom: 10px;
+	font-size: 3rem;
+	font-family: 'Damion', cursive;
+}
+
+.select-dropdown {
+	border-radius: 15px;
 }
 
 #footer-section {
