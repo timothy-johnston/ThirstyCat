@@ -13,6 +13,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>thirstyCat</name>
 	<description>ThirstyCat Spring Boot web application</description>
+	<packaging>war</packaging>
 
 	<properties>
 		<java.version>1.8</java.version>
