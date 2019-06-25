@@ -20,9 +20,6 @@ public class ImageRepositoryImpl implements ImageRepositoryCustom {
 	@PersistenceContext
 	EntityManager entityManager;
 	
-	@Autowired
-	ImageService imageService;
-	
 	@Override
 	public Image getImageByDrinkId(Long drinkId) {
 		
