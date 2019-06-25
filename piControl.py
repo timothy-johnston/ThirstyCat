@@ -8,7 +8,6 @@ import tweepy
 import Tkinter
 import urllib2
 
-
 # If data exists, read it in
 if os.path.isfile("/home/pi/projects_2018/shastacam/data/scratchinCatDataLog.txt"):
     dataFileExists = True   
