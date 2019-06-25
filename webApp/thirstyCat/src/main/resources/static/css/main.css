@@ -1,0 +1,300 @@
+/* font-family: 'Patua One', cursive;
+font-family: 'Maven Pro', sans-serif; */
+
+.section {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	min-height: 100vh;
+}
+
+h1 {
+	font-family: 'Patua One', cursive;
+}
+
+body:before {
+    height: 50vh;
+    width: 100%;
+    position: absolute;
+    background: #b8b8ff;
+	content: "";
+	z-index: -1;
+}
+
+body {
+	background: #ffd8be;
+}
+
+/* MEDIA QUERIES */
+@media (max-width: 991px) {
+	
+	.navbar-toggler {
+		z-index: 1;
+	}
+	
+	.navbar-collapse {
+	  background: #b8b8ff;
+	}
+
+	#logo-placeholder-container {
+		flex-grow: 2;
+	}
+
+	#drink-info-container {
+		width: 100% !important;
+		height: 100% !important;
+		text-align: center;
+	}
+  }
+
+#nav-home {
+	/* border: 2px solid blue; */
+	/* height: 35px;
+	top: 10vh; */
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	border-radius: 9000px;	
+}
+
+#nav-ul {
+	width: 80%;
+	margin-left: auto;
+	margin-right: auto;
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+}
+
+#nav-ul-2 {
+	width: 80%;
+	margin-left: auto;
+	margin-right: auto;
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+}
+
+.nav-link {
+	font-size: 1.6rem !important;
+	font-family: 'Damion', cursive;
+	color: #f8f7ff !important;
+}
+
+#spacer-nav-button {
+	opacity: 0.0;
+}
+
+#spacer-nav-button:hover {
+	cursor: default;
+}
+
+.social-icon-container {
+	display: flex;
+	justify-content: center;
+}
+
+.fa {
+	padding: 13px;
+	font-size: 1.4rem !important;
+	text-align: center;
+	text-decoration: none;
+	border-radius: 50%;
+	color: white;
+	width: 48px;
+	height: 48px;
+}
+
+.fa-twitter {
+	background: #55ACEE;
+}
+
+.fa-github {
+	background: #000000;
+}
+
+.fa-linkedin {
+	background: #0077B5;
+}
+
+.fa:hover {
+text-decoration: none;
+color: white;
+}
+
+.fa-twitter:hover {
+	background: #55aceecc;
+}
+
+.fa-github:hover {
+	background: #000000a2;
+}
+
+.fa-linkedin:hover {
+	background: rgba(49, 120, 158, 0.635);
+}
+
+#logo-placeholder-container {
+	display: flex;
+	justify-content: center;
+}
+
+#logo-placeholder {
+	margin-right: 0px;
+}
+
+#logo-placeholder-text {
+	font-size: 8rem;
+	color: #f8f7ff;
+}
+
+#section-home {
+	min-height: calc(85vh - 10vh - 34px);
+}
+
+#drink-container {
+	padding: 0px;
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	align-items: center;
+}
+
+#drinkPic-container {
+	border: 12px solid #b8b8ff;
+	border-radius: 15px;
+	overflow: hidden;
+	margin: 10px auto;
+	width: 800px;
+	height: 600px;
+}
+
+#drinkPic {
+	width: 800px;
+	height: 600px;
+	object-fit: contain;
+}
+
+.info-card {
+	width: 300px;
+	height: 600px;
+	margin: 10px auto;
+	border: 12px solid #b8b8ff;
+	border-radius: 15px;
+	background: #796ad1;
+	overflow: hidden;
+	background: linear-gradient( 180deg, #f8f7ff 90px, #796ad1 90px);
+}
+
+#drinkInfo-header {
+	height: 90px;
+	display: flex;
+	align-content: center;
+}
+
+#drinkInfo-header h2 {
+	width: 100%;
+	text-align: center;
+	margin-top: auto;
+	margin-bottom: auto;
+	color: #796ad1;
+	font-size: 3.0rem;
+	font-family: 'Maven Pro', sans-serif;
+	font-family: 'Damion', cursive;
+}
+
+#drink-info-body {
+	display: flex;
+	flex-direction: column;
+	align-content: space-around;
+}
+
+.drink-info {
+	color: #f8f7ff;
+	font-size: 1.2rem;
+	font-family: 'Josefin Sans', sans-serif;
+	margin: 25px 25px 25px 25px;
+	/* font-family: 'Damion', cursive; */
+}
+
+#section-stats {
+	background: linear-gradient( 180deg, #ffd8be 50%, #b8b8ff 50%)
+}
+
+/* #section-stats::before {
+	height: 50vh;
+    width: 100%;
+    position: absolute;
+    background: #ffd8be;
+	content: "";
+	z-index: -1;
+} */
+
+#stats-header {
+	font-size: 8rem;
+	color: #f8f7ff;
+	text-align: center;
+}
+
+#graph-container {
+/* 	width: 80%; */
+	height: 450px;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 20px;
+	padding-bottom: 5px;
+	border: 12px solid #ffd8be;
+	border-radius: 25px;
+	background: #f8f7ff;
+}
+
+#options-container {
+/* 	width: 80%; */
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 50px;
+	/* background: silver; */
+}
+
+.select-label {
+	color: #f8f7ff;
+/* 	margin-top: 10px; */
+	margin-bottom: 10px;
+	font-size: 3rem;
+	font-family: 'Damion', cursive;
+}
+
+.select-dropdown {
+	border-radius: 15px;
+}
+
+#footer-section {
+	min-height: 25vh;
+	background:#796ad1;
+	display: flex;
+	flex-direction: colun;
+	justify-content: center;
+}
+
+#footer-content-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.footer-content {
+	text-align: center;
+	color: #f8f7ff
+}
+
+.formatted-link {
+	color: #f8f7ff !important;
+	font-weight: bold;
+}
+
+.footer-icon {
+	margin: 0px 3px;
+}
+
+
+

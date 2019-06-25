@@ -1,17 +1,15 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
     <head>
         <title>ThirstyCat</title>
 
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta http-equiv="X-UA-Compatible" content="text/html" />
 
         <!-- Bootstrap required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
         <!-- Import fonts -->
-        <!-- <link href="https://fonts.googleapis.com/css?family=Quicksand:300,500" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Josefin+Sans|Open+Sans" rel="stylesheet">  -->
         <link href="https://fonts.googleapis.com/css?family=Maven+Pro|Patua+One" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Damion&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
@@ -19,82 +17,119 @@
 
         <!-- Bootstrap stylesheet goes before any other stylesheets -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <link rel="stylesheet" href="../static/styles/main.css" />
+        <link rel="stylesheet" type="text/css" href="/css/main.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+        <!-- Highcharts-->
+        <script src="https://code.highcharts.com/highcharts.js"></script>
+        <script src="https://code.highcharts.com/modules/heatmap.js"></script>
+        <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    
     </head>
 
     <body>
 
-        <div id="test">
-
-        <!-- Navbar -->
-        <nav id="nav-home" class="navbar navbar-expand-lg bg-transparent navbar-dark">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="collapsibleNavbar">
-                <ul id="nav-ul" class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">CatStats</a>
-                    </li>
-                </ul>
-            </div>
-            <div id="logo-placeholder-container">
-                <a id="logo-placeholder" class="navbar-brand visible-xs-block text-center" href="#">
-                    <h1 id="logo-placeholder-text">ThirstyCat</h1>
-                </a>
-            </div>
-            <div class="collapse navbar-collapse" id="collapsibleNavbar">
-                <ul id="nav-ul-2" class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Favorite Pics</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Log In</a>
-                    </li>     
-                </ul>
-            </div> 
-            <button id="spacer-nav-button" class="navbar-toggler">
-                <span class="navbar-toggler-icon"></span>
-            </button> 
-        </nav>
-    
-        <section id="section-home">
-            <div id="drink-container" class="container">
-                <div id="drinkPic-container">
-                    <img id="drinkPic" src="../media/catPic.jpg" alt="Picture of Shasta taking a drink">
+        <section id="landing" class="section">
+            <!-- Navbar -->
+            <nav id="nav-home" class="navbar navbar-expand-lg bg-transparent navbar-dark">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                    <ul id="nav-ul" class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">CatStats</a>
+                        </li>
+                    </ul>
                 </div>
-                <div id="drink-info-container">
-                    <div id="drinkInfo-header">
-                        <h2 class="drinkInfo">Drink Info</h2>
+                <div id="logo-placeholder-container">
+                    <a id="logo-placeholder" class="navbar-brand visible-xs-block text-center" href="#">
+                        <h1 id="logo-placeholder-text">ThirstyCat</h1>
+                    </a>
+                </div>
+                <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                    <ul id="nav-ul-2" class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Log In</a>
+                        </li>     
+                    </ul>
+                </div> 
+                <button id="spacer-nav-button" class="navbar-toggler">
+                    <span class="navbar-toggler-icon"></span>
+                </button> 
+            </nav>
+        
+            <div id="section-home">
+                <div id="drink-container" class="container">
+                    <div id="drinkPic-container">
+                        <img id="drinkPic" src="/media/catPic.jpg" alt="Picture of Shasta taking a drink">
                     </div>
-                    <div id="drink-info-body">
-                        <div>
-                        <h5 class="drink-info">Shasta took this drink at _time_ EST.</h5>
-                        <h5 class="drink-info">It was her _count_ drink of the day.</h5>
-                        <h5 class="drink-info">It had been _time-elapsed_ since her last drink, and she was at the water bowl for _duration_.</h5>
+                    <div id="drink-info-container" class="info-card">
+                        <div id="drinkInfo-header">
+                            <h2 class="drinkInfo">Drink Info</h2>
                         </div>
-                        <div>
-                            <h5 class="drink-info">Check back later or follow ThirstyCat on Twitter to see some more pictures!</h5>
-                            <div class="social-icon-container">
-                                <a class="fa fa-twitter" href="https://twitter.com/TimJohnston_11" target="_blank"></a>
+                        <div id="drink-info-body">
+                            <div>
+                            <h5 id="drinkTime" class="drink-info">Shasta took this drink at _time_ EST.</h5>
+                            <h5 id="drinkCount" class="drink-info">It was her _count_ drink of the day.</h5>
+                            <h5 id="elapsedTime" class="drink-info">It had been _time-elapsed_ since her last drink, and she was at the water bowl for _duration_.</h5>
+                            </div>
+                            <div>
+                                <h5 class="drink-info">Check back later or follow ThirstyCat on Twitter to see some more pictures!</h5>
+                                <div class="social-icon-container">
+                                    <a class="fa fa-twitter" href="https://twitter.com/TimJohnston_11" target="_blank"></a>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
+                    </div>
                 </div>
             </div>
         </section>
 
+        <section id="section-stats" class="section">
+            <div id="stats-header-container" class="container">
+                <h1 id="stats-header">Cat Stats</h1>
         </div>
-
-
-        <section>
-
+            <div id="graph-container" class="container">
+                <!-- Content inserted here by javascript functions making highchart graphs-->
+            </div>
+            <div id="options-container" class="container">
+                <form name="chart-options-form" id="chart-options-form" >
+                    <div class = "form-group">
+                        <label class="select-label" for="chart-type-select">Choose your graph!</label>
+                        <select name = "chart-type-select" class="custom-select custom-select-lg mb-3 select-dropdown">
+                            <option value="drinksPerTimeSlice">Drinks Per Block of Time Each Day - Heatmap</option>
+                            <option value="drinksPerDay">Drinks Per Day - Bar Chart</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
         </section>
+
+        <section id="footer-section">
+            <div id="footer-content-container" class="container">
+                <h1 class="footer-content">Thanks for visiting!</h1>
+                <p class="footer-content">
+                    ThirstyCat is a project by Tim Johnston (and his cat Shasta). 
+                    Learn more about Tim by visiting <a class="formatted-link" target="_blank" href="http://www.timothyjohnston.me">timothyjohnston.me</a>
+                </p>
+                <p class="footer-content">Connect with Tim on LinkedIn, Twitter, or Github</p>
+                <div class="social-icon-container">
+                    <a class="fa fa-linkedin footer-icon" href="https://twitter.com/TimJohnston_11" target="_blank"></a>
+                    <a class="fa fa-twitter footer-icon" href="https://twitter.com/TimJohnston_11" target="_blank"></a>
+                    <a class="fa fa-github footer-icon" href="https://twitter.com/TimJohnston_11" target="_blank"></a>
+                </div>
+            </div>
+        </section>
+
+
     
     
     
@@ -148,10 +183,12 @@
     
     
         <!-- Javascript, Jquery, Bootstrap -->
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-        <script async src="../static/js/main.js"></script>
+        <script async src="/js/highchartsConfig.js"></script>
+        <script async src="/js/main.js"></script>
+        
         
     </body>
     

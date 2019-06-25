@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.web.csrf.CsrfToken;
+//import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,9 +26,10 @@ public class DrinkController {
 	
 	/*
 	 * Post request format:
-	 	{
-			"startTime": "2019-06-04T03:57:53.558",
-			"endTime": "2019-06-04T03:59:53.558"
+		{
+		"startTime": "2019-06-04T03:57:53.558",
+		"endTime": "2019-06-04T03:59:53.558",
+		"createdBy": "test"
 		}
 	 */
 	@PostMapping("/addDrink")

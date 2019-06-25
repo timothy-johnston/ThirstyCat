@@ -1,6 +1,9 @@
 package com.tj.thirstyCat.service;
 
 import java.util.List;
+import java.util.Optional;
+
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,25 +21,26 @@ public class ImageService {
 		imageRepository.save(image);
 	}
 
-	public Long[] addImage(Image testImage) {
-		// TODO Auto-generated method stub
-		return null;
-		
+	public Image addImage(Image testImage) {
+		return imageRepository.save(testImage);
 	}
 
-	public Image getLastImage() {
-		// TODO Auto-generated method stub
-		return null;
+	public byte[] getLastImage() {
+		return imageRepository.getLastImage();
 	}
 
 	public List<Image> getAllImages() {
-		// TODO Auto-generated method stub
-		return null;
+		return imageRepository.findAll();
 	}
 
 	public Image getImageById(Long imageId) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	@Transactional
+	public Image getImageByDrinkId(Long drinkId) {
+		return imageRepository.getImageByDrinkId(drinkId);
 	}
 
 	public void favoriteImage(Long imageId) {

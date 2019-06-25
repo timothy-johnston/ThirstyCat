@@ -23,8 +23,11 @@ public class Image {
 	
 	@CreationTimestamp
 	private Date createdDate;
+	
 	@Lob
 	private byte[] imageByteArray;
+	
+	private String createdBy;
 
 	public Image() {
 		
@@ -33,6 +36,12 @@ public class Image {
 	public Image(Long drinkId, byte[] imageByteArray) {
 		this.drinkId = drinkId;
 		this.imageByteArray = imageByteArray;
+	}
+	
+	public Image(Long drinkId, byte[] imageByteArray, String createdBy) {
+		this.drinkId = drinkId;
+		this.imageByteArray = imageByteArray;
+		this.createdBy = createdBy;
 	}
 
 	public Long getId() {
@@ -57,6 +66,14 @@ public class Image {
 
 	public void setImageByteArray(byte[] imageByteArray) {
 		this.imageByteArray = imageByteArray;
+	}
+	
+	public String getCreatedBy() {
+		return createdBy;
+	}
+
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
 	}
 	
 }
