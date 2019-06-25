@@ -7,6 +7,7 @@ import Adafruit_MCP3008
 import tweepy
 import Tkinter
 import urllib2
+import requests
 
 # If data exists, read it in
 if os.path.isfile("/home/pi/projects_2018/shastacam/data/scratchinCatDataLog.txt"):
@@ -165,6 +166,21 @@ while True:
     	#urlBasic = 'https://tewardj11.pythonanywhere.com/api/drinks/addBasic/' + str(usesThisDay)
 	#f = urllib2.urlopen(urlBasic).read()
 	#f = urllib.urlopen(url)
+	urlRoot = 'http://thirstycat.us-east-1.elasticbeanstalk.com/'
+	urlAddDrink = 'addDrink'
+	urlAddImage = 'addImage'
+	
+	photoPath = "/home/pi/projects_2018/shastacam/catWasHere.jpg"	
+	photo = open(photoPath, 'rb')
+	photoBytes = photo.read()
+	multipartKeyValue = {'image' : photoBytes}
+	imageRequestBody = {'createdBy':'pi-test', 'drinkId':9999}
+	requestResponse = requests.post(urlRoot + urlAddImage, files=multipartKeyValue, data=imageRequestBody)
+	print requestResponse 
+
+
+
+
 
 	#Format output
         tableOutput = "Time: " + str(fullTimeStampStart) + "\nNumber of drinks today:  " + str(usesThisDay) + "\n"
@@ -174,7 +190,6 @@ while True:
 	twitterMessage = "Alert, cat detected! Shasta just took a drink.\n" + tableOutput
 #        for follower in tweepy.Cursor(api.followers).items():             #Follow logic commented out temporarily - some issue with Twitter capping number of follows
 #	    follower.follow()
-        photoPath = "/home/pi/projects_2018/shastacam/catWasHere.jpg"
 	api.update_with_media(photoPath, twitterMessage)
 
     # Pause
