@@ -9,6 +9,20 @@ import Tkinter
 import urllib2
 import requests
 
+
+
+urlRoot = 'http://thirstycat.us-east-1.elasticbeanstalk.com/'
+urlAddDrink = 'addDrink'
+urlAddImage = 'addImage'
+
+photoPath = "/home/pi/projects_2018/shastacam/catWasHere.jpg"	
+photo = open(photoPath, 'rb')
+photoBytes = photo.read()
+multipartKeyValue = {'image' : photoBytes}
+imageRequestBody = {'createdBy':'pi-test', 'drinkId':9999}
+requestResponse = requests.post(urlRoot + urlAddImage, files=multipartKeyValue, data=imageRequestBody)
+print requestResponse 
+
 # If data exists, read it in
 if os.path.isfile("/home/pi/projects_2018/shastacam/data/scratchinCatDataLog.txt"):
     dataFileExists = True   
