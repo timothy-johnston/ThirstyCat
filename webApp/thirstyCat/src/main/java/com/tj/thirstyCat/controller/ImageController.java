@@ -27,7 +27,8 @@ public class ImageController {
 	@PostMapping(value="/addImage", consumes="multipart/form-data")
 	@ResponseBody
 	public Image persistImage(@Valid @RequestBody MultipartFile image, String createdBy, Long drinkId) throws IOException {
-		return imageService.addImage(new Image(drinkId, image.getBytes(), createdBy));
+		Image uploadedImage = new Image(drinkId, image.getBytes(), createdBy);
+		return imageService.addImage(uploadedImage);
 	}
 
 	@GetMapping("/lastImage")
