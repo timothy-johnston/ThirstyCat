@@ -15,14 +15,6 @@ urlRoot = 'http://thirstycat.us-east-1.elasticbeanstalk.com/'
 urlAddDrink = 'addDrink'
 urlAddImage = 'addImage'
 
-photoPath = "/home/pi/projects_2018/shastacam/catWasHere.jpg"	
-photo = open(photoPath, 'rb')
-photoBytes = photo.read()
-multipartKeyValue = {'image' : photoBytes}
-imageRequestBody = {'createdBy':'pi-test', 'drinkId':9999}
-requestResponse = requests.post(urlRoot + urlAddImage, files=multipartKeyValue, data=imageRequestBody)
-print requestResponse 
-
 # If data exists, read it in
 if os.path.isfile("/home/pi/projects_2018/shastacam/data/scratchinCatDataLog.txt"):
     dataFileExists = True   
@@ -180,21 +172,24 @@ while True:
     	#urlBasic = 'https://tewardj11.pythonanywhere.com/api/drinks/addBasic/' + str(usesThisDay)
 	#f = urllib2.urlopen(urlBasic).read()
 	#f = urllib.urlopen(url)
-	urlRoot = 'http://thirstycat.us-east-1.elasticbeanstalk.com/'
-	urlAddDrink = 'addDrink'
-	urlAddImage = 'addImage'
-	
+	#Image data
 	photoPath = "/home/pi/projects_2018/shastacam/catWasHere.jpg"	
 	photo = open(photoPath, 'rb')
 	photoBytes = photo.read()
 	multipartKeyValue = {'image' : photoBytes}
-	imageRequestBody = {'createdBy':'pi-test', 'drinkId':9999}
-	requestResponse = requests.post(urlRoot + urlAddImage, files=multipartKeyValue, data=imageRequestBody)
-	print requestResponse 
+	imageRequestBody = {'createdBy':'pi', 'drinkId':9999}
+#	requestResponse = requests.post(urlRoot + urlAddImage, files=multipartKeyValue, data=imageRequestBody)
 
-
-
-
+	#Drink data
+	requestStartTime = str(timeStampStartDatetime).replace(" ", "T")
+	requestEndTime = str(timeStampEndDatetime).replace(" ", "T")
+	drinkInfo = {
+		'startTime': requestStartTime,
+		'endTime': requestEndTime,
+		'createdBy': 'pi'
+       		 }
+	headers = {'Content-Type':'application/json'}
+#	requestResponseDrink = requests.post(urlRoot + urlAddDrink, json=drinkInfo, headers=headers)
 
 	#Format output
         tableOutput = "Time: " + str(fullTimeStampStart) + "\nNumber of drinks today:  " + str(usesThisDay) + "\n"
