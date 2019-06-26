@@ -48,7 +48,7 @@ public class UserController {
 		//Save new user
 		userService.save(userRegistration);
 		
-		return "redirect:/registration?sucess";
+		return "redirect:/login?success";
 		
 	}
 	
