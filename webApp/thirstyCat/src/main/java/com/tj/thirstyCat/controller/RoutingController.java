@@ -12,6 +12,11 @@ public class RoutingController {
 		return "home";
 	}
 	
+	@RequestMapping("/home")
+	String homeFromOther() {
+		return "home";
+	}
+	
 	@RequestMapping("/login")
 	String login() {
 		return "login";
