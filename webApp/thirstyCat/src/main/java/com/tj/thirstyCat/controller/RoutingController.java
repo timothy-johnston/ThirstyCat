@@ -22,5 +22,10 @@ public class RoutingController {
 	public String userIndex() {
 		return "user/home";
 	}
+	
+	@GetMapping("/favoritepics")
+	public String favoritePics() {
+		return "favoritePics";
+	}
 
 }

@@ -48,7 +48,9 @@ public class UserController {
 		//Save new user
 		userService.save(userRegistration);
 		
-		return "redirect:/login?success";
+		//Should be able to just call the login method here so user doesn't have to do that too.
+		
+		return "redirect:/registration?success";
 		
 	}
 	
