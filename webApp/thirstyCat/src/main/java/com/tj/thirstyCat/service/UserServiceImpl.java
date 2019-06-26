@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.tj.thirstyCat.model.Role;
 import com.tj.thirstyCat.model.User;
 import com.tj.thirstyCat.model.UserRegistration;
 import com.tj.thirstyCat.repository.UserRepository;
