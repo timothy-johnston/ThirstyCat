@@ -3,6 +3,7 @@ package com.tj.thirstyCat.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -19,8 +20,8 @@ import com.tj.thirstyCat.security.JwtRequestFilter;
 import com.tj.thirstyCat.service.UserService;
 
 @Configuration
-@EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
+@Order(2)
 public class SecurityConfigurationJWT extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
