@@ -51,6 +51,9 @@ public class UserControllerJWT {
 	private void authenticate(String username, String password) throws Exception {
 		
 		//TODO: Check user role. If role != ADMIN, throw exception
+//		if (true) {
+//			throw new Exception("I_DON'T_THINK_SO_TIM");
+//		}
 		
 		try {
 			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
