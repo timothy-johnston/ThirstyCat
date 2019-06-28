@@ -45,6 +45,10 @@ body {
 		height: 100% !important;
 		text-align: center;
 	}
+
+	.social-icon-container {
+		margin-bottom: 15px;
+	}
   }
 
 #nav-home {

@@ -1,6 +1,7 @@
 var currentDrinkId;
 var allDrinks = [];
 var apiURL = "http://localhost:8080";
+// var apiURL = "http://thirstycat.us-east-1.elasticbeanstalk.com/";
 var apiPathLastDrink = "/lastDrink";
 var apiPathAllDrinks = "/allDrinks";
 var apiPathLastDrinkImage = "/lastImage/";
@@ -138,7 +139,7 @@ function updateDrinkInfo(latestDrink) {
 
 	//Update drink count, time since last, and duration
 	var drinkCountString = "She has taken " + drinkStats[0] + " drinks today.";
-	var elapsedTimeString = drinkStats[1] + ", and she was at the fountain for " + drinkStats[2] + ((drinkStats[2] > 1) ? " minutes." : "minute.");
+	var elapsedTimeString = drinkStats[1] + ", and she was at the fountain for " + drinkStats[2] + ((drinkStats[2] > 1) ? " minutes." : " minute.");
 	$('#drinkCount').text(drinkCountString);
 	$('#elapsedTime').text(elapsedTimeString);
 
