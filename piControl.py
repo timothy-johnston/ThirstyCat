@@ -8,12 +8,13 @@ import tweepy
 import Tkinter
 import urllib2
 import requests
+import json
 
 
-
-urlRoot = 'http://thirstycat.us-east-1.elasticbeanstalk.com/'
+urlRoot = 'http://thirstycat.us-east-1.elasticbeanstalk.com/api/'
 urlAddDrink = 'addDrink'
 urlAddImage = 'addImage'
+urlJWT = 'authenticateJWT'
 
 # If data exists, read it in
 if os.path.isfile("/home/pi/projects_2018/shastacam/data/scratchinCatDataLog.txt"):
@@ -172,13 +173,22 @@ while True:
     	#urlBasic = 'https://tewardj11.pythonanywhere.com/api/drinks/addBasic/' + str(usesThisDay)
 	#f = urllib2.urlopen(urlBasic).read()
 	#f = urllib.urlopen(url)
+
+	#Get JWT Token
+	jwtPath = urlRoot + urlJWT
+	tokenRequestJSON = {'username':'PI_CONTROL', 'password':config.pi_pass}
+#	tokenResponse = requests.post(jwtPath, json=payload)
+#	tokenResponseJSON = json.loads(tokenResponse.text)
+#	bearerToken = 'Bearer ' + tokenResponseJSON['token']
+
 	#Image data
 	photoPath = "/home/pi/projects_2018/shastacam/catWasHere.jpg"	
 	photo = open(photoPath, 'rb')
 	photoBytes = photo.read()
 	multipartKeyValue = {'image' : photoBytes}
 	imageRequestBody = {'createdBy':'pi', 'drinkId':9999}
-#	requestResponse = requests.post(urlRoot + urlAddImage, files=multipartKeyValue, data=imageRequestBody)
+#	headers = {'Authorization':bearerToken}
+#	requestResponse = requests.post(urlRoot + urlAddImage, files=multipartKeyValue, data=imageRequestBody, headers=headers)
 
 	#Drink data
 	requestStartTime = str(timeStampStartDatetime).replace(" ", "T")
@@ -188,7 +198,7 @@ while True:
 		'endTime': requestEndTime,
 		'createdBy': 'pi'
        		 }
-	headers = {'Content-Type':'application/json'}
+#	headers = {'Content-Type':'application/json', 'Authorization':bearerToken}
 #	requestResponseDrink = requests.post(urlRoot + urlAddDrink, json=drinkInfo, headers=headers)
 
 	#Format output
