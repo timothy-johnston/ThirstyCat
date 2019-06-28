@@ -14,7 +14,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import com.tj.thirstyCat.service.UserService;
 
 @Configuration
-@Order(1)
+@Order(3)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Autowired
@@ -27,6 +27,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				"/css/**",
 				"/media/**",
 				"/",
+				"/api/**",
 //				"/favoritepics",
 				"/webjars/**").permitAll()
 		.anyRequest().authenticated()
