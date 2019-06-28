@@ -26,7 +26,7 @@ import com.tj.thirstyCat.security.JwtTokenUtil;
 import com.tj.thirstyCat.service.UserService;
 
 @Controller
-@RequestMapping("/secure")
+@RequestMapping("/registration")
 public class UserController {
 
 	@Autowired
@@ -43,13 +43,13 @@ public class UserController {
 		return new UserRegistration();
 	}
 	
-	@GetMapping("/registration")
+	@GetMapping
 	public String loadRegistrationPage(Model model) {
 		return "registration";
 	}
 	
 	//Todo: Research BindingResult
-	@PostMapping("/registration")
+	@PostMapping
 	public String registerUser(@ModelAttribute("user") @Valid UserRegistration userRegistration, BindingResult result) {
 		User user = userService.findByUsername(userRegistration.getUsername());
 		
@@ -67,38 +67,6 @@ public class UserController {
 		//Should be able to just call the login method here so user doesn't have to do that too.
 		
 		return "redirect:/registration?success";
-		
-	}
-	
-	//User retrieves JWT token from this endpoint
-	@PostMapping("/authenticateJWT")
-	public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
-		
-		//Calls method using Springs AuthenticationManager. If Authentication fails, an exception will be thrown and JWT will not be generated
-		authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
-		
-		//Get current user
-		UserDetails user = userService.loadUserByUsername(authenticationRequest.getUsername());
-		
-		//Generate token for current user
-		String token = jwtTokenUtil.generateToken(user);
-		
-		return ResponseEntity.ok(new JwtResponse(token));
-		
-	}
-	
-	//TODO: Need to research how Spring AuthenticationManager does this authentication
-	private void authenticate(String username, String password) throws Exception {
-		
-		//TODO: Check user role. If role != ADMIN, throw exception
-		
-		try {
-			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
-		} catch (DisabledException e) {
-			throw new Exception("USER_DISABLED", e);
-		} catch (BadCredentialsException e) {
-			throw new Exception("INVALID_CREDENTIALS", e);
-		}
 		
 	}
 	
