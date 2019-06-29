@@ -69,8 +69,9 @@ $( document ).ready(function() {
 		
 		//Check if there is a logged in user. If so, initiate favoriting of picture
 		//If not, prompt to log in
-		if (username.length > 0) {
+		if (userIsLoggedIn) {
 			alert("favoriting");
+			$(this).css("color","red")
 		} else {
 			$('#login-prompt-container').show();
 		}
@@ -94,6 +95,7 @@ function getMostRecentDrinkId(allDrinks) {
 
 	//If most recent drink id differs from current drink id, update drink
 	if (latestDrink.id != currentDrinkId) {
+		currentDrinkId = latestDrink.id;
 		updateDrinkInfo(latestDrink);
 	}
 
@@ -179,7 +181,12 @@ function updateDrinkInfo(latestDrink) {
 }
 
 function updateDrinkImage(latestImage) {
-	//TODO: IMPLEMENT
+	
+	//Check if drink image has been liked. If so, turn like button red
+	if (userIsLoggedIn && userLikedCurrentPicture(latestImage.id)) {
+		$('#like-heart').css("color","red")
+	}
+
 }
 
 //Format time to be shown on screen
@@ -348,6 +355,17 @@ function getDrinksPerDay(elapsedDates) {
 
 function initiateChartCreation(arrayDrinksPerDay, allDrinks) {
 	createCharts(arrayDrinksPerDay, allDrinks, chartId);
+}
+
+function userIsLoggedIn() {
+	var username = $('.username-holder').text();
+	return (username.length > 0)
+}
+
+function userLikedCurrentPicture(id) {
+
+	//Get list of user's liked pictures
+
 }
 
 
