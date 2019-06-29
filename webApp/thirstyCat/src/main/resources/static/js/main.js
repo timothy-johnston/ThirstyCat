@@ -62,6 +62,20 @@ $( document ).ready(function() {
 	
 	//Handle favoriting of pictures.
 	var username = $('.username-holder').text();
+	console.log(username);
+	console.log(username.length)
+	
+	$('#like-heart').click(function() {
+		
+		//Check if there is a logged in user. If so, initiate favoriting of picture
+		//If not, prompt to log in
+		if (username.length > 0) {
+			alert("favoriting");
+		} else {
+			$('#login-prompt-container').show();
+		}
+		
+	});
 
 })
 

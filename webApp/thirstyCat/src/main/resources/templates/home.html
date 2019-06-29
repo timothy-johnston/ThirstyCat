@@ -14,7 +14,8 @@
         <link href="https://fonts.googleapis.com/css?family=Maven+Pro|Patua+One" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Damion&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300&display=swap" rel="stylesheet">  
+        <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300&display=swap" rel="stylesheet">
+<!--         <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">  -->
 
         <!-- Bootstrap stylesheet goes before any other stylesheets -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -65,11 +66,22 @@
                     <span class="navbar-toggler-icon"></span>
                 </button> 
             </nav>
-        
+
             <div id="section-home">
                 <div id="drink-container" class="container">
                     <div id="drinkPic-container">
                         <img id="drinkPic" src="/media/catPic.jpg" alt="Picture of Shasta taking a drink">
+                        <div id="fav-container">
+                            <div id="login-prompt-container">
+                                <p id="login-prompt">
+                                 	<a id="login-link" class="formatted-link" target="" href="/" th:href="@{/login}">Log in</a>
+                                 	to favorite this picture!
+                                 </p> 
+                            </div>
+                            <div id="like-heart-container">
+                                <i id="like-heart" class="fa fas fa-heart"></i>
+                            </div>
+                        </div>
                     </div>
                     <div id="drink-info-container" class="info-card">
                         <div id="drinkInfo-header">
