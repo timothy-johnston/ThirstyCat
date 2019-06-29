@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
     <head>
         <title>ThirstyCat</title>
 
@@ -177,7 +178,9 @@
 
 
 
-
+        <p>
+            Welcome <span sec:authentication="principal.username">User!!!</span>
+        </p>
     
     
     

@@ -50,17 +50,17 @@ public class UserControllerJWT {
 	//TODO: Need to research how Spring AuthenticationManager does this authentication
 	private void authenticate(String username, String password) throws Exception {
 		
-		//TODO: Check user role. If role != ADMIN, throw exception
-//		if (true) {
-//			throw new Exception("I_DON'T_THINK_SO_TIM");
-//		}
-		
-		try {
-			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
-		} catch (DisabledException e) {
-			throw new Exception("USER_DISABLED", e);
-		} catch (BadCredentialsException e) {
-			throw new Exception("INVALID_CREDENTIALS", e);
+		//Check username. Only my Raspberry Pi shold be authenticated
+		if (username.equals("PI_CONTROL")) {
+			try {
+				authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
+			} catch (DisabledException e) {
+				throw new Exception("USER_DISABLED", e);
+			} catch (BadCredentialsException e) {
+				throw new Exception("INVALID_CREDENTIALS", e);
+			}
+		} else {
+			throw new Exception("INVALID_PERMISSIONS");
 		}
 		
 	}
