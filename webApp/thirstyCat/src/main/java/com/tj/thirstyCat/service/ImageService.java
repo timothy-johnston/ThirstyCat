@@ -7,7 +7,10 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.tj.thirstyCat.model.Favorite;
 import com.tj.thirstyCat.model.Image;
+import com.tj.thirstyCat.repository.FavoriteReposiotry;
 import com.tj.thirstyCat.repository.ImageRepository;
 
 @Service
@@ -15,6 +18,9 @@ public class ImageService {
 
 	@Autowired
 	private ImageRepository imageRepository;
+	
+	@Autowired
+	private FavoriteReposiotry favoriteRepository;
 	
 	//Add image to database
 	public void storeFile(Image image) {
@@ -43,9 +49,12 @@ public class ImageService {
 		return imageRepository.getImageByDrinkId(drinkId);
 	}
 
-	public void favoriteImage(Long imageId) {
-		// TODO Auto-generated method stub
-		
+	public Favorite favoriteImage(Favorite favorite) {
+		return favoriteRepository.save(favorite);
+	}
+	
+	public List<Favorite> getFavoritesByUsername(String username) {
+		return favoriteRepository.getFavoritesByUsername(username);
 	}
 	
 }

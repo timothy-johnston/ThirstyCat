@@ -1,6 +1,7 @@
 package com.tj.thirstyCat.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.tj.thirstyCat.model.Favorite;
 import com.tj.thirstyCat.model.Image;
 import com.tj.thirstyCat.service.ImageService;
 
@@ -59,10 +61,24 @@ public class ImageController {
 		return imageService.getImageByDrinkId(drinkId);
 	}
 
-	@GetMapping("/favorite/{imageId}")
+	@PostMapping("/favorite")
 	@ResponseBody
-	public void favoriteImage(@PathVariable Long imageId) {
-		imageService.favoriteImage(imageId);
+	public void favoriteImage(@Valid @RequestBody Favorite favorite) {
+		imageService.favoriteImage(favorite);
+	}
+	
+	@GetMapping("/favorites/{username}")
+	@ResponseBody
+	public List<Long> getFavoriteImageIds(@PathVariable String username) {
+		List<Long> idList = new ArrayList<Long>();
+		
+		List<Favorite> favorites = imageService.getFavoritesByUsername(username);
+		
+		for(Favorite favorite : favorites) {
+			idList.add(favorite.getImageId());
+		}
+		
+		return idList;
 	}
 
 }
