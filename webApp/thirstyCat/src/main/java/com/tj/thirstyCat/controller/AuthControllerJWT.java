@@ -19,7 +19,7 @@ import com.tj.thirstyCat.service.UserService;
 
 @Controller
 @RequestMapping("/api")
-public class UserControllerJWT {
+public class AuthControllerJWT {
 
 	@Autowired
 	private UserService userService;
@@ -50,8 +50,8 @@ public class UserControllerJWT {
 	//TODO: Need to research how Spring AuthenticationManager does this authentication
 	private void authenticate(String username, String password) throws Exception {
 		
-		//Check username. Only my Raspberry Pi shold be authenticated
-		if (username.equals("PI_CONTROL")) {
+		//Check username. Only my Raspberry Pi should be authenticated
+		if (username.equalsIgnoreCase("TC_ADMIN_A") || username.equalsIgnoreCase("TC_ADMIN_B")) {
 			try {
 				authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
 			} catch (DisabledException e) {

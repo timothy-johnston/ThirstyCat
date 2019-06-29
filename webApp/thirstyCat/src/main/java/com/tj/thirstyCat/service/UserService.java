@@ -9,6 +9,9 @@ public interface UserService extends UserDetailsService {
 
 	User findByUsername(String username);
 	
+	Long getCurrentUserId();
+	
 	User save(UserRegistration registration);
+	
 	
 }

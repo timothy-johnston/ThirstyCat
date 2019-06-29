@@ -59,6 +59,9 @@ $( document ).ready(function() {
 		$(this).css({"width":"800px","height":"600px"});
 		$(this).find("img").css({"width":"800px","height":"600px"});
 	});
+	
+	//Handle favoriting of pictures.
+	var username = $('.username-holder').text();
 
 })
 

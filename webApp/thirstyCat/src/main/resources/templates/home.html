@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
     <head>
         <title>ThirstyCat</title>
 
@@ -130,7 +130,18 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
             </div>
         </section>
 
+<!--         <p th:if="${#authentication.principal}"> -->
+<!--             Welcome <span sec:authentication="principal.username">User!!!</span> -->
+<!--         </p> -->
+    
+    
+    <div class="username-holder-div" style="display: none" sec:authorize="isAuthenticated()">
+        <p class="username-holder" sec:authentication="principal.username">User</p>
+    </div>
 
+	<div class="username-holder-div" style="display: none" sec:authorize="isAnonymous()">
+        <p class="username-holder"></p>
+	</div>
     
     
     
@@ -162,25 +173,22 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
     
     
     
-    
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
-        <p>
-            Welcome <span sec:authentication="principal.username">User!!!</span>
-        </p>
+
+
+
+
+
+
+
+
+
+
+
+
+
     
     
     
