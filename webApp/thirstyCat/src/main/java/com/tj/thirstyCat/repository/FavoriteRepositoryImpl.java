@@ -8,6 +8,8 @@ import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
 
+import com.tj.thirstyCat.model.Favorite;
+
 @Repository
 public class FavoriteRepositoryImpl implements FavoriteRepositoryCustom {
 
@@ -15,12 +17,12 @@ public class FavoriteRepositoryImpl implements FavoriteRepositoryCustom {
 	EntityManager entityManager;
 	
 	@Override
-	public List<Long> getFavoritesByUsername(String username) {
+	public List<Favorite> getFavoritesByUsername(String username) {
 		
 		String queryString = "FROM Favorite where username = ?1";
 		Query query = entityManager.createQuery(queryString);
 		query.setParameter(1, username);
-		List<Long> favorites = query.getResultList();
+		List<Favorite> favorites = query.getResultList();
 		
 		return favorites;
 		
