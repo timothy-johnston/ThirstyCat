@@ -18,10 +18,7 @@ public class RoutingController {
 	
 	@RequestMapping("/")
 	public ModelAndView home() {
-		System.out.println("--------------test------------!!!");
-		
-		System.out.println(jwtAdminUsername);
-		
+
 		//Credentials are needed for client side api calls, so pass them along in the model
 		ModelAndView mav = new ModelAndView("home");
 		mav.addObject("username", jwtAdminUsername);
@@ -42,8 +39,15 @@ public class RoutingController {
 	}
 	
 	@GetMapping("/favoritepics")
-	public String favoritePics() {
-		return "favoritePics";
+	public ModelAndView favoritePics() {
+		
+		//Credentials are needed for client side api calls, so pass them along in the model
+		ModelAndView mav = new ModelAndView("favoritePics");
+		mav.addObject("username", jwtAdminUsername);
+		mav.addObject("password", jwtAdminPassword);
+		
+		return mav;
+		
 	}
 
 }
