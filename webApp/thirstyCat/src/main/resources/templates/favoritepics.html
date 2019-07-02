@@ -14,12 +14,12 @@
         <link href="https://fonts.googleapis.com/css?family=Maven+Pro|Patua+One" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Damion&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300&display=swap" rel="stylesheet">
-<!--         <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">  -->
+        <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300&display=swap" rel="stylesheet">  
 
         <!-- Bootstrap stylesheet goes before any other stylesheets -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="/css/main.css" />
+        <link rel="stylesheet" type="text/css" href="/css/favoritepics.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     
         <!-- Highcharts-->
@@ -43,7 +43,7 @@
                             <a class="nav-link" href="#">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#section-stats">CatStats</a>
+                            <a class="nav-link" href="#">CatStats</a>
                         </li>
                     </ul>
                 </div>
@@ -58,7 +58,7 @@
                             <a class="nav-link" href="#">About</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="login">Log In</a>
+                            <a class="nav-link" href="#">Log In</a>
                         </li>     
                     </ul>
                 </div> 
@@ -67,62 +67,48 @@
                 </button> 
             </nav>
 
-            <div id="section-home">
-                <div id="drink-container" class="container">
-                    <div id="drinkPic-container">
-                        <img id="drinkPic" src="/media/catPic.jpg" alt="Picture of Shasta taking a drink">
-                        <div id="fav-container">
-                            <div id="login-prompt-container">
-                                <p id="login-prompt">
-                                 	<a id="login-link" class="formatted-link" target="" href="/" th:href="@{/login}">Log in</a>
-                                 	to favorite this picture!
-                                 </p> 
-                            </div>
-                            <div id="like-heart-container">
-                                <i id="like-heart" class="fa fas fa-heart"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="drink-info-container" class="info-card">
-                        <div id="drinkInfo-header">
-                            <h2 class="drinkInfo">Drink Info</h2>
-                        </div>
-                        <div id="drink-info-body">
-                            <div>
-                            <h5 id="drinkTime" class="drink-info">Shasta took this drink at _time_ EST.</h5>
-                            <h5 id="drinkCount" class="drink-info">It was her _count_ drink of the day.</h5>
-                            <h5 id="elapsedTime" class="drink-info">It had been _time-elapsed_ since her last drink, and she was at the water bowl for _duration_.</h5>
-                            </div>
-                            <div>
-                                <h5 class="drink-info">Check back later or follow ThirstyCat on Twitter to see some more pictures!</h5>
-                                <div class="social-icon-container">
-                                    <a class="fa fa-twitter" href="https://twitter.com/TimJohnston_11" target="_blank"></a>
-                                </div>
-                            </div>
-                        </div>
 
+
+            <div id="section-pics">
+
+                    <div id="fav-pics-header-container" class="container">
+                            <p id="fav-pics-header">My Favorite Pics</p>
+                        </div>
+                <div id="pic-grid-container" class="container">
+                    <div class="fav-pic-container">
+                        <img class="fav-pic" src="/media/catPic.jpg" alt="Picture of Shasta taking a drink">
+                    </div>
+                    <div class="fav-pic-container">
+                        <img class="fav-pic" src="/media/catPic.jpg" alt="Picture of Shasta taking a drink">
+                    </div>
+                    <div class="fav-pic-container">
+                        <img class="fav-pic" src="/media/catPic.jpg" alt="Picture of Shasta taking a drink">
+                    </div>
+                    <div class="fav-pic-container">
+                        <img class="fav-pic" src="/media/catPic.jpg" alt="Picture of Shasta taking a drink">
+                    </div>
+                    <div class="fav-pic-container">
+                        <img class="fav-pic" src="/media/catPic.jpg" alt="Picture of Shasta taking a drink">
+                    </div>
+                    <div class="fav-pic-container">
+                        <img class="fav-pic" src="/media/catPic.jpg" alt="Picture of Shasta taking a drink">
+                    </div>
+                    <div class="fav-pic-container">
+                        <img class="fav-pic" src="/media/catPic.jpg" alt="Picture of Shasta taking a drink">
+                    </div>
+                    <div class="fav-pic-container">
+                        <img class="fav-pic" src="/media/catPic.jpg" alt="Picture of Shasta taking a drink">
+                    </div>
+                    <div class="fav-pic-container">
+                        <img class="fav-pic" src="/media/catPic.jpg" alt="Picture of Shasta taking a drink">
+                    </div>
+                    <div class="fav-pic-container">
+                        <img class="fav-pic" src="/media/catPic.jpg" alt="Picture of Shasta taking a drink">
+                    </div>
+                    <div class="fav-pic-container">
+                        <img class="fav-pic" src="/media/catPic.jpg" alt="Picture of Shasta taking a drink">
                     </div>
                 </div>
-            </div>
-        </section>
-
-        <section id="section-stats" class="section">
-            <div id="stats-header-container" class="container">
-                <h1 id="stats-header">Cat Stats</h1>
-        </div>
-            <div id="graph-container" class="container">
-                <!-- Content inserted here by javascript functions making highchart graphs-->
-            </div>
-            <div id="options-container" class="container">
-                <form name="chart-options-form" id="chart-options-form" >
-                    <div class = "form-group">
-                        <label class="select-label" for="chart-type-select">Choose your graph!</label>
-                        <select name = "chart-type-select" class="custom-select custom-select-lg mb-3 select-dropdown">
-                            <option value="drinksPerTimeSlice">Drinks Per Block of Time Each Day - Heatmap</option>
-                            <option value="drinksPerDay">Drinks Per Day - Bar Chart</option>
-                        </select>
-                    </div>
-                </form>
             </div>
         </section>
 
@@ -142,20 +128,12 @@
             </div>
         </section>
 
-<!--         <p th:if="${#authentication.principal}"> -->
-<!--             Welcome <span sec:authentication="principal.username">User!!!</span> -->
-<!--         </p> -->
-    
-    
-    <!-- <div class="username-holder-div" style="display: none" sec:authorize="isAuthenticated()">
-        <p class="username-holder" sec:authentication="principal.username">User</p>
-    </div>
 
-	<div class="username-holder-div" style="display: none" sec:authorize="isAnonymous()">
-        <p class="username-holder"></p>
-    </div> -->
     
-    <div class="username-holder-div" style="display: none" sec:authorize="isAuthenticated()">
+    
+    
+    
+        <div class="username-holder-div" style="display: none" sec:authorize="isAuthenticated()">
             <p class="username-holder" sec:authentication="principal.username">User</p>
         </div>
     
@@ -189,10 +167,6 @@
     
     
     
-    
-    
-    
-    
 
 
 
@@ -209,20 +183,23 @@
 
 
 
-    
+<!--         <p> -->
+<!--             Welcome <span sec:authentication="principal.username">User!!!</span> -->
+<!--         </p> -->
     
     
     
         <!-- Javascript, Jquery, Bootstrap -->
         <script th:inline="javascript">
-    		var JWTuser = /*[[${username}]]*/ 'default';
-    		var JWTpass = /*[[${password}]]*/ 'default';
-		</script>
+            var JWTuser = /*[[${username}]]*/ 'default';
+            var JWTpass = /*[[${password}]]*/ 'default';
+        </script>
         <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
         <script async src="/js/highchartsConfig.js"></script>
-        <script async src="/js/main.js"></script>
+        <script async src="/js/favoritepics.js"></script>
+<!--         <script async src="/js/main.js"></script> -->
         
         
     </body>

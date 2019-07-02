@@ -32,16 +32,16 @@ public class ImageRepositoryImpl implements ImageRepositoryCustom {
 		
 	}
 	
-	@Override
-	@Transactional
-	public byte[] getLastImage() {
-		
-		String queryString = "SELECT imageByteArray FROM Image ORDER BY id DESC";
-		Query query = entityManager.createQuery(queryString);
-		byte[] imageBytes = (byte[]) query.setMaxResults(1).getResultList().get(0);
-		
-		return imageBytes;
-		
-	}
+//	@Override
+//	@Transactional
+//	public Image getLastImage() {
+//		
+//		String queryString = "SELECT id FROM Image ORDER BY id DESC";
+//		Query query = entityManager.createQuery(queryString);
+//		Long imageBytes = (byte[]) query.setMaxResults(1).getResultList().get(0);
+//		
+//		return imageBytes;
+//		
+//	}
 	
 }
