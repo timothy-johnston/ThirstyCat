@@ -11,6 +11,15 @@ $( document ).ready(function() {
     username = $('.username-holder').text();
     getJWT(getLikedImages);
 
+	//Expand picture when clicked on
+	$('.fav-pic-container').click(function() {
+		//Reset size of currently expanded image (if any)
+		$('.fav-pic-container').css({"width":"200px","height":"150px"});
+		$('.fav-pic').css({"width":"200px","height":"150px"});
+		$(this).css({"width":"400px","height":"300px"});
+		$(this).find("img").css({"width":"800px","height":"600px"});
+	});
+
 });
 
 function getJWT(nextFunction) {
