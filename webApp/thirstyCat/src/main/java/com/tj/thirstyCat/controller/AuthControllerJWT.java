@@ -50,7 +50,7 @@ public class AuthControllerJWT {
 	//TODO: Need to research how Spring AuthenticationManager does this authentication
 	private void authenticate(String username, String password) throws Exception {
 		
-		//Check username. Only my Raspberry Pi should be authenticated
+		//Check that user is Raspberry Pi or frontend
 		if (username.equalsIgnoreCase("TC_ADMIN_A") || username.equalsIgnoreCase("TC_ADMIN_B")) {
 			try {
 				authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));

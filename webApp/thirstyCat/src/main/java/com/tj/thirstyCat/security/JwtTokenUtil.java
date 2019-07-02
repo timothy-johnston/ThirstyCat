@@ -52,11 +52,12 @@ public class JwtTokenUtil {
 	
 	//Parses the JWT into its individual Claims
 	private Claims getAllClaimsFromToken(String token) {
+		System.out.println(token);
 		return Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
 	}
 	
 	//Compare token expiration time to current time
-	private Boolean isTokenExpired(String token) {
+	public Boolean isTokenExpired(String token) {
 		final Date expiration = getExpirationDateFromToken(token);
 		return expiration.before(new Date());
 	}
@@ -83,7 +84,7 @@ public class JwtTokenUtil {
 	}
 	
 	//Confirm validity of token
-	//Token is valid if token username = current username and token has not expired
+	//Token is valid if token username = current username and token has not expired or been blacklisted
 	public Boolean validateToken(String token, UserDetails userDetails) {
 		final String username = getUsernameFromToken(token);
 		Boolean isValid = (username.equals(userDetails.getUsername()) && !isTokenExpired(token));

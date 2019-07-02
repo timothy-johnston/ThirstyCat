@@ -15,6 +15,7 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import com.tj.thirstyCat.service.TokenService;
 import com.tj.thirstyCat.service.UserService;
 
 import io.jsonwebtoken.ExpiredJwtException;
@@ -27,6 +28,9 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 	
 	@Autowired 
 	private JwtTokenUtil jwtTokenUtil;
+	
+	@Autowired
+	private TokenService tokenService;
 	
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
@@ -54,8 +58,9 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 			System.out.println("JWT Token does not begin with Bearer.");
 		}
 		
-		//Validate token
-		if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+		//Validate token & ensure it has not been blacklisted
+		boolean tokenIsBlacklisted = tokenService.isTokenBlacklisted(jwtToken);
+		if (username != null && SecurityContextHolder.getContext().getAuthentication() == null && !tokenIsBlacklisted) {
 			
 			//Get user details
 			UserDetails userDetails = userService.loadUserByUsername(username);
@@ -66,6 +71,9 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 				usernamePasswordAuthenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 				SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
 			}
+			
+			//Add token to blacklist & purge expired tokens from blacklist
+			tokenService.updateTokenBlacklist(jwtToken);
 		}
 		
 		chain.doFilter(request, response);
