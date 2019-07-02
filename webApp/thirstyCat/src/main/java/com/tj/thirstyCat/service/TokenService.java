@@ -28,7 +28,7 @@ public class TokenService {
 	//and add the incoming token to the blacklist so it can not be used again
 	public void updateTokenBlacklist(String token) {
 		purgeBlacklistOfExpiredTokens();
-		addTokenToBlacklist(token);
+//		addTokenToBlacklist(token);
 	}
 
 	private void addTokenToBlacklist(String token) {

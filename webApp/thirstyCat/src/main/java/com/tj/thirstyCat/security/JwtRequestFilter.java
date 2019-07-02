@@ -101,6 +101,13 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 			tokenService.updateTokenBlacklist(jwtToken);
 		}
 		
+		//TODO: Remove debug output
+		if (tokenIsBlacklisted) {
+			System.out.println("Token is blacklisted");
+		} else {
+			System.out.println("Token isn't blacklisted");
+		}
+		
 		chain.doFilter(request, response);
 		
 	}

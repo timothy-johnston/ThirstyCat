@@ -89,10 +89,6 @@ function getJWT(nextFunction) {
 
 	var payload = {username: JWTuser, password: JWTpass};
 
-	console.log("--------PAYLOAD------------");
-	console.log(payload);
-	console.log(JSON.stringify(payload));
-
 	$.ajax({
 		url: apiURL + apiPathJWT,
 		dataType: 'json',
@@ -100,9 +96,8 @@ function getJWT(nextFunction) {
 		contentType: 'application/json',
 		data: JSON.stringify(payload),
 		success: function(result){
-			console.log("in success");
-			console.log(result);
 			//Call the next function, passing the jwt token
+			console.log("JWT is: " + result.token);
 			nextFunction(result.token);
 		},
 		error: function(){
@@ -155,6 +150,30 @@ function getDrinkImage(jwtToken) {
 	});
 }
 
+function favoriteImage(jwtToken) {
+	console.log("In ajax call: favorite image");
+
+	var payload = {username: username, imageId: currentImageId};
+
+	$.ajax({
+		url: apiURL + apiPathFavoriteImage,
+		beforeSend: function (xhr) {
+			xhr.setRequestHeader('Authorization', 'Bearer ' + jwtToken);
+		},
+		dataType: 'json',
+		type: 'post',
+		contentType: 'application/json',
+		data: JSON.stringify(payload),
+		success: function(result){
+			console.log("successfully favorited picture");
+			console.log(result);
+		},
+		error: function(){
+			console.log( "could not favorite picture" );
+		}
+	});
+}
+
 function getMostRecentImage() {
 	console.log("In ajax call: Get most recently available image.");
 	$.ajax({
@@ -174,6 +193,7 @@ function getMostRecentImage() {
 
 function getAllDrinks(jwtToken) {
 	console.log("In ajax call: Get all drinks");
+
 	$.ajax({
 		url: apiURL + apiPathAllDrinks,
 		beforeSend: function (xhr) {
@@ -181,7 +201,7 @@ function getAllDrinks(jwtToken) {
 		},
 		type: "GET",
 		success: function(result) {
-			console.log("good job");
+			jwtToken  = null;
 			console.log(result);
 			
 			allDrinks = result;
@@ -190,37 +210,38 @@ function getAllDrinks(jwtToken) {
 
 		},
 		failure: function(result) {
-			console.log("bad job");
+			jwtToken  = null;
+			console.log("get all drinks fail");
 		}
 	});
 }
 
-function favoriteImage(username, imageId) {
-	console.log("In ajax POST - favorite image");
+// function favoriteImage(username, imageId) {
+// 	console.log("In ajax POST - favorite image");
 
-	var payload = {username: username, imageId: imageId};
+// 	var payload = {username: username, imageId: imageId};
 
-	console.log("--------PAYLOAD------------");
-	console.log(payload);
-	console.log(JSON.stringify(payload));
+// 	console.log("--------FAVORITE IMAGE PAYLOAD------------");
+// 	console.log(payload);
+// 	console.log(JSON.stringify(payload));
 
-	$.ajax({
-		url: apiURL + apiPathFavoriteImage,
-		beforeSend: function (xhr) {
-			xhr.setRequestHeader('Authorization', 'Bearer ' + jwtToken);
-		},
-		dataType: 'json',
-		type: 'post',
-		contentType: 'application/json',
-		data: JSON.stringify(payload),
-		success: function(){
-			console.log("favorite successful")
-		},
-		error: function(){
-			console.log( "great job" );
-		}
-	})
-}
+// 	$.ajax({
+// 		url: apiURL + apiPathFavoriteImage,
+// 		beforeSend: function (xhr) {
+// 			xhr.setRequestHeader('Authorization', 'Bearer ' + jwtToken);
+// 		},
+// 		dataType: 'json',
+// 		type: 'post',
+// 		contentType: 'application/json',
+// 		data: JSON.stringify(payload),
+// 		success: function(){
+// 			console.log("favorite successful")
+// 		},
+// 		error: function(){
+// 			console.log( "FAVORITE UNSECCESSFUL" );
+// 		}
+// 	})
+// }
 
 function updateDrinkInfo(latestDrink) {
 	
@@ -433,7 +454,7 @@ function initiateChartCreation(arrayDrinksPerDay, allDrinks) {
 
 function userIsLoggedIn() {
 	var username = $('.username-holder').text();
-	console.log("Username length: " + username.length);
+
 	return (username.length > 0);
 }
 
@@ -454,9 +475,7 @@ function getLikedImages(jwtToken) {
 		},
 		type: "GET",
 		success: function(result) {
-			console.log("good job");
-			console.log(result);
-			
+
 			likedImages = result;
 
 			console.log("liked images: ");
@@ -464,7 +483,7 @@ function getLikedImages(jwtToken) {
 
 		},
 		failure: function(result) {
-			console.log("bad job");
+			console.log("Couldn't retrieve liked images");
 		}
 	});
 
