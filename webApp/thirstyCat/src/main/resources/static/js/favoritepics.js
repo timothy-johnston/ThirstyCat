@@ -12,12 +12,19 @@ $( document ).ready(function() {
     getJWT(getLikedImages);
 
 	//Expand picture when clicked on
-	$('.fav-pic-container').click(function() {
+	$('.fav-pic').click(function() {
 		//Reset size of currently expanded image (if any)
-		$('.fav-pic-container').css({"width":"200px","height":"150px"});
-		$('.fav-pic').css({"width":"200px","height":"150px"});
-		$(this).css({"width":"400px","height":"300px"});
-		$(this).find("img").css({"width":"800px","height":"600px"});
+//		$('.fav-pic-container').css({"width":"200px","height":"150px"});
+//		$('.fav-pic').css({"width":"200px","height":"150px"});
+//		$(this).css({"width":"400px","height":"300px"});
+//		$(this).find("img").css({"width":"800px","height":"600px"});
+        
+        //Get clicked image src
+        var src = $(this).attr('src');
+
+        //Set clicked image as featured imaged
+        $('#featured-pic').attr('src', src);
+
 	});
 
 });
