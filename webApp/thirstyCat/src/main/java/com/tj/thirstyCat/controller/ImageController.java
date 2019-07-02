@@ -38,7 +38,7 @@ public class ImageController {
 
 	@GetMapping("/lastImage")
 	@ResponseBody
-	public byte[] retrieveLastImage() {
+	public Image retrieveLastImage() {
 		return imageService.getLastImage();
 	}
 

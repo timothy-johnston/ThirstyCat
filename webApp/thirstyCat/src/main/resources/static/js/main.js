@@ -3,12 +3,15 @@ var currentImageId;
 var allDrinks = [];
 var apiURL = "http://localhost:8080/api";
 // var apiURL = "http://thirstycat.us-east-1.elasticbeanstalk.com/";
-var apiPathLastDrink = "/lastDrink";
-var apiPathAllDrinks = "/allDrinks";
-var apiPathLastDrinkImage = "/lastImage/";
-var apiPathImageByDrinkID = "/imageByDrink/";
-var apiPathJWT = "/authenticateJWT"
+var apiPathLastDrink = "/drink/lastDrink";
+var apiPathAllDrinks = "/drink/allDrinks";
+var apiPathLastDrinkImage = "/image/lastImage";
+var apiPathImageByDrinkID = "/image/imageByDrink/";
+var apiPathFavoriteImage = "/image/favorite";
+var apiPathLikedImages = "/image/favorites/";
+var apiPathJWT = "/authenticateJWT";
 var updateImage = true;
+var username;
 var chartId = 1;
 var jwt;
 
@@ -64,16 +67,15 @@ $( document ).ready(function() {
 	});
 	
 	//Handle favoriting of pictures.
-	
+	username = $('.username-holder').text();
 	$('#like-heart').click(function() {
-		
-		var username = $('.username-holder').text();
 
 		//Check if there is a logged in user. If so, initiate favoriting of picture
 		//If not, prompt to log in
-		if (userIsLoggedIn && !userLikedCurrentPicture(currentImageId)) {
+		if (userIsLoggedIn(username) && !userLikedCurrentPicture(username, currentImageId)) {
 			$(this).css("color","red")
-			favoriteImage(username, currentImageId);
+			//favoriteImage(username, currentImageId);
+			getJWT(favoriteImage);
 		} else {
 			$('#login-prompt-container').show();
 		}
@@ -82,7 +84,7 @@ $( document ).ready(function() {
 
 })
 
-function getJWT(username, imageId) {
+function getJWT(nextFunction) {
 	console.log("In ajax POST - get JWT");
 
 	var payload = {username: JWTuser, password: JWTpass};
@@ -98,9 +100,10 @@ function getJWT(username, imageId) {
 		contentType: 'application/json',
 		data: JSON.stringify(payload),
 		success: function(result){
-			jwt = result.token;
-			//Get list of all drink data
-			getAllDrinks();
+			console.log("in success");
+			console.log(result);
+			//Call the next function, passing the jwt token
+			nextFunction(result.token);
 		},
 		error: function(){
 			console.log( "jwt fail" );
@@ -112,8 +115,8 @@ function getJWT(username, imageId) {
 //If so, retrieve new data & update page
 function initiateDrinkUpdate() {
 	
-	//Get JWT Token
-	getJWT()
+	//Get JWT Token and pass in the callback function
+	getJWT(getAllDrinks)
 	
 }
 
@@ -129,10 +132,13 @@ function getMostRecentDrinkId(allDrinks) {
 
 }
 
-function getDrinkImage(latestDrink) {
+function getDrinkImage(jwtToken) {
 	console.log("In ajax call: get current drink's image.");
 	$.ajax({
-		url: apiURL + apiPathImageByDrinkID + latestDrink.id,
+		url: apiURL + apiPathLastDrinkImage,
+		beforeSend: function (xhr) {
+			xhr.setRequestHeader('Authorization', 'Bearer ' + jwtToken);
+		},
 		type: "GET",
 		success: function(result) {
 
@@ -143,8 +149,8 @@ function getDrinkImage(latestDrink) {
 			performStats();
 
 		},
-		error: function() {
-			getMostRecentImage();
+		failure: function(result) {
+			console.log("a failure");
 		}
 	});
 }
@@ -166,16 +172,25 @@ function getMostRecentImage() {
 	});
 }
 
-function getAllDrinks() {
+function getAllDrinks(jwtToken) {
 	console.log("In ajax call: Get all drinks");
 	$.ajax({
 		url: apiURL + apiPathAllDrinks,
+		beforeSend: function (xhr) {
+			xhr.setRequestHeader('Authorization', 'Bearer ' + jwtToken);
+		},
 		type: "GET",
 		success: function(result) {
+			console.log("good job");
+			console.log(result);
+			
 			allDrinks = result;
 			
 			getMostRecentDrinkId(allDrinks);
 
+		},
+		failure: function(result) {
+			console.log("bad job");
 		}
 	});
 }
@@ -191,6 +206,9 @@ function favoriteImage(username, imageId) {
 
 	$.ajax({
 		url: apiURL + apiPathFavoriteImage,
+		beforeSend: function (xhr) {
+			xhr.setRequestHeader('Authorization', 'Bearer ' + jwtToken);
+		},
 		dataType: 'json',
 		type: 'post',
 		contentType: 'application/json',
@@ -223,7 +241,7 @@ function updateDrinkInfo(latestDrink) {
 
 	//Call function to update image (if image update flag is set to on)
 	if (updateImage == true) {
-		getDrinkImage(latestDrink);
+		getJWT(getDrinkImage);
 	} else {
 		performStats();
 		updateImage = true;
@@ -237,7 +255,7 @@ function updateDrinkImage(latestImage) {
 	currentImageId = latestImage.id;
 
 	//Check if drink image has been liked. If so, turn like button red
-	if (userIsLoggedIn && userLikedCurrentPicture(latestImage.id)) {
+	if (userIsLoggedIn && userLikedCurrentPicture()) {
 		$('#like-heart').css("color","red")
 	}
 
@@ -415,12 +433,40 @@ function initiateChartCreation(arrayDrinksPerDay, allDrinks) {
 
 function userIsLoggedIn() {
 	var username = $('.username-holder').text();
-	return (username.length > 0)
+	console.log("Username length: " + username.length);
+	return (username.length > 0);
 }
 
-function userLikedCurrentPicture(id) {
+function userLikedCurrentPicture() {
 
 	//Get list of user's liked pictures
+	getJWT(getLikedImages)
+
+}
+
+function getLikedImages(jwtToken) {
+
+	console.log("In ajax call: Get user's liked images");
+	$.ajax({
+		url: apiURL + apiPathLikedImages + username,
+		beforeSend: function (xhr) {
+			xhr.setRequestHeader('Authorization', 'Bearer ' + jwtToken);
+		},
+		type: "GET",
+		success: function(result) {
+			console.log("good job");
+			console.log(result);
+			
+			likedImages = result;
+
+			console.log("liked images: ");
+			console.log(likedImages);
+
+		},
+		failure: function(result) {
+			console.log("bad job");
+		}
+	});
 
 }
 

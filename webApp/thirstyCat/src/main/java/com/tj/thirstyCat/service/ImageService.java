@@ -31,8 +31,25 @@ public class ImageService {
 		return imageRepository.save(testImage);
 	}
 
-	public byte[] getLastImage() {
-		return imageRepository.getLastImage();
+	public Image getLastImage() {
+//		return imageRepository.getLastImage();
+		
+		List<Image> allImages = imageRepository.findAll();
+		
+		//Loop over images. Image with highest id is most recent;
+		Image lastImage = null;
+		Long highestImageId = 0L;
+		for (Image image : allImages) {
+			
+			if (image.getId() > highestImageId) {
+				highestImageId = image.getId();
+				lastImage = image;
+			}
+			
+		}
+		
+		return lastImage;
+		
 	}
 
 	public List<Image> getAllImages() {

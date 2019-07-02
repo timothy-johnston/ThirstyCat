@@ -8,6 +8,6 @@ public interface ImageRepositoryCustom {
 
 	public Image getImageByDrinkId(Long drinkId);
 	
-	public byte[] getLastImage();
+//	public Image getLastImage();
 	
 }

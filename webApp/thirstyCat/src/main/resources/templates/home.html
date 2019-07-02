@@ -147,13 +147,21 @@
 <!--         </p> -->
     
     
-    <div class="username-holder-div" style="display: none" sec:authorize="isAuthenticated()">
+    <!-- <div class="username-holder-div" style="display: none" sec:authorize="isAuthenticated()">
         <p class="username-holder" sec:authentication="principal.username">User</p>
     </div>
 
 	<div class="username-holder-div" style="display: none" sec:authorize="isAnonymous()">
         <p class="username-holder"></p>
-	</div>
+    </div> -->
+    
+    <div class="username-holder-div" style="display: none" sec:authorize="isAuthenticated()">
+            <p class="username-holder" sec:authentication="principal.username">User</p>
+        </div>
+    
+        <div class="username-holder-div" style="display: none" sec:authorize="isAnonymous()">
+            <p class="username-holder"></p>
+        </div>
     
     
     

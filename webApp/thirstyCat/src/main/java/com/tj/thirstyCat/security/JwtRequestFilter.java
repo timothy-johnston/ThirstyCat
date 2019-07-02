@@ -1,6 +1,7 @@
 package com.tj.thirstyCat.security;
 
 import java.io.IOException;
+import java.util.Enumeration;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -36,6 +37,30 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
 		
 		String requestTokenHeader = request.getHeader("Authorization");
+		Enumeration<String> names = request.getHeaderNames();
+		
+		System.out.println(names.nextElement());
+		System.out.println(names.nextElement());
+		System.out.println(names.nextElement());
+		System.out.println(names.nextElement());
+		System.out.println(names.nextElement());
+		System.out.println(names.nextElement());
+		System.out.println(names.nextElement());
+		System.out.println(names.nextElement());
+		System.out.println(names.nextElement());
+		System.out.println(names.nextElement());
+		System.out.println(names.nextElement());
+		System.out.println(names.nextElement());
+		System.out.println(names.nextElement());
+		System.out.println(names.nextElement());
+		System.out.println(names.nextElement());
+		System.out.println(names.nextElement());
+		System.out.println(names.nextElement());
+		System.out.println(request.getHeader("Host"));
+		System.out.println(request.getHeader("Authorization"));
+		System.out.println(request.getHeader("authorization"));
+		
+		
 		
 		String username = null;
 		String jwtToken = null;
