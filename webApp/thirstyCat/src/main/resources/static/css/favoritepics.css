@@ -16,6 +16,24 @@
 	border-radius: 15px;
 }
 
+#featured-pic-container {
+	width: 600px;
+	height: 450px;
+	margin: 5px;
+	padding: 0px;
+	border: 12px solid #ffd8be;
+	border-radius: 25px;
+	overflow: hidden;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#featured-pic {
+	width: 600px;
+	height: 450px;
+	object-fit: contain;
+}
+
 .fav-pic-container {
 	width: 200px;
 	height: 150px;

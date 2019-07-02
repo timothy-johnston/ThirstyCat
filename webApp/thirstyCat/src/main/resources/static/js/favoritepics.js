@@ -4,20 +4,25 @@ var apiPathLikedImages = "/image/favorites/";
 var apiPathJWT = "/authenticateJWT";
 var username;
 
-
 $( document ).ready(function() {
 
     //Load user's liked images
     username = $('.username-holder').text();
     getJWT(getLikedImages);
 
+	//Replace featured favorite picture with clicked favorite picture
+	$('.fav-pic').click(function() {
+        //Get clicked image src
+        var src = $(this).attr('src');
+        //Set clicked image as featured imaged
+        $('#featured-pic').attr('src', src);
+	});
+
 });
 
 function getJWT(nextFunction) {
 	console.log("In ajax POST - get JWT");
-
 	var payload = {username: JWTuser, password: JWTpass};
-
 	$.ajax({
 		url: apiURL + apiPathJWT,
 		dataType: 'json',
@@ -25,19 +30,15 @@ function getJWT(nextFunction) {
 		contentType: 'application/json',
 		data: JSON.stringify(payload),
 		success: function(result){
-			//Call the next function, passing the jwt token
-			console.log("JWT is: " + result.token);
 			nextFunction(result.token);
 		},
 		error: function(result){
-            console.log(result);
-			console.log( "jwt fail" );
+            console.log("Couldn't retrieve JWT");
 		}
 	})
 }
 
 function getLikedImages(jwtToken) {
-
 	console.log("In ajax call: Get user's liked images");
 	$.ajax({
 		url: apiURL + apiPathLikedImages + username,
@@ -46,14 +47,8 @@ function getLikedImages(jwtToken) {
 		},
 		type: "GET",
 		success: function(result) {
-
 			likedImages = result;
-
-			console.log("liked images: ");
-            console.log(likedImages);
-            
             populateImages(likedImages);
-
 		},
 		failure: function(result) {
 			console.log("Couldn't retrieve liked images");
@@ -62,12 +57,9 @@ function getLikedImages(jwtToken) {
 
 }
 
+//Appends each image of the passed in array to the picture grid
 function populateImages(images) {
-
     for (i = 0; i < images.length; i++) {
-        console.log("trying a thing");
         $('#pic-grid-container').append("<div class='fav-pic-container'><img class='fav-pic' src='/media/catPic.jpg' alt='Picture of Shasta taking a drink'></img></div>");
-        // $('#pic-grid-container').append("<p>test </p>");
     }
-
 }
