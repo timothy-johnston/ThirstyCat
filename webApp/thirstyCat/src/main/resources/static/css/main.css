@@ -192,13 +192,15 @@ color: white;
 }
 
 #login-prompt-container {
-	display: none;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 }
 
 #login-prompt {
 	font-size: 1.2rem;
 	color: #796ad1;
-	margin-top: revert;
+	margin-bottom: 0px;
 	margin-left: 15px;
 	margin-right: 15px;
     font-family: 'Maven Pro', sans-serif;
