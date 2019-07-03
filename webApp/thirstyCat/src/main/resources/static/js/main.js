@@ -153,7 +153,13 @@ function getDrinkImage(jwtToken) {
 function favoriteImage(jwtToken) {
 	console.log("In ajax call: favorite image");
 
-	var payload = {username: username, imageId: currentImageId};
+//	var payload = {username: username, imageId: currentImageId + 1};
+	
+	var payload = {username: username, imageId: "97"};
+	
+	// var payload = {username: JWTuser, password: JWTpass};
+
+	console.log(JSON.stringify(payload));
 
 	$.ajax({
 		url: apiURL + apiPathFavoriteImage,
@@ -167,9 +173,6 @@ function favoriteImage(jwtToken) {
 		success: function(result){
 			console.log("successfully favorited picture");
 			console.log(result);
-		},
-		error: function(){
-			console.log( "could not favorite picture" );
 		}
 	});
 }
@@ -215,33 +218,6 @@ function getAllDrinks(jwtToken) {
 		}
 	});
 }
-
-// function favoriteImage(username, imageId) {
-// 	console.log("In ajax POST - favorite image");
-
-// 	var payload = {username: username, imageId: imageId};
-
-// 	console.log("--------FAVORITE IMAGE PAYLOAD------------");
-// 	console.log(payload);
-// 	console.log(JSON.stringify(payload));
-
-// 	$.ajax({
-// 		url: apiURL + apiPathFavoriteImage,
-// 		beforeSend: function (xhr) {
-// 			xhr.setRequestHeader('Authorization', 'Bearer ' + jwtToken);
-// 		},
-// 		dataType: 'json',
-// 		type: 'post',
-// 		contentType: 'application/json',
-// 		data: JSON.stringify(payload),
-// 		success: function(){
-// 			console.log("favorite successful")
-// 		},
-// 		error: function(){
-// 			console.log( "FAVORITE UNSECCESSFUL" );
-// 		}
-// 	})
-// }
 
 function updateDrinkInfo(latestDrink) {
 	
