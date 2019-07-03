@@ -1,6 +1,10 @@
 /* font-family: 'Patua One', cursive;
 font-family: 'Maven Pro', sans-serif; */
 
+html {
+	scroll-behavior: smooth;
+  }
+
 .section {
 	display: flex;
 	flex-direction: column;
@@ -37,7 +41,8 @@ body {
 	}
 
 	#logo-placeholder-container {
-		flex-grow: 2;
+		flex-grow: 2 !important;
+		border: 5px solid red;
 	}
 
 
@@ -50,9 +55,9 @@ body {
 		height: 100% !important;
 		text-align: center;
 	}
-
-	.social-icon-container {
-		margin-bottom: 15px;
+	
+	#logo-placeholder-text {
+		font-size: 6rem !important;
 	}
 	
   }
