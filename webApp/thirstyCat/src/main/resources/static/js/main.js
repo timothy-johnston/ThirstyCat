@@ -136,10 +136,12 @@ function getDrinkImage(jwtToken) {
 	$.ajax({
 		url: apiURL + apiPathLastDrinkImage,
 		beforeSend: function (xhr) {
-			xhr.setRequestHeader('Authorization', 'Bearer ' + jwtToken);
+			xhr.setRequestHeader('Authorization', 'Bearer ' + sessionStorage.getItem("jwt"));
 		},
 		type: "GET",
 		success: function(result) {
+
+			sessionStorage.setItem("jwt", result.getResponseHeader("auth"));
 
 			//Update the image displayed on the UI
 			updateDrinkImage(result);
@@ -168,13 +170,16 @@ function favoriteImage(jwtToken) {
 	$.ajax({
 		url: apiURL + apiPathFavoriteImage,
 		beforeSend: function (xhr) {
-			xhr.setRequestHeader('Authorization', 'Bearer ' + jwtToken);
+			xhr.setRequestHeader('Authorization', 'Bearer ' + sessionStorage.getItem("jwt"));
 		},
 		dataType: 'json',
 		type: 'post',
 		contentType: 'application/json',
 		data: JSON.stringify(payload),
 		success: function(result){
+
+			sessionStorage.setItem("jwt", result.getResponseHeader("auth"));
+
 			console.log("successfully favorited picture");
 			console.log(result);
 		}
@@ -246,7 +251,11 @@ function updateDrinkInfo(latestDrink) {
 
 	//Call function to update image (if image update flag is set to on)
 	if (updateImage == true) {
-		getJWT(getDrinkImage);
+		//getJWT(getDrinkImage);
+
+
+		getDrinkImage();
+
 	} else {
 		performStats();
 		updateImage = true;
@@ -445,7 +454,9 @@ function userIsLoggedIn() {
 function userLikedCurrentPicture() {
 
 	//Get list of user's liked pictures
-	getJWT(getLikedImages)
+	//getJWT(getLikedImages)
+
+	getLikedImages();
 
 }
 
@@ -455,10 +466,12 @@ function getLikedImages(jwtToken) {
 	$.ajax({
 		url: apiURL + apiPathLikedImages + username,
 		beforeSend: function (xhr) {
-			xhr.setRequestHeader('Authorization', 'Bearer ' + jwtToken);
+			xhr.setRequestHeader('Authorization', 'Bearer ' + sessionStorage.getItem("jwt"));
 		},
 		type: "GET",
 		success: function(result) {
+
+			sessionStorage.setItem("jwt", result.getResponseHeader("auth"));
 
 			likedImages = result;
 
