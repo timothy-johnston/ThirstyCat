@@ -182,7 +182,7 @@ color: white;
 }
 
 #login-prompt-container {
-	display: flex;
+	display: none;
 	flex-direction: column;
 	justify-content: center;
 }

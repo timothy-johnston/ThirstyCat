@@ -55,10 +55,12 @@
                 <div class="collapse navbar-collapse" id="collapsibleNavbar">
                     <ul class="navbar-nav nav-ul">
                         <li class="nav-item">
-                            <a class="nav-link" href="#">About</a>
+                            <a class="nav-link" href="login" sec:authorize="isAnonymous()">Log In</a>
+                            <a class="nav-link" href="favoritepics" sec:authorize="isAuthenticated()">Favorite Pics</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="login">Log In</a>
+                            <a class="nav-link" href="registration" sec:authorize="isAnonymous()">Register</a>
+                            <a class="nav-link" href="login?logout" sec:authorize="isAuthenticated()">Sign Out</a>
                         </li>     
                     </ul>
                 </div> 
@@ -72,7 +74,7 @@
                     <div id="drinkPic-container">
                         <img id="drinkPic" src="/media/catPic.jpg" alt="Picture of Shasta taking a drink">
                         <div id="fav-container">
-                            <div id="login-prompt-container">
+                            <div id="login-prompt-container" sec:authorize="isAnonymous()">
                                 <p id="login-prompt">
                                  	<a id="login-link" class="formatted-link" target="" href="/" th:href="@{/login}">Log in</a>
                                  	to favorite this picture!

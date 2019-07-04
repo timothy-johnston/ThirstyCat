@@ -77,6 +77,7 @@ $( document ).ready(function() {
 			//favoriteImage(username, currentImageId);
 			getJWT(favoriteImage);
 		} else {
+			$('#login-prompt-container').css({"display":"flex"});
 			$('#login-prompt-container').show();
 		}
 		
