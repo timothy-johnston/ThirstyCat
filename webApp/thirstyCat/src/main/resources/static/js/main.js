@@ -58,13 +58,13 @@ $( document ).ready(function() {
 	});
 
 	//Expand favorite picture when clicked on
-	$('.fav-pic-container').click(function() {
-		//Reset size of currently expanded image (if any)
-		$('.fav-pic-container').css({"width":"200px","height":"150px"});
-		$('.fav-pic').css({"width":"200px","height":"150px"});
-		$(this).css({"width":"800px","height":"600px"});
-		$(this).find("img").css({"width":"800px","height":"600px"});
-	});
+	// $('.fav-pic-container').click(function() {
+	// 	//Reset size of currently expanded image (if any)
+	// 	$('.fav-pic-container').css({"width":"200px","height":"150px"});
+	// 	$('.fav-pic').css({"width":"200px","height":"150px"});
+	// 	$(this).css({"width":"800px","height":"600px"});
+	// 	$(this).find("img").css({"width":"800px","height":"600px"});
+	// });
 	
 	//Handle favoriting of pictures.
 	username = $('.username-holder').text();
@@ -112,7 +112,10 @@ function getJWT(nextFunction) {
 function initiateDrinkUpdate() {
 	
 	//Get JWT Token and pass in the callback function
-	getJWT(getAllDrinks)
+	// getJWT(getAllDrinks)
+
+
+	getAllDrinks();
 	
 }
 
@@ -201,11 +204,15 @@ function getAllDrinks(jwtToken) {
 	$.ajax({
 		url: apiURL + apiPathAllDrinks,
 		beforeSend: function (xhr) {
-			xhr.setRequestHeader('Authorization', 'Bearer ' + jwtToken);
+			xhr.setRequestHeader('Authorization', 'Bearer ' + sessionStorage.getItem("jwt"));
 		},
 		type: "GET",
 		success: function(result) {
-			jwtToken  = null;
+			
+			//NOTE: Stopping here on Wednesday July 3. Pick up here on Sunday. Need to go through this flow and replace
+			//all calls to getJwt to the needed api call, grabbing the jwt from sessionstorage and then setting it based on the response header.
+			sessionStorage.setItem("jwt", result.getResponseHeader("auth"));
+			
 			console.log(result);
 			
 			allDrinks = result;
