@@ -33,6 +33,12 @@ public class JwtTokenUtil {
 	//Token lifetime in milliseconds
 	private static final long JWT_TOKEN_VALIDITY = 10 * 60 * 1000;
 	
+	@Value("${JWT_CRED_1}") 
+	private String jwtAdminUsername;
+	
+	@Value("${JWT_CRED_2}") 
+	private String jwtAdminPassword;
+	
 	@Autowired
 	private UserService userService;
 	
@@ -103,6 +109,12 @@ public class JwtTokenUtil {
 		final String username = getUsernameFromToken(token);
 		Boolean isValid = (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
 		return isValid;
+	}
+	
+	public JwtResponse createAdminJWT() throws Exception {
+		
+		return createAuthenticationToken(new JwtRequest(jwtAdminUsername, jwtAdminPassword));
+		
 	}
 	
 	//Accepts username and password in jwtRequest and returns a new valid JWT
