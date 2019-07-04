@@ -5,9 +5,17 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.DisabledException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
+
+import com.tj.thirstyCat.service.UserService;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -24,6 +32,12 @@ public class JwtTokenUtil {
 	
 	//Token lifetime in milliseconds
 	private static final long JWT_TOKEN_VALIDITY = 10 * 60 * 1000;
+	
+	@Autowired
+	private UserService userService;
+	
+	@Autowired
+	AuthenticationManager authenticationManager;
 	
 	//Will eventually sign the generated token using this secret
 	@Value("${jwt.secret}")
@@ -89,6 +103,40 @@ public class JwtTokenUtil {
 		final String username = getUsernameFromToken(token);
 		Boolean isValid = (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
 		return isValid;
+	}
+	
+	//Accepts username and password in jwtRequest and returns a new valid JWT
+	public JwtResponse createAuthenticationToken(JwtRequest jwtRequest) throws Exception {
+		
+		//Calls method using Springs AuthenticationManager. If Authentication fails, an exception will be thrown and JWT will not be generated
+		authenticate(jwtRequest.getUsername(), jwtRequest.getPassword());
+		
+		//Get current user
+		UserDetails user = userService.loadUserByUsername(jwtRequest.getUsername());
+		
+		//Generate token for current user
+		String token = generateToken(user);
+		
+		return new JwtResponse(token);
+
+	}
+	
+	//TODO: Need to research how Spring AuthenticationManager does this authentication
+	private void authenticate(String username, String password) throws Exception {
+		
+		//Check that user is Raspberry Pi or frontend
+		if (username.equalsIgnoreCase("TC_ADMIN_A") || username.equalsIgnoreCase("TC_ADMIN_B")) {
+			try {
+				authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
+			} catch (DisabledException e) {
+				throw new Exception("USER_DISABLED", e);
+			} catch (BadCredentialsException e) {
+				throw new Exception("INVALID_CREDENTIALS", e);
+			}
+		} else {
+			throw new Exception("INVALID_PERMISSIONS");
+		}
+		
 	}
 	
 }
