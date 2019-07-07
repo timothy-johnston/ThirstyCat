@@ -27,7 +27,6 @@ $( document ).ready(function() {
 
 	// Check to see if new drink has been taken every minute. If so, update info on page
 	setInterval(function() {
-		console.log("------starting set interval---------")
 		initiateDrinkUpdate();
 	}, (1000 * 60));
 
@@ -73,9 +72,9 @@ $( document ).ready(function() {
 		//Check if there is a logged in user. If so, initiate favoriting of picture
 		//If not, prompt to log in
 		if (userIsLoggedIn(username) && !userLikedCurrentPicture(username, currentImageId)) {
-			$(this).css("color","red")
+			$(this).css("color","red");
 			//favoriteImage(username, currentImageId);
-			getJWT(favoriteImage);
+			favoriteImage("205");
 		} else {
 			$('#login-prompt-container').css({"display":"flex"});
 			$('#login-prompt-container').show();
@@ -85,27 +84,24 @@ $( document ).ready(function() {
 
 })
 
-function getJWT(nextFunction) {
-	console.log("In ajax POST - get JWT");
-
-	var payload = {username: JWTuser, password: JWTpass};
-
-	$.ajax({
-		url: apiURL + apiPathJWT,
-		dataType: 'json',
-		type: 'post',
-		contentType: 'application/json',
-		data: JSON.stringify(payload),
-		success: function(result){
-			//Call the next function, passing the jwt token
-			console.log("JWT is: " + result.token);
-			nextFunction(result.token);
-		},
-		error: function(){
-			console.log( "jwt fail" );
-		}
-	})
-}
+//function getJWT(nextFunction) {
+//
+//	var payload = {username: JWTuser, password: JWTpass};
+//
+//	$.ajax({
+//		url: apiURL + apiPathJWT,
+//		dataType: 'json',
+//		type: 'post',
+//		contentType: 'application/json',
+//		data: JSON.stringify(payload),
+//		success: function(result, status, xhr){
+//			//Call the next function, passing the jwt token
+//			nextFunction(result.token);
+//		},
+//		error: function(){
+//		}
+//	})
+//}
 
 //Check for new drink info/picture
 //If so, retrieve new data & update page
@@ -132,16 +128,16 @@ function getMostRecentDrinkId(allDrinks) {
 }
 
 function getDrinkImage(jwtToken) {
-	console.log("In ajax call: get current drink's image.");
+
 	$.ajax({
 		url: apiURL + apiPathLastDrinkImage,
 		beforeSend: function (xhr) {
 			xhr.setRequestHeader('Authorization', 'Bearer ' + sessionStorage.getItem("jwt"));
 		},
 		type: "GET",
-		success: function(result) {
+		success: function(result, status, xhr) {
 
-			sessionStorage.setItem("jwt", result.getResponseHeader("auth"));
+			sessionStorage.setItem("jwt", xhr.getResponseHeader("auth"));
 
 			//Update the image displayed on the UI
 			updateDrinkImage(result);
@@ -150,22 +146,18 @@ function getDrinkImage(jwtToken) {
 			performStats();
 
 		},
-		failure: function(result) {
-			console.log("a failure");
+		failure: function(result, status, xhr) {
+
 		}
 	});
 }
 
-function favoriteImage(jwtToken) {
-	console.log("In ajax call: favorite image");
-
-//	var payload = {username: username, imageId: currentImageId + 1};
+function favoriteImage(id) {
 	
-	var payload = {username: username, imageId: "97"};
-	
-	// var payload = {username: JWTuser, password: JWTpass};
-
-	console.log(JSON.stringify(payload));
+	console.log("making payload. id: " + id);
+	var payload = {username: username, imageId: id};
+	console.log("payload: ");
+	console.log(payload);
 
 	$.ajax({
 		url: apiURL + apiPathFavoriteImage,
@@ -176,22 +168,17 @@ function favoriteImage(jwtToken) {
 		type: 'post',
 		contentType: 'application/json',
 		data: JSON.stringify(payload),
-		success: function(result){
-
-			sessionStorage.setItem("jwt", result.getResponseHeader("auth"));
-
-			console.log("successfully favorited picture");
-			console.log(result);
+		success: function(result, status, xhr){
+			sessionStorage.setItem("jwt", xhr.getResponseHeader("auth"));
 		}
 	});
 }
 
 function getMostRecentImage() {
-	console.log("In ajax call: Get most recently available image.");
 	$.ajax({
 		url: apiURL + apiPathLastDrinkImage,
 		type: "GET",
-		success: function(result) {
+		success: function(result, status, xhr) {
 
 			//Update the image displayed on the UI
 			updateDrinkImage(result);
@@ -204,7 +191,6 @@ function getMostRecentImage() {
 }
 
 function getAllDrinks(jwtToken) {
-	console.log("In ajax call: Get all drinks");
 
 	$.ajax({
 		url: apiURL + apiPathAllDrinks,
@@ -212,22 +198,17 @@ function getAllDrinks(jwtToken) {
 			xhr.setRequestHeader('Authorization', 'Bearer ' + sessionStorage.getItem("jwt"));
 		},
 		type: "GET",
-		success: function(result) {
+		success: function(result, status, xhr) {
 			
-			//NOTE: Stopping here on Wednesday July 3. Pick up here on Sunday. Need to go through this flow and replace
-			//all calls to getJwt to the needed api call, grabbing the jwt from sessionstorage and then setting it based on the response header.
-			sessionStorage.setItem("jwt", result.getResponseHeader("auth"));
-			
-			console.log(result);
+			sessionStorage.setItem("jwt", xhr.getResponseHeader("auth"));
 			
 			allDrinks = result;
 			
 			getMostRecentDrinkId(allDrinks);
 
 		},
-		failure: function(result) {
+		failure: function(result, status, xhr) {
 			jwtToken  = null;
-			console.log("get all drinks fail");
 		}
 	});
 }
@@ -356,12 +337,6 @@ function getDurationOfDrink() {
 
 function performStats() {
 
-	//DEBUG OUTPUT TO MAKE SURE FLOW IS CORRECT
-	//At this point, allDrinks should be populated with data
-	console.log("----------Checking that allDrinks is defined-------------");
-	console.log(allDrinks);
-
-
 	//Create array of days from first day of ThirstyCat data to present
 	var elapsedDates = createElapsedDatesArray();
 	var test2 = getDrinksPerDay(elapsedDates);
@@ -462,16 +437,19 @@ function userLikedCurrentPicture() {
 
 function getLikedImages(jwtToken) {
 
-	console.log("In ajax call: Get user's liked images");
+	console.log("started ajax get liked images");
+
 	$.ajax({
 		url: apiURL + apiPathLikedImages + username,
 		beforeSend: function (xhr) {
 			xhr.setRequestHeader('Authorization', 'Bearer ' + sessionStorage.getItem("jwt"));
 		},
 		type: "GET",
-		success: function(result) {
+		success: function(result, status, xhr) {
 
-			sessionStorage.setItem("jwt", result.getResponseHeader("auth"));
+			console.log("ajax get liked images success");
+
+			sessionStorage.setItem("jwt", xhr.getResponseHeader("auth"));
 
 			likedImages = result;
 
@@ -479,8 +457,8 @@ function getLikedImages(jwtToken) {
 			console.log(likedImages);
 
 		},
-		failure: function(result) {
-			console.log("Couldn't retrieve liked images");
+		failure: function(result, status, xhr) {
+			console.log("ajax get liked images failure");
 		}
 	});
 

@@ -45,28 +45,28 @@ public class DrinkController {
 	@PostMapping("/addDrink")
 	@ResponseBody
 	public Drink persistDrink(@Valid @RequestBody Drink drink, HttpServletResponse response) {
-		
-		
 		response = commonService.setResponseHeaderJWT(response);
-		
 		return(drinkService.addDrink(drink));
 	}
 	
 	@GetMapping("/allDrinks")
 	@ResponseBody
-	public List<Drink> getAllDrinks() {
+	public List<Drink> getAllDrinks(HttpServletResponse response) {
+		response = commonService.setResponseHeaderJWT(response);
 		return drinkService.getAllDrinks();
 	}
 	
 	@GetMapping("/lastDrink")
 	@ResponseBody
-	public Optional<Drink> retrieveLastDrink() {
+	public Optional<Drink> retrieveLastDrink(HttpServletResponse response) {
+		response = commonService.setResponseHeaderJWT(response);
 		return drinkService.getLastDrink();
 	}
 
 	@GetMapping("/drink/{drinkId}")
 	@ResponseBody
-	public Optional<Drink> getDrink(@PathVariable Long drinkId) {
+	public Optional<Drink> getDrink(@PathVariable Long drinkId, HttpServletResponse response) {
+		response = commonService.setResponseHeaderJWT(response);
 		return drinkService.getDrinkById(drinkId);
 	}
 	
