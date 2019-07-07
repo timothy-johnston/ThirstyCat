@@ -127,7 +127,7 @@ function getMostRecentDrinkId(allDrinks) {
 
 }
 
-function getDrinkImage(jwtToken) {
+function getDrinkImage() {
 
 	$.ajax({
 		url: apiURL + apiPathLastDrinkImage,
@@ -435,7 +435,7 @@ function userLikedCurrentPicture() {
 
 }
 
-function getLikedImages(jwtToken) {
+function getLikedImages() {
 
 	console.log("started ajax get liked images");
 
