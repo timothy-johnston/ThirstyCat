@@ -291,11 +291,11 @@ color: white;
 
 #graph-container {
 /* 	width: 80%; */
-	height: 450px;
+	min-height: 60vh;
 	margin-left: auto;
 	margin-right: auto;
 	padding: 20px;
-	padding-bottom: 5px;
+	padding-bottom: 10px;
 	border: 12px solid #ffd8be;
 	border-radius: 25px;
 	background: #f8f7ff;

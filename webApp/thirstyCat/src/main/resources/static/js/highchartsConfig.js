@@ -91,9 +91,12 @@ function createDrinkPerHourPerDay(drinkData, allDrinks) {
         },
       
         xAxis: {
-          categories: dates,
+//          categories: dates,
+        	labels: {
+        		enabled: false
+        	},
           title: {
-              text: 'Date',
+              text: null,
           	  style: {
                   fontSize: '1.5rem'
               }
