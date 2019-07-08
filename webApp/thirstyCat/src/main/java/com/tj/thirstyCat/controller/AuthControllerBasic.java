@@ -1,5 +1,7 @@
 package com.tj.thirstyCat.controller;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +49,7 @@ public class AuthControllerBasic {
 	
 	//Todo: Research BindingResult
 	@PostMapping
-	public String registerUser(@ModelAttribute("user") @Valid UserRegistration userRegistration, BindingResult result) {
+	public String registerUser(@ModelAttribute("user") @Valid UserRegistration userRegistration, BindingResult result, HttpServletRequest request) {
 		User user = userService.findByUsername(userRegistration.getUsername());
 		
 		if (user != null) {
@@ -61,9 +63,14 @@ public class AuthControllerBasic {
 		//Save new user
 		userService.save(userRegistration);
 		
-		//Should be able to just call the login method here so user doesn't have to do that too.
+		//Log in
+		try {
+	        request.login(userRegistration.getUsername(), userRegistration.getPassword());
+	    } catch (ServletException e) {
+	        System.out.println("Error while logging in after registration: " + e);
+	    }
 		
-		return "redirect:/registration?success";
+		return "redirect:/home";
 		
 	}
 	

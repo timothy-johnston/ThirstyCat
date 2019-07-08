@@ -4,7 +4,7 @@
 
 #login-container {
 	width: 500px;
-	height: 400px;
+	height: 550px;
 	margin: 10px auto;
 	border: 12px solid #b8b8ff;
 	border-radius: 15px;
@@ -57,6 +57,10 @@
     background: #796ad1;
     color: #f8f7ff;
     border: 2px solid #f8f7ff;
+}
+
+label {
+	color: #f8f7ff;
 }
 
 #login-p {

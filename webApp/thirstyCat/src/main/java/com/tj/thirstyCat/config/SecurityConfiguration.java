@@ -27,8 +27,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				"/css/**",
 				"/media/**",
 				"/",
+				"/home",
 				"/api/**",
-//				"/favoritepics",
 				"/webjars/**").permitAll()
 		.anyRequest().authenticated()
 		.and()
@@ -41,7 +41,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.clearAuthentication(true)
 		.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 		.logoutSuccessUrl("/login?logout")
-		.permitAll();
+		.permitAll()
+		.and()
+		.rememberMe().key("secretEnvVar");
 	}
 	
 	@Bean
