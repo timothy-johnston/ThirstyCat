@@ -55,12 +55,11 @@
                 <div class="collapse navbar-collapse" id="collapsibleNavbar">
                     <ul class="navbar-nav nav-ul">
                         <li class="nav-item">
-                            <a class="nav-link" href="login" sec:authorize="isAnonymous()">Log In</a>
-                            <a class="nav-link" href="favoritepics" sec:authorize="isAuthenticated()">Favorite Pics</a>
+                            <a class="nav-link" href="favoritepics">Favorite Pics</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="registration" sec:authorize="isAnonymous()">Register</a>
-                            <a class="nav-link" href="login?logout" sec:authorize="isAuthenticated()">Sign Out</a>
+                            <a class="nav-link" href="login" sec:authorize="isAnonymous()">Log In</a>
+                            <a class="nav-link" href="logout" sec:authorize="isAuthenticated()">Sign Out</a>
                         </li>     
                     </ul>
                 </div> 
