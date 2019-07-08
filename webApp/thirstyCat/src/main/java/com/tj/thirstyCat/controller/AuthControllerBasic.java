@@ -67,7 +67,7 @@ public class AuthControllerBasic {
 		try {
 	        request.login(userRegistration.getUsername(), userRegistration.getPassword());
 	    } catch (ServletException e) {
-	        System.out.println("Error while logging in after registration: " + e);
+//	        System.out.println("Error while logging in after registration: " + e);
 	    }
 		
 		return "redirect:/home";

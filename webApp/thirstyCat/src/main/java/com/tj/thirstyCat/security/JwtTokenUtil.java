@@ -72,7 +72,7 @@ public class JwtTokenUtil {
 	
 	//Parses the JWT into its individual Claims
 	private Claims getAllClaimsFromToken(String token) {
-		System.out.println(token);
+//		System.out.println(token);
 		return Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
 	}
 	

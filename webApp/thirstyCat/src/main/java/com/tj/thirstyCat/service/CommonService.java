@@ -22,7 +22,7 @@ public class CommonService {
 			response.addHeader("auth", jwt.getToken());
 		} catch (Exception e) {
 			//TODO: Replace debug console output with logging
-			System.out.println("Error retrieving jwt: " + e.getMessage());
+//			System.out.println("Error retrieving jwt: " + e.getMessage());
 			response.addHeader("auth", "Error retrieving jwt.");
 		}
 		

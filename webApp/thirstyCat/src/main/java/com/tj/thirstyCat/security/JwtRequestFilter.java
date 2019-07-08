@@ -37,30 +37,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
 		
 		String requestTokenHeader = request.getHeader("Authorization");
-		Enumeration<String> names = request.getHeaderNames();
-		
-		System.out.println(names.nextElement());
-		System.out.println(names.nextElement());
-		System.out.println(names.nextElement());
-		System.out.println(names.nextElement());
-		System.out.println(names.nextElement());
-		System.out.println(names.nextElement());
-		System.out.println(names.nextElement());
-		System.out.println(names.nextElement());
-		System.out.println(names.nextElement());
-		System.out.println(names.nextElement());
-		System.out.println(names.nextElement());
-		System.out.println(names.nextElement());
-		System.out.println(names.nextElement());
-		System.out.println(names.nextElement());
-		System.out.println(names.nextElement());
-		System.out.println(names.nextElement());
-		System.out.println(names.nextElement());
-		System.out.println(request.getHeader("Host"));
-		System.out.println(request.getHeader("Authorization"));
-		System.out.println(request.getHeader("authorization"));
-		
-		
+		Enumeration<String> names = request.getHeaderNames();		
 		
 		String username = null;
 		String jwtToken = null;
@@ -73,14 +50,14 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 				username = jwtTokenUtil.getUsernameFromToken(jwtToken);
 			} catch (IllegalArgumentException e) {
 				//TODO: Implement logging instead of printing to console
-				System.out.println("Unable to retrieve JWT Token.");
+//				System.out.println("Unable to retrieve JWT Token.");
 			} catch (ExpiredJwtException e) {
 				//TODO: Implement logging instead of printing to console
-				System.out.println("JWT Token has expired.");
+//				System.out.println("JWT Token has expired.");
 			}
 		} else {
 			//TODO: Implement logging instead of printing to console
-			System.out.println("JWT Token does not begin with Bearer.");
+//			System.out.println("JWT Token does not begin with Bearer.");
 		}
 		
 		//Validate token & ensure it has not been blacklisted
@@ -100,14 +77,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 			//Add token to blacklist & purge expired tokens from blacklist
 			tokenService.updateTokenBlacklist(jwtToken);
 		}
-		
-		//TODO: Remove debug output
-		if (tokenIsBlacklisted) {
-			System.out.println("Token is blacklisted");
-		} else {
-			System.out.println("Token isn't blacklisted");
-		}
-		
+				
 		chain.doFilter(request, response);
 		
 	}

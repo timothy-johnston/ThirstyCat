@@ -29,7 +29,7 @@ public class RoutingController {
 			mav.addObject("jwt", jwt.getToken());
 		} catch (Exception e) {
 			// TODO Replace console debug output with logging
-			System.out.println("Error retrieving jwt (RoutingController) : " + e.getMessage());
+//			System.out.println("Error retrieving jwt (RoutingController) : " + e.getMessage());
 		}
 		
 		return mav;
@@ -59,7 +59,7 @@ public class RoutingController {
 			mav.addObject("jwt", jwt.getToken());
 		} catch (Exception e) {
 			// TODO Replace console debug output with logging
-			System.out.println("Error retrieving jwt (RoutingController) : " + e.getMessage());
+//			System.out.println("Error retrieving jwt (RoutingController) : " + e.getMessage());
 		}
 		
 		return mav;
