@@ -84,7 +84,7 @@ function createDrinkPerHourPerDay(drinkData, allDrinks) {
         },
       
         title: {
-          text: 'Drinks Per 3-Hour Block of Time Each Day',
+          text: 'Drink Timing - Heatmap',
           style: {
         	  fontSize: "2rem"
           } 

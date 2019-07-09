@@ -1,9 +1,11 @@
 package com.tj.thirstyCat.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,22 +13,30 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.tj.thirstyCat.model.Favorite;
 import com.tj.thirstyCat.model.Image;
+import com.tj.thirstyCat.service.CommonService;
 import com.tj.thirstyCat.service.ImageService;
 
-@RestController("/api/image")
+@RestController
+@RequestMapping("/api/image")
 public class ImageController {
 
 	@Autowired
 	ImageService imageService;
 	
+	@Autowired
+	private CommonService commonService;
+	
 	@PostMapping(value="/addImage", consumes="multipart/form-data")
 	@ResponseBody
-	public Image persistImage(@Valid @RequestBody MultipartFile image, String createdBy, Long drinkId) throws IOException {
+	public Image persistImage(@Valid @RequestBody MultipartFile image, String createdBy, Long drinkId, HttpServletResponse response) throws IOException {
+		response = commonService.setResponseHeaderJWT(response);
 		//Persist
 		Image uploadedImage = new Image(drinkId, image.getBytes(), createdBy);
 		return imageService.addImage(uploadedImage);
@@ -34,33 +44,55 @@ public class ImageController {
 
 	@GetMapping("/lastImage")
 	@ResponseBody
-	public byte[] retrieveLastImage() {
+	public Image retrieveLastImage(HttpServletResponse response) {
+		response = commonService.setResponseHeaderJWT(response);
 		return imageService.getLastImage();
 	}
 
 	@GetMapping("/allImages")
 	@ResponseBody
-	public List<Image> getAllImages() {
-		System.out.println("In all images");
+	public List<Image> getAllImages(HttpServletResponse response) {
+		response = commonService.setResponseHeaderJWT(response);
 		return imageService.getAllImages();
 	}
 
 	@GetMapping("/image/{imageId}")
 	@ResponseBody
-	public Image getImage(@PathVariable Long imageId) {
+	public Image getImage(@PathVariable Long imageId, HttpServletResponse response) {
+		response = commonService.setResponseHeaderJWT(response);
 		return imageService.getImageById(imageId);
 	}
 	
 	@GetMapping("/imageByDrink/{drinkId}")
 	@ResponseBody
-	public Image getImageByDrinkId(@PathVariable Long drinkId) {
+	public Image getImageByDrinkId(@PathVariable Long drinkId, HttpServletResponse response) {
+		response = commonService.setResponseHeaderJWT(response);
 		return imageService.getImageByDrinkId(drinkId);
 	}
 
-	@GetMapping("/favorite/{imageId}")
+	@PostMapping("/favorite")
 	@ResponseBody
-	public void favoriteImage(@PathVariable Long imageId) {
-		imageService.favoriteImage(imageId);
+	public Favorite favoriteImage(@Valid @RequestBody Favorite favorite, HttpServletResponse response) {
+		response = commonService.setResponseHeaderJWT(response);
+		imageService.favoriteImage(favorite);
+		return favorite;
+	}
+	
+	@GetMapping("/favorites/{username}")
+	@ResponseBody
+	public List<Long> getFavoriteImageIds(@PathVariable String username, HttpServletResponse response) {
+		
+		response = commonService.setResponseHeaderJWT(response);
+		
+		List<Long> idList = new ArrayList<Long>();
+		
+		List<Favorite> favorites = imageService.getFavoritesByUsername(username);
+		
+		for(Favorite favorite : favorites) {
+			idList.add(favorite.getImageId());
+		}
+		
+		return idList;
 	}
 
 }

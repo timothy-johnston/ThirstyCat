@@ -2,8 +2,7 @@ Potential color schemes:
     https://coolors.co/353535-ffffff-712f79-e9f1f7-13070c - purple white black
     https://coolors.co/353535-ffffff-712f79-4ecdc4-f7fff7 - purple turquoise
     https://coolors.co/08415c-ffffff-000000-cacfd6-c03221 - black white deepblue
-    https://coolors.co/9381ff-b8b8ff-f8f7ff-ffeedd-ffd8be - papayawhip
-        Note: I'm using 796ad1 instead of 9381ff (its a deeper shade)
+    https://coolors.co/796ad1-b8b8ff-f8f7ff-ffeedd-ffd8be - papaya whip
 
 Great Google Fonts Pairing Guide
 https://www.reliablepsd.com/ultimate-google-font-pairings/ 

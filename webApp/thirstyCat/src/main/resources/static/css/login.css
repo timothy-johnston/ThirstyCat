@@ -4,7 +4,7 @@
 
 #login-container {
 	width: 500px;
-	height: 400px;
+	height: 550px;
 	margin: 10px auto;
 	border: 12px solid #b8b8ff;
 	border-radius: 15px;
@@ -13,6 +13,21 @@
     background: linear-gradient( 180deg, #f8f7ff 90px, #796ad1 90px);
     display: flex;
     flex-direction: column;
+}
+
+.alert-container {
+	display: flex;
+	justify-content: center;
+}
+
+.alert-info {
+	width: 485px;
+	border: 5px solid #796ad1;
+	border-radius: 15px;
+	background-color: #f8f7ff;
+	text-align: center;
+	color: #796ad1;
+	font-size: 1.5rem;
 }
 
 #login-form-container {
@@ -29,12 +44,11 @@
 .form-input {
 	font-family: 'Maven Pro', sans-serif;
 	font-family: 'Josefin Sans', sans-serif;
-    font-size: 2rem;
+    font-size: 1.5rem;
     border-radius: 5px;
     border: none;
-    width: 75%;
+    width: 100%;
     margin: 10px auto;
-    text-align: center;
 }
 
 .submit-btn {
@@ -43,6 +57,10 @@
     background: #796ad1;
     color: #f8f7ff;
     border: 2px solid #f8f7ff;
+}
+
+label {
+	color: #f8f7ff;
 }
 
 #login-p {

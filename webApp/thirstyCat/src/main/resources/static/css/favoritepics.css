@@ -1,0 +1,49 @@
+#fav-pics-header {
+    text-align: center;
+    color: #f8f7ff;
+    /* 	margin-top: 10px; */
+        /* margin-bottom: 10px; */
+    font-size: 4rem;
+    font-family: 'Damion', cursive;
+}
+
+#pic-grid-container {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	background: #ffd8be;
+	border: 12px solid #ffd8be;
+	border-radius: 15px;
+}
+
+#featured-pic-container {
+	width: 600px;
+	height: 450px;
+	margin: 5px;
+	padding: 0px;
+	border: 12px solid #ffd8be;
+	border-radius: 25px;
+	overflow: hidden;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#featured-pic {
+	width: 600px;
+	height: 450px;
+	object-fit: contain;
+}
+
+.fav-pic-container {
+	width: 200px;
+	height: 150px;
+	margin: 5px;
+	border-radius: 10px;
+	overflow: hidden;
+}
+
+.fav-pic {
+	width: 200px;
+	height: 150px;
+	object-fit: contain;
+}

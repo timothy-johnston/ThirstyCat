@@ -1,25 +1,15 @@
 package com.tj.thirstyCat.service;
 
-import javax.validation.Valid;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 import com.tj.thirstyCat.model.User;
-import com.tj.thirstyCat.repository.UserRepository;
+import com.tj.thirstyCat.model.UserRegistration;
 
-@Service
-public class UserService {
+public interface UserService extends UserDetailsService {
 
-	@Autowired
-	private UserRepository userRepository;
+	User findByUsername(String username);
 	
-	public User addUser(@Valid User user) {
-		return userRepository.save(user);
-	}
-
-	public void deleteUserById(Long userId) {
-		userRepository.deleteById(userId);
-	}
-
+	User save(UserRegistration registration);
+	
+	
 }
