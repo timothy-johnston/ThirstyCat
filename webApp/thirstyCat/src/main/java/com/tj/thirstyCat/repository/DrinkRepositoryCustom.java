@@ -6,6 +6,6 @@ import com.tj.thirstyCat.model.Drink;
 
 public interface DrinkRepositoryCustom {
 
-	public Optional<Drink> findLastDrink();
+	public Long findLastDrinkId();
 	
 }

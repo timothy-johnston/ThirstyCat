@@ -136,6 +136,9 @@ public class JwtTokenUtil {
 	//TODO: Need to research how Spring AuthenticationManager does this authentication
 	private void authenticate(String username, String password) throws Exception {
 		
+		System.out.println("The username is: " + username);
+		
+		
 		//Check that user is Raspberry Pi or frontend
 		if (username.equalsIgnoreCase("TC_ADMIN_A") || username.equalsIgnoreCase("TC_ADMIN_B")) {
 			try {
@@ -146,6 +149,9 @@ public class JwtTokenUtil {
 				throw new Exception("INVALID_CREDENTIALS", e);
 			}
 		} else {
+			
+			System.out.println("Invalid permissions for some reason.... Username is: " + username);
+			
 			throw new Exception("INVALID_PERMISSIONS");
 		}
 		

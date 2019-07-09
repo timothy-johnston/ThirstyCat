@@ -22,19 +22,16 @@ public class DrinkRepositoryImpl implements DrinkRepositoryCustom {
 	@PersistenceContext
 	EntityManager entityManager;
 	
-	@Autowired
-	DrinkService drinkService;
-	
 	@Override
-	public Optional<Drink> findLastDrink() {
+	public Long findLastDrinkId() {
 		
 		//Get list of drinks sorted by decreasing drink id
 		String queryString = "SELECT id FROM Drink ORDER BY id DESC";
 		Query query = entityManager.createQuery(queryString);
 		List<Long> idList = query.getResultList();
 		
-		//Use largest id to retrieve latest drink
-		return drinkService.getDrinkById(idList.get(0));
+		//Return latest id
+		return idList.get(0);
 		
 	}
 	
