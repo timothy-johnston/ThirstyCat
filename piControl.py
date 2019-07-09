@@ -12,8 +12,9 @@ import requests
 
 
 urlRoot = 'http://thirstycat.us-east-1.elasticbeanstalk.com/'
-urlAddDrink = 'addDrink'
-urlAddImage = 'addImage'
+urlAddDrink = 'api/drink/addDrink'
+urlAddImage = 'api/image/addImage'
+urlGetJWT = 'api/authenticateJWT'
 
 # If data exists, read it in
 if os.path.isfile("/home/pi/projects_2018/shastacam/data/scratchinCatDataLog.txt"):
@@ -92,7 +93,7 @@ MOSI = 24
 CS   = 25
 mcp = Adafruit_MCP3008.MCP3008(clk=CLK, cs=CS, miso=MISO, mosi=MOSI)
 channel = 0
-threshold = 400
+threshold = 150
 
 delayTime = 25    #Wait when going above/below threshold
 incTime = 1
