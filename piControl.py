@@ -11,6 +11,7 @@ import requests
 import json
 
 
+
 urlRoot = 'http://thirstycat.us-east-1.elasticbeanstalk.com/api/'
 urlAddDrink = 'addDrink'
 urlAddImage = 'addImage'
@@ -93,7 +94,7 @@ MOSI = 24
 CS   = 25
 mcp = Adafruit_MCP3008.MCP3008(clk=CLK, cs=CS, miso=MISO, mosi=MOSI)
 channel = 0
-threshold = 400
+threshold = 150
 
 delayTime = 25    #Wait when going above/below threshold
 incTime = 1
@@ -176,7 +177,7 @@ while True:
 
 	#Get JWT Token
 	jwtPath = urlRoot + urlJWT
-	tokenRequestJSON = {'username':'PI_CONTROL', 'password':config.pi_pass}
+	tokenRequestJSON = {'username':'PI_CONTROL_A', 'password':config.pi_pass}
 #	tokenResponse = requests.post(jwtPath, json=payload)
 #	tokenResponseJSON = json.loads(tokenResponse.text)
 #	bearerToken = 'Bearer ' + tokenResponseJSON['token']
