@@ -22,6 +22,14 @@ public class DrinkService {
 
 	public Optional<Drink> getLastDrink() {
 		return drinkRepository.findLastDrink();
+		
+		
+		//Circular dependency fix if needed:
+		//Change drinkRepository.findLastDrink to findLastDrinkId [return last id rather than calling this service to return last drink]
+		//Long lastDrinkId = drinkReposiotry.findLastDrinkId()
+		//return drinkRepository.findById(lastDrinkId);
+		
+		
 	}
 
 	public List<Drink> getAllDrinks() {
