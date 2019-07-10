@@ -50,7 +50,7 @@ public class RoutingController {
 	public ModelAndView favoritePics() {
 		
 		//Credentials are needed for client side api calls, so pass them along in the model
-		ModelAndView mav = new ModelAndView("favoritePics");
+		ModelAndView mav = new ModelAndView("favoritepics");
 		
 		//Create admin token and pass to client
 		JwtResponse jwt;
