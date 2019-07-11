@@ -16,13 +16,14 @@ urlRoot = 'http://thirstycat.us-east-1.elasticbeanstalk.com/api/'
 urlAddDrink = 'drink/addDrink'
 urlAddImage = 'image/addImage'
 urlJWT = 'authenticateJWT'
+dataFileName = "log1.txt"
 
 # If data exists, read it in
-if os.path.isfile("/home/pi/projects_2018/shastacam/data/scratchinCatDataLog6.txt"):
+if os.path.isfile("/home/pi/projects_2018/shastacam/data/" + dataFileName):
     dataFileExists = True   
 
     #Open the file
-    file = open("/home/pi/projects_2018/shastacam/data/scratchinCatDataLog6.txt", "a+")
+    file = open("/home/pi/projects_2018/shastacam/data/" + dataFileName, "a+")
     
     #Store each line in the contentsList array
     contentsList = file.readlines()
@@ -159,10 +160,10 @@ while True:
 	# duration = timeStampEndDatetime - timeStampStartDatetime
 	
 	#Calculate average uses per month
-        lineToWrite = str(timeStampStartDatetime) + "," + str(timeStampEndDatetime) + "," + str(usesThisDay)
+        lineToWrite = str(timeStampStartDatetime) + "," + str(timeStampEndDatetime) + "," + str(usesThisDay) + "\n"
 	
 	#Open and write to file
-	file = open("/home/pi/projects_2018/shastacam/data/scratchinCatDataLog6.txt","a+")
+	file = open("/home/pi/projects_2018/shastacam/data/" + dataFileName,"a+")
         file.write(lineToWrite)
         file.close()
         print "MOST RECENT USE:"
