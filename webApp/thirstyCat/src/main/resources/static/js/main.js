@@ -1,8 +1,8 @@
 var currentDrinkId;
 var currentImageId;
 var allDrinks = [];
-//var apiURL = "http://localhost:8080/api";
-var apiURL = "http://thirstycat.us-east-1.elasticbeanstalk.com/api";
+var apiURL = "http://localhost:8080/api";
+// var apiURL = "http://thirstycat.us-east-1.elasticbeanstalk.com/api";
 var apiPathLastDrink = "/drink/lastDrink";
 var apiPathAllDrinks = "/drink/allDrinks";
 var apiPathLastDrinkImage = "/image/lastImage";
@@ -297,6 +297,9 @@ function calculateDrinkDetails() {
 	//Calculate duration of drink
 	var durationOfDrink= getDurationOfDrink();
 
+	console.log("--------------returning drink stats now-------------")
+	console.log([drinksToday, timeSinceLastDrinkString, durationOfDrink])
+
 	return [drinksToday, timeSinceLastDrinkString, durationOfDrink];
 
 }
@@ -325,7 +328,12 @@ function getTimeSinceLastDrink() {
 
 	//Calculate hours and minutes
 	var hours = Math.floor(elapsedMillis / (1000 * 60 * 60));
-	var minuteRemainder = Math.round(elapsedMillis / (1000 * 60) % (Math.floor(hours) * 60));
+
+	if (hours == 0) {
+		var minuteRemainder = Math.round(elapsedMillis / (1000 * 60));
+	} else {
+		var minuteRemainder = Math.round(elapsedMillis / (1000 * 60) % (Math.floor(hours) * 60));
+	}
 
 	//Format string
 	//I am nesting ternaries and I do expect to regret this in the future
