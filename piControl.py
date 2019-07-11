@@ -13,8 +13,8 @@ import json
 
 
 urlRoot = 'http://thirstycat.us-east-1.elasticbeanstalk.com/api/'
-urlAddDrink = 'addDrink'
-urlAddImage = 'addImage'
+urlAddDrink = '/drink/addDrink'
+urlAddImage = '/image/addImage'
 urlJWT = 'authenticateJWT'
 
 # If data exists, read it in
@@ -22,7 +22,7 @@ if os.path.isfile("/home/pi/projects_2018/shastacam/data/scratchinCatDataLog2.tx
     dataFileExists = True   
 
     #Open the file
-    file = open("/home/pi/projects_2018/shastacam/data/scratchinCatDataLog.txt2", "a+")
+    file = open("/home/pi/projects_2018/shastacam/data/scratchinCatDataLog2.txt", "a+")
     
     #Store each line in the contentsList array
     contentsList = file.readlines()
@@ -94,7 +94,7 @@ MOSI = 24
 CS   = 25
 mcp = Adafruit_MCP3008.MCP3008(clk=CLK, cs=CS, miso=MISO, mosi=MOSI)
 channel = 0
-threshold = 150
+threshold = 350
 
 delayTime = 25    #Wait when going above/below threshold
 incTime = 1
@@ -162,7 +162,7 @@ while True:
         lineToWrite = str(timeStampStartDatetime) + "," + str(timeStampEndDatetime) + "," + str(duration) + "," +  str(usesThisDay) + "," + str(usesThisMonth) + "," + str(totalUses) + "," + str(avgUsesPerDayThisMonth) + "\n"
 	
 	#Open and write to file
-	file = open("/home/pi/projects_2018/shastacam/data/scratchinCatDataLog.txt2","a+")
+	file = open("/home/pi/projects_2018/shastacam/data/scratchinCatDataLog2.txt","a+")
         file.write(lineToWrite)
         file.close()
         print "MOST RECENT USE:"
@@ -176,29 +176,29 @@ while True:
 	#f = urllib.urlopen(url)
 
 	#Get JWT Token
-	jwtPath = urlRoot + urlJWT
-	tokenRequestJSON = {'username':'PI_CONTROL_A', 'password':config.pi_pass}
-#	tokenResponse = requests.post(jwtPath, json=payload)
+#	jwtPath = urlRoot + urlJWT
+#	tokenRequestJSON = {'username':'PI_CONTROL_A', 'password':config.pi_pass}
+#	tokenResponse = requests.post(jwtPath, json=tokenRequestJSON)
 #	tokenResponseJSON = json.loads(tokenResponse.text)
 #	bearerToken = 'Bearer ' + tokenResponseJSON['token']
 
 	#Image data
 	photoPath = "/home/pi/projects_2018/shastacam/catWasHere.jpg"	
-	photo = open(photoPath, 'rb')
-	photoBytes = photo.read()
-	multipartKeyValue = {'image' : photoBytes}
-	imageRequestBody = {'createdBy':'pi', 'drinkId':9999}
+#	photo = open(photoPath, 'rb')
+#	photoBytes = photo.read()
+#	multipartKeyValue = {'image' : photoBytes}
+#	imageRequestBody = {'createdBy':'pi', 'drinkId':9999}
 #	headers = {'Authorization':bearerToken}
 #	requestResponse = requests.post(urlRoot + urlAddImage, files=multipartKeyValue, data=imageRequestBody, headers=headers)
 
 	#Drink data
-	requestStartTime = str(timeStampStartDatetime).replace(" ", "T")
-	requestEndTime = str(timeStampEndDatetime).replace(" ", "T")
-	drinkInfo = {
-		'startTime': requestStartTime,
-		'endTime': requestEndTime,
-		'createdBy': 'pi'
-       		 }
+#	requestStartTime = str(timeStampStartDatetime).replace(" ", "T")
+#	requestEndTime = str(timeStampEndDatetime).replace(" ", "T")
+#	drinkInfo = {
+#		'startTime': requestStartTime,
+#		'endTime': requestEndTime,
+#		'createdBy': 'pi'
+ #      		 }
 #	headers = {'Content-Type':'application/json', 'Authorization':bearerToken}
 #	requestResponseDrink = requests.post(urlRoot + urlAddDrink, json=drinkInfo, headers=headers)
 
