@@ -18,11 +18,11 @@ urlAddImage = '/image/addImage'
 urlJWT = 'authenticateJWT'
 
 # If data exists, read it in
-if os.path.isfile("/home/pi/projects_2018/shastacam/data/scratchinCatDataLog2.txt"):
+if os.path.isfile("/home/pi/projects_2018/shastacam/data/scratchinCatDataLog3.txt"):
     dataFileExists = True   
 
     #Open the file
-    file = open("/home/pi/projects_2018/shastacam/data/scratchinCatDataLog2.txt", "a+")
+    file = open("/home/pi/projects_2018/shastacam/data/scratchinCatDataLog3.txt", "a+")
     
     #Store each line in the contentsList array
     contentsList = file.readlines()
@@ -35,7 +35,7 @@ if os.path.isfile("/home/pi/projects_2018/shastacam/data/scratchinCatDataLog2.tx
     timeStampStartLast = mostRecentRecord.split(",")[0]
     yearMonthDayLast = timeStampStartLast.split(" ")[0]
     # monthStartLast = yearMonthDayLast.split("-")[1]
-    # usesThisDay = int(mostRecentRecord.split(",")[3])
+    usesThisDay = int(mostRecentRecord.split(",")[1])
     # usesThisMonth = int(mostRecentRecord.split(",")[4])
     # totalUses = int(mostRecentRecord.split(",")[5])
     
@@ -67,7 +67,7 @@ else:
     dateStartLast = datetime.datetime.now().isoformat(' ')
     yearMonthDayLast = dateStartLast.split(" ")[0]
     # monthStartLast = dateStartLast.split("-")[1]
-    # usesThisDay = 0
+    usesThisDay = 0
     # usesThisMonth = 0
     # totalUses = 0
     # totalDays = 0
@@ -159,10 +159,10 @@ while True:
 	# duration = timeStampEndDatetime - timeStampStartDatetime
 	
 	#Calculate average uses per month
-        lineToWrite = str(timeStampStartDatetime) + "," + str(timeStampEndDatetime)
+        lineToWrite = str(timeStampStartDatetime) + "," + str(timeStampEndDatetime) + "," + str(usesThisDay)
 	
 	#Open and write to file
-	file = open("/home/pi/projects_2018/shastacam/data/scratchinCatDataLog2.txt","a+")
+	file = open("/home/pi/projects_2018/shastacam/data/scratchinCatDataLog3.txt","a+")
         file.write(lineToWrite)
         file.close()
         print "MOST RECENT USE:"
