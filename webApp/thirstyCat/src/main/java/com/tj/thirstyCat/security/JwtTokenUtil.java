@@ -12,6 +12,8 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
@@ -136,17 +138,35 @@ public class JwtTokenUtil {
 	//TODO: Need to research how Spring AuthenticationManager does this authentication
 	private void authenticate(String username, String password) throws Exception {
 		
-		System.out.println("The username is: " + username);
+		System.out.println("Here we go again. The username is: " + username);
 		
 		
 		//Check that user is Raspberry Pi or frontend
 		if (username.equalsIgnoreCase("TC_ADMIN_A") || username.equalsIgnoreCase("TC_ADMIN_B")) {
 			try {
-				authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
+				
+				System.out.println("Good username. Now trying to authenticate. Making token...");
+				
+				UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(username, password);
+				
+				System.out.println("Token is: " + token);
+				
+				System.out.println("Now passing token to authentication manager.");
+				
+				Authentication authentication = authenticationManager.authenticate(token);
+				
+				System.out.println("Authentication is: " + authentication);
+				
 			} catch (DisabledException e) {
 				throw new Exception("USER_DISABLED", e);
 			} catch (BadCredentialsException e) {
 				throw new Exception("INVALID_CREDENTIALS", e);
+			} catch (AuthenticationException e) {
+				System.out.println("Ooops. Authentication exception: " + e.getMessage());
+				throw new Exception("AUTHENTICATION_EXCEPTION", e);
+			} catch (Exception e) {
+				System.out.println("Something bad happened... : " + e.getMessage());
+				throw new Exception("A_BAD_THING_EXCEPTION", e);
 			}
 		} else {
 			

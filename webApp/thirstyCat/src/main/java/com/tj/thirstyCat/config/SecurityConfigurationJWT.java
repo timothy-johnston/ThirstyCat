@@ -53,13 +53,16 @@ public class SecurityConfigurationJWT extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
 		httpSecurity.antMatcher("/api/**")
 		.csrf().disable()
-			.authorizeRequests().antMatchers("/api/authenticateJWT").permitAll()
-			.anyRequest().authenticated().and()
+			.authorizeRequests()
+			.antMatchers("/api/authenticateJWT").permitAll()
+			.anyRequest().authenticated()
+			.and()
 			.exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and()
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 		
 		//Validate token filter
-		httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+		httpSecurity.addFilterAfter(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+
 	}
 
 }
