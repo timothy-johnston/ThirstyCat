@@ -34,44 +34,44 @@ if os.path.isfile("/home/pi/projects_2018/shastacam/data/scratchinCatDataLog2.tx
     #Parse information that is needed for later calculations / file writing
     timeStampStartLast = mostRecentRecord.split(",")[0]
     yearMonthDayLast = timeStampStartLast.split(" ")[0]
-    monthStartLast = yearMonthDayLast.split("-")[1]
-    usesThisDay = int(mostRecentRecord.split(",")[3])
-    usesThisMonth = int(mostRecentRecord.split(",")[4])
-    totalUses = int(mostRecentRecord.split(",")[5])
+    # monthStartLast = yearMonthDayLast.split("-")[1]
+    # usesThisDay = int(mostRecentRecord.split(",")[3])
+    # usesThisMonth = int(mostRecentRecord.split(",")[4])
+    # totalUses = int(mostRecentRecord.split(",")[5])
     
     #To determine how many days of data have been collected this month, iterate over the list of records
-    for record in contentsList:
+    # for record in contentsList:
         #Get the timestamp, month, and day of the current record
-        fullTimestampCurrentRecord = record.split(",")[0]
-        yearMonthDayCurrentRecord = fullTimestampCurrentRecord.split(" ")[0]
-        monthCurrentRecord = yearMonthDayCurrentRecord.split("-")[1]
+        # fullTimestampCurrentRecord = record.split(",")[0]
+        # yearMonthDayCurrentRecord = fullTimestampCurrentRecord.split(" ")[0]
+        # monthCurrentRecord = yearMonthDayCurrentRecord.split("-")[1]
 	
 	#Check if the month of the current record matches the current month
 	#If so, save the day as firstDayWithDataThisMonth. This will be used for averaging later (total days = thisDay - firstDay)
 	#If no records with this month exist, the firstDayWithDataThisMonth will be the current day
-        fullTimestampToday = datetime.datetime.now().isoformat(' ')
-        yearMonthDayToday = fullTimestampToday.split(" ")[0]
-	monthToday = yearMonthDayToday.split("-")[1]
-	dayToday = yearMonthDayToday.split("-")[2]
-	firstDayWithDataThisMonth = dayToday
-	totalDays = 0
-	if monthCurrentRecord == monthToday:
-	    firstDayWithDataThisMonth = yearMonthDayCurrentRecord.split("-")[2]
-	    totalDays = int(dayToday) - int(firstDayWithDataThisMonth) + 1
+        # fullTimestampToday = datetime.datetime.now().isoformat(' ')
+        # yearMonthDayToday = fullTimestampToday.split(" ")[0]
+	# monthToday = yearMonthDayToday.split("-")[1]
+	# dayToday = yearMonthDayToday.split("-")[2]
+	# firstDayWithDataThisMonth = dayToday
+	# totalDays = 0
+	# if monthCurrentRecord == monthToday:
+	    # firstDayWithDataThisMonth = yearMonthDayCurrentRecord.split("-")[2]
+	    # totalDays = int(dayToday) - int(firstDayWithDataThisMonth) + 1
 #	    avgUsesPerDayThisMonth = totalUses / totalDays
-	    break
+	    # break
     #Close the file
     file.close()
 #If the data file doesn't exist yet (first time running the program), create it
 else:
     dateStartLast = datetime.datetime.now().isoformat(' ')
     yearMonthDayLast = dateStartLast.split(" ")[0]
-    monthStartLast = dateStartLast.split("-")[1]
-    usesThisDay = 0
-    usesThisMonth = 0
-    totalUses = 0
-    totalDays = 0
-    avgUsesPerDayThisMonth = 0
+    # monthStartLast = dateStartLast.split("-")[1]
+    # usesThisDay = 0
+    # usesThisMonth = 0
+    # totalUses = 0
+    # totalDays = 0
+    # avgUsesPerDayThisMonth = 0
 
 
 # Allow write permissions for log file
@@ -96,7 +96,7 @@ mcp = Adafruit_MCP3008.MCP3008(clk=CLK, cs=CS, miso=MISO, mosi=MOSI)
 channel = 0
 threshold = 350
 
-delayTime = 25    #Wait when going above/below threshold
+delayTime = 1    #Wait when going above/below threshold
 incTime = 1
 firstTimeInLoop = True
 
@@ -118,8 +118,8 @@ while True:
 	timeStampStartDatetime = datetime.datetime.now()
 	fullTimeStampStart = datetime.datetime.now().isoformat(' ')
 	yearMonthDay = fullTimeStampStart.split(" ")[0]
-	monthStart = yearMonthDay.split("-")[1]
-        dayStart = yearMonthDay.split("-")[2]
+	# monthStart = yearMonthDay.split("-")[1]
+        # dayStart = yearMonthDay.split("-")[2]
 	#time.sleep(delayTime)
         value = mcp.read_adc(channel)
        
@@ -127,20 +127,20 @@ while True:
         if value >= threshold:
 	#if value - lastValue > 15:
 	    catWasHere = True
-            totalUses = totalUses + 1
+            # totalUses = totalUses + 1
 
             if yearMonthDayLast == yearMonthDay:
                 usesThisDay = usesThisDay + 1
             else:
                 usesThisDay = 1
-		totalDays = totalDays + 1
+		# totalDays = totalDays + 1
 #		avgUsesPerDayThisMonth = totalUses / totalDays
 
-	    if monthStartLast == monthStart:
-		usesThisMonth = usesThisMonth + 1
-	    else:
-		usesThisMonth = 1
-		totalDays = 1
+	    # if monthStartLast == monthStart:
+		# usesThisMonth = usesThisMonth + 1
+	    # else:
+		# usesThisMonth = 1
+		# totalDays = 1
 	
 	    # Assign the current date and month to dateStartLast and monthStartLast for comparison to the next time the cat is here
             yearMonthDayLast = yearMonthDay
@@ -156,10 +156,10 @@ while True:
     if catWasHere:
         catWasHere = False
         timeStampEndDatetime = datetime.datetime.now()
-	duration = timeStampEndDatetime - timeStampStartDatetime
+	# duration = timeStampEndDatetime - timeStampStartDatetime
 	
 	#Calculate average uses per month
-        lineToWrite = str(timeStampStartDatetime) + "," + str(timeStampEndDatetime) + "," +  str(usesThisDay) + "\n"
+        lineToWrite = str(timeStampStartDatetime) + "," + str(timeStampEndDatetime)
 	
 	#Open and write to file
 	file = open("/home/pi/projects_2018/shastacam/data/scratchinCatDataLog2.txt","a+")
