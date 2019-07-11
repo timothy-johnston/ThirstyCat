@@ -13,16 +13,16 @@ import json
 
 
 urlRoot = 'http://thirstycat.us-east-1.elasticbeanstalk.com/api/'
-urlAddDrink = '/drink/addDrink'
-urlAddImage = '/image/addImage'
+urlAddDrink = 'drink/addDrink'
+urlAddImage = 'image/addImage'
 urlJWT = 'authenticateJWT'
 
 # If data exists, read it in
-if os.path.isfile("/home/pi/projects_2018/shastacam/data/scratchinCatDataLog5.txt"):
+if os.path.isfile("/home/pi/projects_2018/shastacam/data/scratchinCatDataLog6.txt"):
     dataFileExists = True   
 
     #Open the file
-    file = open("/home/pi/projects_2018/shastacam/data/scratchinCatDataLog5.txt", "a+")
+    file = open("/home/pi/projects_2018/shastacam/data/scratchinCatDataLog6.txt", "a+")
     
     #Store each line in the contentsList array
     contentsList = file.readlines()
@@ -96,7 +96,7 @@ mcp = Adafruit_MCP3008.MCP3008(clk=CLK, cs=CS, miso=MISO, mosi=MOSI)
 channel = 0
 threshold = 350
 
-delayTime = 1    #Wait when going above/below threshold
+delayTime = 15    #Wait when going above/below threshold
 incTime = 1
 firstTimeInLoop = True
 
@@ -162,7 +162,7 @@ while True:
         lineToWrite = str(timeStampStartDatetime) + "," + str(timeStampEndDatetime) + "," + str(usesThisDay)
 	
 	#Open and write to file
-	file = open("/home/pi/projects_2018/shastacam/data/scratchinCatDataLog5.txt","a+")
+	file = open("/home/pi/projects_2018/shastacam/data/scratchinCatDataLog6.txt","a+")
         file.write(lineToWrite)
         file.close()
         print "MOST RECENT USE:"
@@ -188,7 +188,7 @@ while True:
 		'endTime': requestEndTime,
 		'createdBy': 'pi'
 			}
-	headers = {'Content-Type':'application/json', 'Authorization':bearerToken}
+	headers = {'Content-Type':'application/json', 'Authorization':'Bearer ' + tokenResponseJSON['token']}
 
 	print drinkInfo
 	print headers
@@ -229,7 +229,7 @@ while True:
 	twitterMessage = "Alert, cat detected! Shasta just took a drink.\n" + tableOutput
 #        for follower in tweepy.Cursor(api.followers).items():             #Follow logic commented out temporarily - some issue with Twitter capping number of follows
 #	    follower.follow()
-#	api.update_with_media(photoPath, twitterMessage)
+	api.update_with_media(photoPath, twitterMessage)
 
     # Pause
     print "Finished loop at " + str(datetime.datetime.now()) +", FSR reading was: " + str(value) + ", threshold is: " + str(threshold)
