@@ -14,11 +14,22 @@ $( document ).ready(function() {
 
 	//Replace featured favorite picture with clicked favorite picture
 	$('.fav-pic').click(function() {
+		console.log("trying to replace featured");
         //Get clicked image src
-        var src = $(this).attr('src');
+		var src = $(this).attr('src');
+		console.log("new src: " + src);
         //Set clicked image as featured imaged
         $('#featured-pic').attr('src', src);
 	});
+
+	// setInterval(function() {
+	// 	var test = $('.fav-pic');
+	// 	console.log("Test: ");
+	// 	console.log(test)
+	// }, 1000)
+	var test = $('.fav-pic');
+	console.log("Test: ");
+	console.log(test)
 
 });
 
@@ -90,6 +101,18 @@ function getAndAppendImage(id) {
 			var picID = "pic-" + Date.now().toString();
 			$('#pic-grid-container').append("<div class='fav-pic-container'><img id=" + picID + " class='fav-pic' src='' alt='Picture of Shasta taking a drink'></img></div>");
 			$('#' + picID).attr('src', `data:image/jpg;base64,${imageBytes}`);
+
+
+
+				//Replace featured favorite picture with clicked favorite picture
+	$('.fav-pic').click(function() {
+		console.log("trying to replace featured");
+        //Get clicked image src
+		var src = $(this).attr('src');
+		console.log("new src: " + src);
+        //Set clicked image as featured imaged
+        $('#featured-pic').attr('src', src);
+	});
 
 		},
 		failure: function(result, status, xhr) {
