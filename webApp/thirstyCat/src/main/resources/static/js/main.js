@@ -260,6 +260,7 @@ function updateDrinkImage(latestImage) {
 	console.log(latestImage.imageByteArray);
 	var imageBytes = latestImage.imageByteArray;
 
+	$('#drinkPic').show();
 	$('#drinkPic').attr('src', `data:image/jpg;base64,${imageBytes}`);
 
 

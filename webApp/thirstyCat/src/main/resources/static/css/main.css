@@ -169,6 +169,7 @@ color: white;
 	position: relative;
 	border: 12px solid #b8b8ff;
 	border-radius: 15px;
+	background: #b8b8ff;
 	overflow: hidden;
 	margin: 10px auto;
 	width: 800px;
@@ -176,6 +177,7 @@ color: white;
 }
 
 #drinkPic {
+	display: none;
 	width: 800px;
 	height: 600px;
 	object-fit: contain;
