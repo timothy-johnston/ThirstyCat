@@ -159,7 +159,7 @@ while True:
 	duration = timeStampEndDatetime - timeStampStartDatetime
 	
 	#Calculate average uses per month
-        lineToWrite = str(timeStampStartDatetime) + "," + str(timeStampEndDatetime) + "," + str(duration) + "," +  str(usesThisDay) + "," + str(usesThisMonth) + "," + str(totalUses) + "," + str(avgUsesPerDayThisMonth) + "\n"
+        lineToWrite = str(timeStampStartDatetime) + "," + str(timeStampEndDatetime) + "," +  str(usesThisDay) + "\n"
 	
 	#Open and write to file
 	file = open("/home/pi/projects_2018/shastacam/data/scratchinCatDataLog2.txt","a+")
@@ -169,27 +169,35 @@ while True:
         print lineToWrite
 	
     	#Send data to REST API to add it to database
-    	#TODO: Update this to new spring boot web service when complete
-	#url = 'tewardj11.pythonanywhere.com/api/drinks/add/' + str(timeStampStartDatetime) + '+' + str(timeStampEndDatetime) + '+' + str(usesThisDay)
-    	#urlBasic = 'https://tewardj11.pythonanywhere.com/api/drinks/addBasic/' + str(usesThisDay)
-	#f = urllib2.urlopen(urlBasic).read()
-	#f = urllib.urlopen(url)
 
 	#Get JWT Token
-#	jwtPath = urlRoot + urlJWT
-#	tokenRequestJSON = {'username':'PI_CONTROL_A', 'password':config.pi_pass}
-#	tokenResponse = requests.post(jwtPath, json=tokenRequestJSON)
-#	tokenResponseJSON = json.loads(tokenResponse.text)
-#	bearerToken = 'Bearer ' + tokenResponseJSON['token']
+	jwtPath = urlRoot + urlJWT
+	tokenRequestJSON = {'username':'TC_ADMIN_B', 'password':config.pi_pass}
+	tokenResponse = requests.post(jwtPath, json=tokenRequestJSON)
+	tokenResponseJSON = json.loads(tokenResponse.text)
+	bearerToken = 'Bearer ' + tokenResponseJSON['token']
+
+	#Drink data
+	requestStartTime = str(timeStampStartDatetime).replace(" ", "T")
+	requestEndTime = str(timeStampEndDatetime).replace(" ", "T")
+	drinkInfo = {
+		'startTime': requestStartTime,
+		'endTime': requestEndTime,
+		'createdBy': 'pi'
+			}
+	headers = {'Content-Type':'application/json', 'Authorization':bearerToken}
+	requestResponseDrink = requests.post(urlRoot + urlAddDrink, json=drinkInfo, headers=headers)
+	requestResponseDrinkJSON = json.loads(requestResponseDrink.text)
+	drinkId = requestResponseDrinkJSON['id']
 
 	#Image data
 	photoPath = "/home/pi/projects_2018/shastacam/catWasHere.jpg"	
-#	photo = open(photoPath, 'rb')
-#	photoBytes = photo.read()
-#	multipartKeyValue = {'image' : photoBytes}
-#	imageRequestBody = {'createdBy':'pi', 'drinkId':9999}
-#	headers = {'Authorization':bearerToken}
-#	requestResponse = requests.post(urlRoot + urlAddImage, files=multipartKeyValue, data=imageRequestBody, headers=headers)
+	photo = open(photoPath, 'rb')
+	photoBytes = photo.read()
+	multipartKeyValue = {'image' : photoBytes}
+	imageRequestBody = {'createdBy':'pi', 'drinkId':drinkId}
+	headers = {'Authorization':bearerToken}
+	requestResponse = requests.post(urlRoot + urlAddImage, files=multipartKeyValue, data=imageRequestBody, headers=headers)
 
 	#Drink data
 #	requestStartTime = str(timeStampStartDatetime).replace(" ", "T")
@@ -210,7 +218,7 @@ while True:
 	twitterMessage = "Alert, cat detected! Shasta just took a drink.\n" + tableOutput
 #        for follower in tweepy.Cursor(api.followers).items():             #Follow logic commented out temporarily - some issue with Twitter capping number of follows
 #	    follower.follow()
-	api.update_with_media(photoPath, twitterMessage)
+#	api.update_with_media(photoPath, twitterMessage)
 
     # Pause
     print "Finished loop at " + str(datetime.datetime.now()) +", FSR reading was: " + str(value) + ", threshold is: " + str(threshold)
