@@ -144,7 +144,7 @@ while True:
 	
 	    # Assign the current date and month to dateStartLast and monthStartLast for comparison to the next time the cat is here
             yearMonthDayLast = yearMonthDay
-	    monthStartLast = monthStart
+	    # monthStartLast = monthStart
 
             # Wait until cat finishes drinking to move on
             #while value - lastValue > 15:
