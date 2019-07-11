@@ -1,8 +1,8 @@
 var currentDrinkId;
 var currentImageId;
 var allDrinks = [];
-var apiURL = "http://localhost:8080/api";
-// var apiURL = "http://thirstycat.us-east-1.elasticbeanstalk.com/api";
+//var apiURL = "http://localhost:8080/api";
+var apiURL = "http://thirstycat.us-east-1.elasticbeanstalk.com/api";
 var apiPathLastDrink = "/drink/lastDrink";
 var apiPathAllDrinks = "/drink/allDrinks";
 var apiPathLastDrinkImage = "/image/lastImage";
