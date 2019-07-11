@@ -1,8 +1,8 @@
 var currentDrinkId;
 var currentImageId;
 var allDrinks = [];
-// var apiURL = "http://localhost:8080/api";
-var apiURL = "http://thirstycat.us-east-1.elasticbeanstalk.com/api";
+var apiURL = "http://localhost:8080/api";
+// var apiURL = "http://thirstycat.us-east-1.elasticbeanstalk.com/api";
 var apiPathLastDrink = "/drink/lastDrink";
 var apiPathAllDrinks = "/drink/allDrinks";
 var apiPathLastDrinkImage = "/image/lastImage";
@@ -23,6 +23,11 @@ $( document ).ready(function() {
 		//Flow is as follows, asynch rest api calls w/callback functions on success:
 			//initiateDrinkUpdate->getAllDrinks->getMostRecentDrinkId->updateDrinkInfo->
 				//getDrinkImage->performStats->createCharts
+	username = $('.username-holder').text();
+	if (userIsLoggedIn(username)) {
+		getLikedImages();
+	}
+
 	initiateDrinkUpdate();
 
 	// Check to see if new drink has been taken every minute. If so, update info on page
@@ -71,10 +76,11 @@ $( document ).ready(function() {
 
 		//Check if there is a logged in user. If so, initiate favoriting of picture
 		//If not, prompt to log in
-		if (userIsLoggedIn(username) && !userLikedCurrentPicture(username, currentImageId)) {
+		if (userIsLoggedIn(username) && !userLikedCurrentPicture(username, currentDrinkId)) {
 			$(this).css("color","red");
 			//favoriteImage(username, currentImageId);
-			favoriteImage("205");
+			console.log("Current Drink id: " + currentDrinkId);
+			favoriteImage(currentDrinkId);
 		} else {
 			$('#login-prompt-container').css({"display":"flex"});
 			$('#login-prompt-container').show();
@@ -248,6 +254,14 @@ function updateDrinkInfo(latestDrink) {
 function updateDrinkImage(latestImage) {
 	
 	currentImageId = latestImage.id;
+
+	console.log("latestImage: ");
+	console.log(currentImageId)
+	console.log(latestImage.imageByteArray);
+	var imageBytes = latestImage.imageByteArray;
+
+	$('#drinkPic').attr('src', `data:image/jpg;base64,${imageBytes}`);
+
 
 	//Check if drink image has been liked. If so, turn like button red
 	if (userIsLoggedIn && userLikedCurrentPicture()) {
@@ -431,7 +445,11 @@ function userLikedCurrentPicture() {
 	//Get list of user's liked pictures
 	//getJWT(getLikedImages)
 
-	getLikedImages();
+	var imageIsAlreadyLiked = likedImages.includes(currentDrinkId);
+
+	console.log("image is already liked: " + imageIsAlreadyLiked);
+
+	return imageIsAlreadyLiked;
 
 }
 
