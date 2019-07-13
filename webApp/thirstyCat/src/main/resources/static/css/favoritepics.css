@@ -23,15 +23,33 @@
 	padding: 0px;
 	border: 12px solid #ffd8be;
 	border-radius: 25px;
+	background: #ffd8be;
 	overflow: hidden;
 	margin-left: auto;
 	margin-right: auto;
 }
 
 #featured-pic {
+	display: none;
 	width: 600px;
 	height: 450px;
 	object-fit: contain;
+}
+
+#no-favs-container {
+	display: none;
+	height: 100%;
+	background: #b8b8ff;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+#no-favs-prompt {
+	font-size: 2.3rem;
+	margin-left: 50px;
+	margin-right: 50px;
+	text-align: center;
 }
 
 .fav-pic-container {
