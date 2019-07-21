@@ -1,3 +1,99 @@
-404, cat not found!
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+    <head>
+        <title>ThirstyCat</title>
 
-Please return home.
+        <meta http-equiv="X-UA-Compatible" content="text/html" />
+
+        <!-- Bootstrap required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Import fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Maven+Pro|Patua+One" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Damion&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300&display=swap" rel="stylesheet">
+<!--         <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">  -->
+
+        <!-- Bootstrap stylesheet goes before any other stylesheets -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="/css/main.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+        <!-- Highcharts-->
+        <script src="https://code.highcharts.com/highcharts.js"></script>
+        <script src="https://code.highcharts.com/modules/heatmap.js"></script>
+        <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    
+    </head>
+
+    <body>
+
+        <section id="landing" class="section">
+            <!-- Navbar -->
+            <nav id="nav-home" class="navbar navbar-expand-lg bg-transparent navbar-dark">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                    <ul class="navbar-nav nav-ul">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Home</a>
+                        </li>
+                    </ul>
+                </div>
+                <div id="logo-placeholder-container">
+                    <a id="logo-placeholder" class="navbar-brand visible-xs-block text-center" href="#">
+                        <h1 id="logo-placeholder-text">ThirstyCat</h1>
+                    </a>
+                </div>
+                <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                    <ul class="navbar-nav nav-ul">
+                        <li class="nav-item">
+                            <a class="nav-link" href="favoritepics">Favorite Pics</a>
+                        </li>    
+                    </ul>
+                </div> 
+                <button id="spacer-nav-button" class="navbar-toggler">
+                    <span class="navbar-toggler-icon"></span>
+                </button> 
+            </nav>
+        </section>
+
+        <section id="error-message-section">
+            <div id="error-message-container" class="container">
+                <p id="error-message" class="drink-info">Sorry, an error occurred! Please return <a class="nav-link" href="#">Home</a></p>
+            </div>
+        </section>
+
+    
+
+
+        <section id="footer-section">
+            <div id="footer-content-container" class="container">
+                <h1 class="footer-content">Thanks for visiting!</h1>
+                <p class="footer-content">
+                    ThirstyCat is a project by Tim Johnston (and his cat Shasta). 
+                    Learn more about Tim by visiting <a class="formatted-link" target="_blank" href="http://www.timothyjohnston.me">timothyjohnston.me</a>
+                </p>
+                <p class="footer-content">Connect with Tim on LinkedIn, Twitter, or Github</p>
+                <div class="social-icon-container">
+                    <a class="fa fa-linkedin footer-icon" href="https://twitter.com/TimJohnston_11" target="_blank"></a>
+                    <a class="fa fa-twitter footer-icon" href="https://twitter.com/TimJohnston_11" target="_blank"></a>
+                    <a class="fa fa-github footer-icon" href="https://twitter.com/TimJohnston_11" target="_blank"></a>
+                </div>
+            </div>
+        </section>
+
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script async src="/js/highchartsConfig.js"></script>
+        <script async src="/js/main.js"></script>
+        
+        
+    </body>
+    
+</html>
