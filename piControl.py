@@ -95,7 +95,7 @@ MOSI = 24
 CS   = 25
 mcp = Adafruit_MCP3008.MCP3008(clk=CLK, cs=CS, miso=MISO, mosi=MOSI)
 channel = 0
-threshold = 350
+threshold = 415
 
 delayTime = 15    #Wait when going above/below threshold
 incTime = 1
@@ -230,7 +230,11 @@ while True:
 	twitterMessage = "Alert, cat detected! Shasta just took a drink.\n" + tableOutput
 #        for follower in tweepy.Cursor(api.followers).items():             #Follow logic commented out temporarily - some issue with Twitter capping number of follows
 #	    follower.follow()
-	api.update_with_media(photoPath, twitterMessage)
+	try:
+	    api.update_with_media(photoPath, twitterMessage)
+	except Exception as e:
+	    print "EXCEPTION. TWITTER FAIL."
+	    print e
 
     # Pause
     print "Finished loop at " + str(datetime.datetime.now()) +", FSR reading was: " + str(value) + ", threshold is: " + str(threshold)
