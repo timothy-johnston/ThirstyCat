@@ -71,8 +71,11 @@
 
             <div id="section-pics">
 
-                <div id="fav-pics-header-container" class="container">
+                <!-- <div id="fav-pics-header-container" class="container">
                         <p id="fav-pics-header">My Favorite Pics</p>
+                </div> -->
+                <div id="fav-pics-header" class="welcome-prompt-container drink-info container" sec:authorize="isAuthenticated()">
+                    <p><span sec:authentication="principal.username">User</span><span>'s Favorite Pictures</span><p>
                 </div>
                 <div id="featured-pic-container" class="container">
                     <img id="featured-pic" src="" alt="Picture of Shasta taking a drink">

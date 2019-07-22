@@ -165,6 +165,15 @@ color: white;
 	align-items: center;
 }
 
+.welcome-prompt-container {
+	display: flex;
+	justify-content: center;
+	margin: auto !important;
+}
+.welcome-prompt-container p {
+	text-align: center;
+}
+
 #drinkPic-container {
 	position: relative;
 	border: 12px solid #b8b8ff;
