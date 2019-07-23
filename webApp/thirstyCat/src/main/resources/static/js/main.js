@@ -14,6 +14,7 @@ var updateImage = true;
 var username;
 var chartId = 1;
 var jwt;
+var likedImages = [];
 
 $( document ).ready(function() {
 	
