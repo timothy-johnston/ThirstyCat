@@ -71,7 +71,10 @@
             <div id="section-home">
                 <div id="drink-container" class="container">
                     <div class="welcome-prompt-container drink-info container" sec:authorize="isAuthenticated()">
-                        <p><span>Welcome back, </span><span sec:authentication="principal.username">User</span><span>! Check out this picture:</span><p>
+                        <p><span>Welcome back, </span><span sec:authentication="principal.username">User</span><span>! Check out the latest picture:</span><p>
+                    </div>
+                    <div class="welcome-prompt-container drink-info container" sec:authorize="isAnonymous()">
+                        <p><span>Welcome! Check out the latest picture:</span><p>
                     </div>
                     <div id="drinkPic-container">
                         <img id="drinkPic" src="" alt="Picture of Shasta taking a drink">
