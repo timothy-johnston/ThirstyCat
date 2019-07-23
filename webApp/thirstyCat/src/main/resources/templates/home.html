@@ -163,17 +163,9 @@
             <p class="username-holder" sec:authentication="principal.username">User</p>
         </div>
     
-        <div class="username-holder-div" style="display: none" sec:authorize="isAnonymous()">
-            <p class="username-holder"></p>
-        </div>
-
-        <div class="username-holder-div" sec:authorize="isAuthenticated()">
-            <p class="username-holder" sec:authentication="principal.username">User</p>
-        </div>
-    
-        <div class="username-holder-div" sec:authorize="isAnonymous()">
-            <p class="username-holder">No user logged in.</p>
-        </div>
+    <div class="username-holder-div" style="display: none" sec:authorize="isAnonymous()">
+        <p class="username-holder"></p>
+    </div>
     
     
     
