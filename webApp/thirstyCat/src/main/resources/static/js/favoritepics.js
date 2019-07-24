@@ -1,5 +1,6 @@
 //var apiURL = "http://localhost:8080/api";
-var apiURL = "http://thirstycat.us-east-1.elasticbeanstalk.com/api";
+// var apiURL = "http://thirstycat.us-east-1.elasticbeanstalk.com/api";
+var apiURL = "http://www.thethirstycat.net";
 var apiPathLikedImages = "/image/favorites/";
 var apiPathImageByDrinkID = "/image/imageByDrink/";
 var username;
