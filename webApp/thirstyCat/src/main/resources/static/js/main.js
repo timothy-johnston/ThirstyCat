@@ -3,7 +3,7 @@ var currentImageId;
 var allDrinks = [];
 // var apiURL = "http://localhost:8080/api";
 // var apiURL = "http://thirstycat.us-east-1.elasticbeanstalk.com/api";
-var apiURL = "http://www.thethirstycat.net/api";
+var apiURL = "https://www.thethirstycat.net/api";
 var apiPathLastDrink = "/drink/lastDrink";
 var apiPathAllDrinks = "/drink/allDrinks";
 var apiPathLastDrinkImage = "/image/lastImage";
@@ -19,6 +19,21 @@ var likedImages = [];
 
 $( document ).ready(function() {
 	
+	//Explanation for this REALLY hacky hack:  I've configured spring security / aws for  http -> https redirects;
+	//	It works correctly, except for the very first time that a browser visits the page. No redirect happens. If the paged is then refreshed,
+	//	it redirects to https as expected. Have not been able to find a proper solution.
+	//	So, this checks to see if the url has "http://". If it does, I want to refresh the page so the redirect to
+	//	https works. Problem solving, right... ? :O
+	if (window.location.href.toLowerCase().includes("http://")) {
+		//Try to redirect without adding entry to the browser history
+		//Doesn't work on all browsers though, so catch error and navigate to https page as fallback
+		try {  
+			window.location.replace("https://www.thethirstycat.net");
+		} catch(e) {
+			window.location = "https://www.thethirstycat.net";
+		}
+	}
+
 	//Flow Control-------------------------------------------------------------------
 
 	//On initial page load, grab the most recent drink info + picture
