@@ -268,9 +268,6 @@ function calculateDrinkDetails() {
 	//Calculate duration of drink
 	var durationOfDrink= getDurationOfDrink();
 
-	console.log("--------------returning drink stats now-------------")
-	console.log([drinksToday, timeSinceLastDrinkString, durationOfDrink])
-
 	return [drinksToday, timeSinceLastDrinkString, durationOfDrink];
 
 }
@@ -309,6 +306,7 @@ function getTimeSinceLastDrink() {
 	//Format string
 	//I am nesting ternaries and I do expect to regret this in the future
 	//In fact I already regret it
+	//Update 7-30-19: Revisiting this a few weeks after I wrote it and can confirm my regret
 	var hoursString = (hours >= 1) ? hours + ((hours > 1) ? " hours and " : " hour and ") : "";
 	var minutesString = (minuteRemainder >= 1) ? minuteRemainder + " minutes" : minuteRemainder + " minute";
 	var elapsedTimeString = "It had been " + hoursString + minutesString + " since her last drink";
@@ -333,29 +331,9 @@ function performStats() {
 
 	//Create array of days from first day of ThirstyCat data to present
 	var elapsedDates = createElapsedDatesArray();
-	var test2 = getDrinksPerDay(elapsedDates);
 	var arrayDrinksPerDay = [elapsedDates, getDrinksPerDay(elapsedDates)];
 
-	//Create array: number of drinks per day
-		//Chart : Bar Chart : Drinks vs Day
-//	createCharts(arrayDrinksPerDay, allDrinks, 0);
-
-
-	//Create array: avg number of drinks by day, grouped by day of week
-		//Chart : Bar Chart : Avg # drinks vs Day of Week
-
-	//Create array: number of drinks per hour per day
-		//Chart : Heat Map : Drinks per Hour per Day [x =day, y=hour, z=drinks]
 	initiateChartCreation(arrayDrinksPerDay, allDrinks);
-
-	//Create array: avg number of drinks per hour per day, grouped by day of week
-		//Chart : Heat Map : Avg # drinks per Hour per Day of Week
-
-	//Calculate stat: Average number of drinks per day
-
-	//Calculate stat: Max number of drinks per day
-
-	//Calculate stat: Min number of drinks per day
 
 }
 
