@@ -36,11 +36,6 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
 		
-		
-		
-		System.out.println("------------DOING THE FILTER--------------");
-		
-		
 		String requestTokenHeader = request.getHeader("Authorization");
 		Enumeration<String> names = request.getHeaderNames();		
 		
@@ -54,15 +49,15 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 			try {
 				username = jwtTokenUtil.getUsernameFromToken(jwtToken);
 			} catch (IllegalArgumentException e) {
-				//TODO: Implement logging instead of printing to console
-//				System.out.println("Unable to retrieve JWT Token.");
+				//TODO: Implement logging rather than printing error to console (security vulnerability)
+				System.out.println("Unable to retrieve JWT Token.");
 			} catch (ExpiredJwtException e) {
-				//TODO: Implement logging instead of printing to console
-//				System.out.println("JWT Token has expired.");
+				//TODO: Implement logging rather than printing error to console (security vulnerability)
+				System.out.println("JWT Token has expired.");
 			}
 		} else {
-			//TODO: Implement logging instead of printing to console
-//			System.out.println("JWT Token does not begin with Bearer.");
+			//TODO: Implement logging rather than printing error to console (security vulnerability)
+			System.out.println("JWT Token does not begin with Bearer or is null.");
 		}
 		
 		//Validate token & ensure it has not been blacklisted
@@ -80,7 +75,9 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 			}
 			
 			//Add token to blacklist & purge expired tokens from blacklist
-			tokenService.updateTokenBlacklist(jwtToken);
+			//Went a different direction with security so commented out, but may come back to this.
+			//tokenService.updateTokenBlacklist(jwtToken);
+			
 		}
 				
 		chain.doFilter(request, response);

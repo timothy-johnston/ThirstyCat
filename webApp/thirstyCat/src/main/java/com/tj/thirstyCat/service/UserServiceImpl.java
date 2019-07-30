@@ -53,7 +53,7 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	//TODO: Following tutorial at https://www.javaguides.net/2018/11/spring-boot-spring-mvc-spring-security-hibernate-mysql-tutorial.html
-	//and don't quite understand everything going on in this method - need to read up on authorities, lambda functions
+	//Need to read up on authorities, lambda functions to better understand what is happening here
 	private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {
 		return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
 	}

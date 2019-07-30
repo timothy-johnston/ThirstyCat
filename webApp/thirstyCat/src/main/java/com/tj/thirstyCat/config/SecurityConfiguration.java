@@ -13,6 +13,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import com.tj.thirstyCat.service.UserService;
 
+//Order(n) is for prioritizing the two security methods: basic (this class) and jwt
 @Configuration
 @Order(3)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {

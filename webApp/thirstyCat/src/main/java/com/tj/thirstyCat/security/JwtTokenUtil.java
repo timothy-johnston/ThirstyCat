@@ -30,7 +30,7 @@ public class JwtTokenUtil {
 	//This class is mostly copy/paste from the tutorial, but adding my own comments to show understanding
 	
 	//TODO: Why this value? Research, adapt/change to fit this project if needed
-	private static final long serianVersionUID = -2550185165626007488L;
+	private static final long serialVersionUID = -2550185165626007488L;
 	
 	//Token lifetime in milliseconds
 	private static final long JWT_TOKEN_VALIDITY = 10 * 60 * 1000;
@@ -145,33 +145,24 @@ public class JwtTokenUtil {
 		if (username.equalsIgnoreCase("TC_ADMIN_A") || username.equalsIgnoreCase("TC_ADMIN_B")) {
 			try {
 				
-				System.out.println("Good username. Now trying to authenticate. Making token...");
-				
 				UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(username, password);
 				
-				System.out.println("Token is: " + token);
-				
-				System.out.println("Now passing token to authentication manager.");
-				
 				Authentication authentication = authenticationManager.authenticate(token);
-				
-				System.out.println("Authentication is: " + authentication);
 				
 			} catch (DisabledException e) {
 				throw new Exception("USER_DISABLED", e);
 			} catch (BadCredentialsException e) {
 				throw new Exception("INVALID_CREDENTIALS", e);
 			} catch (AuthenticationException e) {
+				//TODO: Implement logging rather than printing error to console (security vulnerability)
 				System.out.println("Ooops. Authentication exception: " + e.getMessage());
 				throw new Exception("AUTHENTICATION_EXCEPTION", e);
 			} catch (Exception e) {
+				//TODO: Implement logging rather than printing error to console (security vulnerability)
 				System.out.println("Something bad happened... : " + e.getMessage());
 				throw new Exception("A_BAD_THING_EXCEPTION", e);
 			}
-		} else {
-			
-			System.out.println("Invalid permissions for some reason.... Username is: " + username);
-			
+		} else {			
 			throw new Exception("INVALID_PERMISSIONS");
 		}
 		

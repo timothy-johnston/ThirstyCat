@@ -21,8 +21,8 @@ public class CommonService {
 			jwt = jwtTokenUtil.createAdminJWT();
 			response.addHeader("auth", jwt.getToken());
 		} catch (Exception e) {
-			//TODO: Replace debug console output with logging
-//			System.out.println("Error retrieving jwt: " + e.getMessage());
+			//TODO: Implement logging rather than printing error to console (security vulnerability)
+			System.out.println("Error retrieving jwt: " + e.getMessage());
 			response.addHeader("auth", "Error retrieving jwt.");
 		}
 		

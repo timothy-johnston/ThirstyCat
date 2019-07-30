@@ -16,6 +16,7 @@ import com.tj.thirstyCat.service.DrinkService;
 @Repository
 public class DrinkRepositoryImpl implements DrinkRepositoryCustom {
 
+	//Tutorials / how to make custom jpa repository
 	//https://www.logicbig.com/tutorials/java-ee-tutorial/jpa/select-from-where-statement.html
 	//https://dzone.com/articles/add-custom-functionality-to-a-spring-data-reposito
 	
