@@ -96,35 +96,10 @@ $( document ).ready(function() {
 
 })
 
-//function getJWT(nextFunction) {
-//
-//	var payload = {username: JWTuser, password: JWTpass};
-//
-//	$.ajax({
-//		url: apiURL + apiPathJWT,
-//		dataType: 'json',
-//		type: 'post',
-//		contentType: 'application/json',
-//		data: JSON.stringify(payload),
-//		success: function(result, status, xhr){
-//			//Call the next function, passing the jwt token
-//			nextFunction(result.token);
-//		},
-//		error: function(){
-//		}
-//	})
-//}
-
 //Check for new drink info/picture
 //If so, retrieve new data & update page
 function initiateDrinkUpdate() {
-	
-	//Get JWT Token and pass in the callback function
-	// getJWT(getAllDrinks)
-
-
 	getAllDrinks();
-	
 }
 
 function getMostRecentDrinkId(allDrinks) {
@@ -166,10 +141,7 @@ function getDrinkImage() {
 
 function favoriteImage(id) {
 	
-	console.log("making payload. id: " + id);
 	var payload = {username: username, imageId: id};
-	console.log("payload: ");
-	console.log(payload);
 
 	$.ajax({
 		url: apiURL + apiPathFavoriteImage,
@@ -244,8 +216,6 @@ function updateDrinkInfo(latestDrink) {
 
 	//Call function to update image (if image update flag is set to on)
 	if (updateImage == true) {
-		//getJWT(getDrinkImage);
-
 
 		getDrinkImage();
 
@@ -260,15 +230,10 @@ function updateDrinkInfo(latestDrink) {
 function updateDrinkImage(latestImage) {
 	
 	currentImageId = latestImage.id;
-
-	console.log("latestImage: ");
-	console.log(currentImageId)
-	console.log(latestImage.imageByteArray);
 	var imageBytes = latestImage.imageByteArray;
 
 	$('#drinkPic').show();
 	$('#drinkPic').attr('src', `data:image/jpg;base64,${imageBytes}`);
-
 
 	//Check if drink image has been liked. If so, turn like button red
 	if (userIsLoggedIn && userLikedCurrentPicture()) {
