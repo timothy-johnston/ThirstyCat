@@ -366,8 +366,7 @@ function getDrinksPerDay(elapsedDates) {
 	var drinkCount = new Array(elapsedDates.length).fill(0);
 
 	//Loop over elapsed dates
-	//TODO: Poor performance here O(n^2), should refactor to not use nested loop
-	//Dear any potential employers looking at this.. please forgive me!
+	//TODO: O(n^2), Can I refactor to not use nested loop
 	for (i = 0; i < elapsedDates.length - 1; i++) {
 		
 		var dateBracketLow = new Date(elapsedDates[i].getFullYear() + "-" + (elapsedDates[i].getMonth() + 1) + "-" + elapsedDates[i].getDate());
@@ -400,20 +399,13 @@ function userIsLoggedIn() {
 
 function userLikedCurrentPicture() {
 
-	//Get list of user's liked pictures
-	//getJWT(getLikedImages)
-
 	var imageIsAlreadyLiked = likedImages.includes(currentDrinkId);
-
-	console.log("image is already liked: " + imageIsAlreadyLiked);
 
 	return imageIsAlreadyLiked;
 
 }
 
 function getLikedImages() {
-
-	console.log("started ajax get liked images");
 
 	$.ajax({
 		url: apiURL + apiPathLikedImages + username,
@@ -423,18 +415,13 @@ function getLikedImages() {
 		type: "GET",
 		success: function(result, status, xhr) {
 
-			console.log("ajax get liked images success");
-
 			sessionStorage.setItem("jwt", xhr.getResponseHeader("auth"));
 
 			likedImages = result;
 
-			console.log("liked images: ");
-			console.log(likedImages);
-
 		},
 		failure: function(result, status, xhr) {
-			console.log("ajax get liked images failure");
+
 		}
 	});
 
