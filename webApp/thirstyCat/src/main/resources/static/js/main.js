@@ -1,8 +1,9 @@
-var currentDrinkId;
-var currentImageId;
-var allDrinks = [];
+//Some variables I'm using globally
+// * = ones to potentially be refactored to improve code quality
+var currentDrinkId;	//*
+var currentImageId;	//*
+var allDrinks = [];	//*
 // var apiURL = "http://localhost:8080/api";
-// var apiURL = "http://thirstycat.us-east-1.elasticbeanstalk.com/api";
 var apiURL = "https://www.thethirstycat.net/api";
 var apiPathLastDrink = "/drink/lastDrink";
 var apiPathAllDrinks = "/drink/allDrinks";
@@ -11,22 +12,22 @@ var apiPathImageByDrinkID = "/image/imageByDrink/";
 var apiPathFavoriteImage = "/image/favorite";
 var apiPathLikedImages = "/image/favorites/";
 var apiPathJWT = "/authenticateJWT";
-var updateImage = true;
-var username;
-var chartId = 1;
-var jwt;
-var likedImages = [];
+var updateImage = true;	//*
+var username;	//*
+var chartId = 1;	//*
+var jwt;	//*
+var likedImages = [];	//*
 
 $( document ).ready(function() {
 	
 	//Explanation for this REALLY hacky hack:  I've configured spring security / aws for  http -> https redirects;
 	//	It works correctly, except for the very first time that a browser visits the page. No redirect happens. If the paged is then refreshed,
-	//	it redirects to https as expected. Have not been able to find a proper solution.
-	//	So, this checks to see if the url has "http://". If it does, I want to refresh the page so the redirect to
+	//	it redirects to https as expected. Must be related to cache/cookies/etc, but have not been able to find a proper solution.
+	//	So, this checks to see if the url has "http://". If it does, I want to send the page right to the https url
 	//	https works. Problem solving, right... ? :O
 	if (window.location.href.toLowerCase().includes("http://")) {
 		//Try to redirect without adding entry to the browser history
-		//Doesn't work on all browsers though, so catch error and navigate to https page as fallback
+		//Doesn't work on all browsers though (like edge/IE), so catch error and navigate to https page as fallback
 		try {  
 			window.location.replace("https://www.thethirstycat.net");
 		} catch(e) {
@@ -36,10 +37,7 @@ $( document ).ready(function() {
 
 	//Flow Control-------------------------------------------------------------------
 
-	//On initial page load, grab the most recent drink info + picture
-		//Flow is as follows, asynch rest api calls w/callback functions on success:
-			//initiateDrinkUpdate->getAllDrinks->getMostRecentDrinkId->updateDrinkInfo->
-				//getDrinkImage->performStats->createCharts
+	//Check to see if user is logged in; if so, load their liked pictures
 	username = $('.username-holder').text();
 	if (userIsLoggedIn(username)) {
 		getLikedImages();
@@ -60,6 +58,8 @@ $( document ).ready(function() {
 	$('.select-dropdown').change(function() {
 		
 		//Turn off image update
+		//Because in the performStats flow (called below) the image is updated if this flag is true
+		//We don't need to do that in this flow
 		updateImage = false;
 
 		//Determine visualization to display based on selection
@@ -78,15 +78,6 @@ $( document ).ready(function() {
 
 	});
 
-	//Expand favorite picture when clicked on
-	// $('.fav-pic-container').click(function() {
-	// 	//Reset size of currently expanded image (if any)
-	// 	$('.fav-pic-container').css({"width":"200px","height":"150px"});
-	// 	$('.fav-pic').css({"width":"200px","height":"150px"});
-	// 	$(this).css({"width":"800px","height":"600px"});
-	// 	$(this).find("img").css({"width":"800px","height":"600px"});
-	// });
-	
 	//Handle favoriting of pictures.
 	username = $('.username-holder').text();
 	$('#like-heart').click(function() {
@@ -95,8 +86,6 @@ $( document ).ready(function() {
 		//If not, prompt to log in
 		if (userIsLoggedIn(username) && !userLikedCurrentPicture(username, currentDrinkId)) {
 			$(this).css("color","red");
-			//favoriteImage(username, currentImageId);
-			console.log("Current Drink id: " + currentDrinkId);
 			favoriteImage(currentDrinkId);
 		} else {
 			$('#login-prompt-container').css({"display":"flex"});
