@@ -1,3 +1,12 @@
+Highcharts.setOptions({
+    chart: {
+        style: {
+            fontFamily: "'Josefin Sans', sans-serif"
+        }
+    }
+});
+
+
 function createCharts(drinkData, allDrinks, chartId) {
 
     //Determine function to call
@@ -76,7 +85,8 @@ function createDrinkPerHourPerDay(drinkData, allDrinks) {
           marginTop: 80,
           marginBottom: 80,
           plotBorderWidth: 1,
-          backgroundColor: false,
+          backgroundColor: false
+        //   margin: [80, 80, 80, 80]
         },
       
         title: {
@@ -92,7 +102,8 @@ function createDrinkPerHourPerDay(drinkData, allDrinks) {
         		enabled: false
         	},
           title: {
-              text: null,
+              text: "Date",
+              margin: 25,
           	  style: {
                   fontSize: '1.5rem'
               }
@@ -100,9 +111,13 @@ function createDrinkPerHourPerDay(drinkData, allDrinks) {
         },
       
         yAxis: {
-          categories: timeBuckets,
-          title: {
-        	  text: 'Time Slice',
+        //   categories: timeBuckets,
+            labels: {
+                enabled: false
+            },
+            title: {
+              text: 'Time Window',
+              margin: 25,
           	  style: {
                   fontSize: '1.5rem'
               }
@@ -113,6 +128,7 @@ function createDrinkPerHourPerDay(drinkData, allDrinks) {
           min: 0,
           minColor: '#FFFFFF',
           maxColor: '#796ad1',
+          margin: 95,
           reversed: true
         },
       
@@ -120,7 +136,8 @@ function createDrinkPerHourPerDay(drinkData, allDrinks) {
           align: 'right',
           layout: 'vertical',
           margin: 0,
-          verticalAlign: 'top',
+          verticalAlign: 'middle',
+          x: 25,
           y: 25,
           symbolHeight: 280
         },
@@ -141,7 +158,15 @@ function createDrinkPerHourPerDay(drinkData, allDrinks) {
             enabled: true,
             color: '#000000'
           }
-        }]
+        }],
+        responsive: {
+            rules: [{
+                condition: {
+                    maxWidth: 450
+                },
+
+            }]
+        }
       
       });
 
