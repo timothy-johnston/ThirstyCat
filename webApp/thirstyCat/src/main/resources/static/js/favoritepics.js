@@ -15,10 +15,8 @@ $( document ).ready(function() {
 
 	//Replace featured favorite picture with clicked favorite picture
 	$('.fav-pic').click(function() {
-		console.log("trying to replace featured");
         //Get clicked image src
 		var src = $(this).attr('src');
-		console.log("new src: " + src);
         //Set clicked image as featured imaged
         $('#featured-pic').attr('src', src);
 	});
@@ -29,15 +27,11 @@ $( document ).ready(function() {
 	// 	console.log(test)
 	// }, 1000)
 	var test = $('.fav-pic');
-	console.log("Test: ");
-	console.log(test)
 
 });
 
 
 function getLikedImageIds() {
-
-	console.log("started ajax get liked images");
 
 	$.ajax({
 		url: apiURL + apiPathLikedImages + username,
@@ -47,20 +41,15 @@ function getLikedImageIds() {
 		type: "GET",
 		success: function(result, status, xhr) {
 
-			console.log("ajax get liked image IDS success");
-
 			sessionStorage.setItem("jwt", xhr.getResponseHeader("auth"));
 
 			likedImageIds = result;
-
-			console.log("liked images: ");
-			console.log(likedImageIds);
 
 			getLikedImagesById(likedImageIds);
 
 		},
 		failure: function(result, status, xhr) {
-			console.log("ajax get liked images failure");
+
 		}
 	});
 
@@ -75,8 +64,6 @@ function getLikedImagesById(likedImageIds) {
 	}
 
 	for (var i = 0; i < imageCount; i++) {
-
-		console.log("not sure if this is working. i = " + i);
 
 		getAndAppendImage(likedImageIds[i], i);
 
@@ -94,14 +81,10 @@ function getAndAppendImage(id, imagePosition) {
 		type: "GET",
 		success: function(result, status, xhr) {
 
-			console.log("RESULT:::");
-			console.log(result);
-
 			sessionStorage.setItem("jwt", xhr.getResponseHeader("auth"));
 
 			//Append new image and set source to retrieved byte array
 			var imageBytes = result.imageByteArray;
-			console.log("Image bytes: " + imageBytes);
 			var picID = "pic-" + Date.now().toString();
 			$('#pic-grid-container').append("<div class='fav-pic-container'><img id=" + picID + " class='fav-pic' src='' alt='Picture of Shasta taking a drink'></img></div>");
 			$('#' + picID).attr('src', `data:image/jpg;base64,${imageBytes}`);
@@ -124,10 +107,6 @@ function getAndAppendImage(id, imagePosition) {
 
 		},
 		failure: function(result, status, xhr) {
-
-			console.log("get image failure");
-
-
 		}
 	});
 }
@@ -135,12 +114,3 @@ function getAndAppendImage(id, imagePosition) {
 function handleNoLikedImages() {
 	$('#no-favs-container').removeAttr('hidden');
 }
-
-//Appends each image of the passed in array to the picture grid
-// function populateImages() {
-// 	console.log("liked images length: " + likedImages.length)
-//     for (var i = 0; i < likedImages.length(); i++) {
-// 		console.log("i is: " + i);
-//         $('#pic-grid-container').append("<div class='fav-pic-container'><img class='fav-pic' src='/media/catPic.jpg' alt='Picture of Shasta taking a drink'></img></div>");
-//     }
-// }
