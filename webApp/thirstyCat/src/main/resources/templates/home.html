@@ -11,11 +11,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
         <!-- Import fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Maven+Pro|Patua+One" rel="stylesheet">
+        <!-- <link href="https://fonts.googleapis.com/css?family=Maven+Pro|Patua+One" rel="stylesheet"> -->
         <link href="https://fonts.googleapis.com/css?family=Damion&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+        <!-- <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet"> -->
         <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300&display=swap" rel="stylesheet">
-<!--         <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">  -->
 
         <!-- Bootstrap stylesheet goes before any other stylesheets -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -29,11 +28,9 @@
 
         <!-- Favicon -->
         <link rel="shortcut icon" type="image/x-icon" href="/media/favicon_1.ico"/>
-    
     </head>
 
     <body>
-
         <section id="landing" class="section">
             <!-- Navbar -->
             <nav id="nav-home" class="navbar navbar-expand-lg bg-transparent navbar-dark">
@@ -152,87 +149,22 @@
             </div>
         </section>
 
-<!--         <p th:if="${#authentication.principal}"> -->
-<!--             Welcome <span sec:authentication="principal.username">User!!!</span> -->
-<!--         </p> -->
-    
-    
-    <!-- <div class="username-holder-div" style="display: none" sec:authorize="isAuthenticated()">
-        <p class="username-holder" sec:authentication="principal.username">User</p>
-    </div>
-
-	<div class="username-holder-div" style="display: none" sec:authorize="isAnonymous()">
-        <p class="username-holder"></p>
-    </div> -->
-    
-    <div class="username-holder-div" style="display: none" sec:authorize="isAuthenticated()">
+        <div class="username-holder-div" style="display: none" sec:authorize="isAuthenticated()">
             <p class="username-holder" sec:authentication="principal.username">User</p>
         </div>
-    
-    <div class="username-holder-div" style="display: none" sec:authorize="isAnonymous()">
-        <p class="username-holder"></p>
-    </div>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+        <div class="username-holder-div" style="display: none" sec:authorize="isAnonymous()">
+            <p class="username-holder"></p>
+        </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-    
-    
-    
-        <!-- Javascript, Jquery, Bootstrap -->
+        <!-- Javascript, Jquery, Bootstrap, Highcharts, my js -->
         <script th:inline="javascript">
             sessionStorage.setItem('jwt',( /*[[${jwt}]]*/ 'default'));
-		</script>
+        </script>
         <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
         <script async src="/js/highchartsConfig.js"></script>
         <script async src="/js/main.js"></script>
-        
         
     </body>
     
