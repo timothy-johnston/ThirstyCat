@@ -74,7 +74,6 @@ public class JwtTokenUtil {
 	
 	//Parses the JWT into its individual Claims
 	private Claims getAllClaimsFromToken(String token) {
-//		System.out.println(token);
 		return Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
 	}
 	
@@ -137,9 +136,6 @@ public class JwtTokenUtil {
 	
 	//TODO: Need to research how Spring AuthenticationManager does this authentication
 	private void authenticate(String username, String password) throws Exception {
-		
-		System.out.println("Here we go again. The username is: " + username);
-		
 		
 		//Check that user is Raspberry Pi or frontend
 		if (username.equalsIgnoreCase("TC_ADMIN_A") || username.equalsIgnoreCase("TC_ADMIN_B")) {
