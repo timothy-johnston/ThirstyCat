@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.tj.thirstyCat.model.User;
 import com.tj.thirstyCat.model.UserRegistration;
@@ -49,15 +50,19 @@ public class AuthControllerBasic {
 	
 	//Todo: Research BindingResult
 	@PostMapping
-	public String registerUser(@ModelAttribute("user") @Valid UserRegistration userRegistration, BindingResult result, HttpServletRequest request) {
+	public ModelAndView registerUser(@ModelAttribute("user") @Valid UserRegistration userRegistration, BindingResult result, HttpServletRequest request) {
 		User user = userService.findByUsername(userRegistration.getUsername());
 		
+		ModelAndView mav = new ModelAndView("registration");
+		
 		if (user != null) {
-			result.rejectValue("username", null, "The username " + userRegistration.getUsername() + " is already taken.");
+			String errorString = "Sorry, the username " + userRegistration.getUsername() + " is already taken.";
+			result.rejectValue("username", null, errorString);
+			mav.addObject("error", errorString);
 		}
 		
 		if (result.hasErrors()) {
-			return "registration";
+			return mav;
 		}
 		
 		//Save new user
@@ -71,7 +76,7 @@ public class AuthControllerBasic {
 	        System.out.println("Error while logging in after registration: " + e);
 	    }
 		
-		return "redirect:/home";
+		return new ModelAndView("redirect:/home");
 		
 	}
 	

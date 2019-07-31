@@ -8,7 +8,7 @@
 		<script src="http://cdn.jsdelivr.net/jquery.validation/1.15.0/jquery.validate.min.js"></script>
 		<script src="http://cdn.jsdelivr.net/jquery.validation/1.15.0/additional-methods.js "></script>
 		<script src="/js/registrationValidation.js"></script>
-		<script src="event.js"></script>
+		<!-- <script src="event.js"></script> -->
 
 		<!-- Bootstrap required meta tags -->
 		<meta charset="utf-8">
@@ -74,9 +74,10 @@
 					</div>
 					<div id="login-form-container">
 						<form id="login-form" name="registration-form" class="form" th:action="@{/registration}" th:object="${user}" method="post">
-							<p class="error-message" th:if="${#fields.hasGlobalErrors()}" th:each="error : ${#fields.errors('global')}" th:text="${error}">
-								Validation error
-							</p>
+<!-- 							<p class="error-message" th:if="${#fields.hasGlobalErrors()}" th:each="error : ${#fields.errors('global')}" th:text="${error}"> -->
+<!-- 								Validation error -->
+<!-- 							</p> -->
+							<p class="drink-info" th:text="${error}"></p>
 							<input id="username" class="form-input" placeholder="Username" th:field="*{username}" />
 							<input id="password" class="form-input" type="password" placeholder="Password" th:field="*{password}" />
 							<button type="submit" class="form-input submit-btn">Register</button>

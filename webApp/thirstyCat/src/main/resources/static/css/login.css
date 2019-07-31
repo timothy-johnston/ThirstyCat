@@ -3,7 +3,7 @@
 }
 
 #login-container {
-	width: 500px;
+	max-width: 500px;
 	margin: 10px auto;
 	border: 12px solid #b8b8ff;
 	border-radius: 15px;

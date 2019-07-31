@@ -57,7 +57,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 			}
 		} else {
 			//TODO: Implement logging rather than printing error to console (security vulnerability)
-			System.out.println("JWT Token does not begin with Bearer or is null.");
+			System.out.println("JWT Token does not begin with Bearer a or is null.");
 		}
 		
 		//Validate token & ensure it has not been blacklisted
