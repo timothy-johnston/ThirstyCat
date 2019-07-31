@@ -47,7 +47,7 @@ body {
 	}
 
 	#fav-container {
-		top: 85%;
+		top: 85% !important;
 	}
 	
 	#drink-info-container {
