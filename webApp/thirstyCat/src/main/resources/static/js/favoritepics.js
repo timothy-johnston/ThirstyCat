@@ -1,5 +1,4 @@
-//var apiURL = "http://localhost:8080/api";
-// var apiURL = "http://thirstycat.us-east-1.elasticbeanstalk.com/api";
+// var apiURL = "http://localhost:8080/api";
 var apiURL = "https://www.thethirstycat.net/api";
 var apiPathLikedImages = "/image/favorites/";
 var apiPathImageByDrinkID = "/image/imageByDrink/";
@@ -20,13 +19,6 @@ $( document ).ready(function() {
         //Set clicked image as featured imaged
         $('#featured-pic').attr('src', src);
 	});
-
-	// setInterval(function() {
-	// 	var test = $('.fav-pic');
-	// 	console.log("Test: ");
-	// 	console.log(test)
-	// }, 1000)
-	var test = $('.fav-pic');
 
 });
 
