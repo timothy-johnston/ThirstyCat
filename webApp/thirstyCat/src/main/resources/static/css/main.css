@@ -45,6 +45,10 @@ body {
 		height: 300px !important;
 		margin-top: 0% !important;
 	}
+
+	#fav-container {
+		top: 85%;
+	}
 	
 	#drink-info-container {
 		width: 400px !important;
