@@ -33,6 +33,7 @@ body {
 
 	#nav-home {
 		flex-direction: column !important;
+		background: #b8b8ff !important;
 	}
 	
 	#logo-placeholder-text {
@@ -42,6 +43,7 @@ body {
 	#drinkPic-container, #drinkPic {
 		width: 400px !important;
 		height: 300px !important;
+		margin-top: 0% !important;
 	}
 	
 	#drink-info-container {
@@ -68,7 +70,7 @@ body {
 	
 	.navbar-collapse {
 		width: 100%;
-	  background: #b8b8ff;
+	  	background: #b8b8ff;
 	}
 	
 	#logo-placeholder-text {
@@ -121,7 +123,7 @@ body {
 }
 
 .nav-ul {
-	width: 80%;
+	width: 100%;
 	margin-left: auto;
 	margin-right: auto;
 	display: flex;
@@ -218,6 +220,7 @@ color: white;
 	display: flex;
 	justify-content: center;
 	margin: auto !important;
+	background: #b8b8ff;
 }
 .welcome-prompt-container p {
 	text-align: center;
