@@ -1,7 +1,3 @@
-function testScript() {
-    alert("success!");
-}
-
 function createCharts(drinkData, allDrinks, chartId) {
 
     //Determine function to call

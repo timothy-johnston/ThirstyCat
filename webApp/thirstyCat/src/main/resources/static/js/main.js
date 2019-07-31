@@ -29,7 +29,7 @@ $( document ).ready(function() {
 		//Try to redirect without adding entry to the browser history
 		//Doesn't work on all browsers though (like edge/IE), so catch error and navigate to https page as fallback
 		try {  
-			window.location.replace("https://www.thethirstycat.net");
+//			window.location.replace("https://www.thethirstycat.net");
 		} catch(e) {
 			window.location = "https://www.thethirstycat.net";
 		}
