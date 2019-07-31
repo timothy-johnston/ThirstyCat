@@ -73,7 +73,7 @@ function createDrinkPerHourPerDay(drinkData, allDrinks) {
 
         chart: {
           type: 'heatmap',
-          marginTop: 40,
+          marginTop: 80,
           marginBottom: 80,
           plotBorderWidth: 1,
           backgroundColor: false,
