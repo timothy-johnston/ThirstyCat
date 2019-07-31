@@ -1,50 +1,37 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="utf-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<script src="https://code.jquery.com/jquery-2.2.2.min.js"></script>
-<script src="http://cdn.jsdelivr.net/jquery.validation/1.15.0/jquery.validate.min.js"></script>
-<script src="http://cdn.jsdelivr.net/jquery.validation/1.15.0/additional-methods.js "></script>
-<script src="/js/registrationValidation.js"></script>
-<script src="event.js"></script>
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<script src="https://code.jquery.com/jquery-2.2.2.min.js"></script>
+		<script src="http://cdn.jsdelivr.net/jquery.validation/1.15.0/jquery.validate.min.js"></script>
+		<script src="http://cdn.jsdelivr.net/jquery.validation/1.15.0/additional-methods.js "></script>
+		<script src="/js/registrationValidation.js"></script>
+		<script src="event.js"></script>
 
-<!-- Bootstrap required meta tags -->
-<meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<!-- Bootstrap required meta tags -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<!-- Import fonts -->
-<link href="https://fonts.googleapis.com/css?family=Maven+Pro|Patua+One"
-	rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Damion&display=swap"
-	rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Lato&display=swap"
-	rel="stylesheet">
-<link
-	href="https://fonts.googleapis.com/css?family=Josefin+Sans:300&display=swap"
-	rel="stylesheet">
+		<!-- Import fonts -->
+		<link href="https://fonts.googleapis.com/css?family=Maven+Pro|Patua+One" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Damion&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300&display=swap" rel="stylesheet">
 
-<!-- Bootstrap stylesheet goes before any other stylesheets -->
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-	crossorigin="anonymous">
-<link rel="stylesheet" type="text/css" href="/css/main.css" />
-<link rel="stylesheet" type="text/css" href="/css/login.css" />
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<!-- Bootstrap stylesheet goes before any other stylesheets -->
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+		<link rel="stylesheet" type="text/css" href="/css/main.css" />
+		<link rel="stylesheet" type="text/css" href="/css/login.css" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<!-- Favicon -->
-<link rel="shortcut icon" type="image/x-icon" href="/media/favicon_1.ico"/>
+		<!-- Favicon -->
+		<link rel="shortcut icon" type="image/x-icon" href="/media/favicon_1.ico"/>
 
-
-
-<title>Registration</title>
-</head>
-<body>
-
+		<title>Registration</title>
+	</head>
+	<body>
 		<section class="section">
 			<!-- Navbar -->
 			<nav id="nav-home" class="navbar navbar-expand-lg bg-transparent navbar-dark">
@@ -86,32 +73,20 @@
 						<h2 class="drinkInfo">Register</h2>
 					</div>
 					<div id="login-form-container">
-						<!-- <form id="registration-form" class="form" method="post" th:action="@{/registration}">
-						</form> -->
 						<form id="login-form" name="registration-form" class="form" th:action="@{/registration}" th:object="${user}" method="post">
 							<p class="error-message" th:if="${#fields.hasGlobalErrors()}" th:each="error : ${#fields.errors('global')}" th:text="${error}">
 								Validation error
 							</p>
-							<!-- <div class="form-group" th:classappend="${#fields.hasErrors('username')}? 'has-error':''"> -->
-								<input id="username" class="form-input" placeholder="Username" th:field="*{username}" />
-								<!-- <p class="error-message" th:each="error : ${#fields.errors('username')}" th:text="${error}">Validation error</p> -->
-							<!-- </div> -->
-							<!-- <div class="form-group" th:classappend="${#fields.hasErrors('password')}? 'has-error':''"> -->
-								<input id="password" class="form-input" type="password" placeholder="Password" th:field="*{password}" />
-								<!-- <p class="error-message" th:each="error : ${#fields.errors('password')}" th:text="${error}">Validation error</p> -->
-							<!-- </div> -->
+							<input id="username" class="form-input" placeholder="Username" th:field="*{username}" />
+							<input id="password" class="form-input" type="password" placeholder="Password" th:field="*{password}" />
 							<button type="submit" class="form-input submit-btn">Register</button>
 							<p id="login-p">
 								<a id="register-link" class="formatted-link" target="" href="/" th:href="@{/login}">Already Registered? Click here to log in.</a>
 							</p>
 						</form>
-
 					</div>
 				</div>
-
 			</div>
-
 		</section>
-
-</body>
+	</body>
 </html>

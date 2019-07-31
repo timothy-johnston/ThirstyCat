@@ -73,10 +73,6 @@
 
 
             <div id="section-pics">
-
-                <!-- <div id="fav-pics-header-container" class="container">
-                        <p id="fav-pics-header">My Favorite Pics</p>
-                </div> -->
                 <div id="fav-pics-header" class="welcome-prompt-container drink-info container" sec:authorize="isAuthenticated()">
                     <p><span sec:authentication="principal.username">User</span><span>'s Favorite Pictures</span><p>
                 </div>
@@ -87,11 +83,10 @@
                     </div>
                 </div>
                 <div id="pic-grid-container" class="container">
-
+                    <!-- Pictures will be inserted here by javascript function -->
                 </div>
             </div>
         </section>
-
         <section id="footer-section">
             <div id="footer-content-container" class="container">
                 <h1 class="footer-content">Thanks for visiting!</h1>
@@ -107,12 +102,6 @@
                 </div>
             </div>
         </section>
-
-
-    
-    
-    
-    
         <div class="username-holder-div" style="display: none" sec:authorize="isAuthenticated()">
             <p class="username-holder" sec:authentication="principal.username">User</p>
         </div>
@@ -120,56 +109,8 @@
         <div class="username-holder-div" style="display: none" sec:authorize="isAnonymous()">
             <p class="username-holder"></p>
         </div>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!--         <p> -->
-<!--             Welcome <span sec:authentication="principal.username">User!!!</span> -->
-<!--         </p> -->
-    
-    
-    
-        <!-- Javascript, Jquery, Bootstrap -->
+ 
+        <!-- Javascript, Jquery, Bootstrap, Highcharts, my js scripts -->
         <script th:inline="javascript">
             sessionStorage.setItem('jwt',( /*[[${jwt}]]*/ 'default'));
         </script>
@@ -178,9 +119,7 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
         <script async src="/js/main.js"></script>
         <script async src="/js/favoritepics.js"></script>
-<!--         <script async src="/js/main.js"></script> -->
-        
-        
+
     </body>
     
 </html>
