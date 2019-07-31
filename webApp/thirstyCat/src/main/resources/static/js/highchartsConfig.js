@@ -44,6 +44,11 @@ function createDrinkVsDay(drinkData) {
         },
         xAxis: {
             categories: xAxis,
+            labels: {
+                style: {
+                    fontSize: '.8rem'
+                }
+        	},
             title: {
             	enabled: 'true',
             	text: 'Date',
@@ -53,6 +58,11 @@ function createDrinkVsDay(drinkData) {
             }
         },
         yAxis: {
+            labels: {
+                style: {
+                    fontSize: '.8rem'
+                }
+        	},
             title: {
                 text: 'Number of Drinks',
             	style: {
@@ -71,7 +81,7 @@ function createDrinkVsDay(drinkData) {
 function createDrinkPerHourPerDay(drinkData, allDrinks) {
 
     var arrayDrinkPerHourPerDay = calculateDrinkPerHourPerDay(drinkData, allDrinks);
-    var timeBuckets = ["Midnight - 3AM", "3AM - 6AM", "6AM - 9AM", "9AM - 12PM", "12PM - 3PM", "3PM - 6PM", "6PM - 9PM", "9PM - Midnight"];
+    var timeBuckets = ["12AM - 3AM", "3AM - 6AM", "6AM - 9AM", "9AM - 12PM", "12PM - 3PM", "3PM - 6PM", "6PM - 9PM", "9PM - 12AM"];
     var dates = [];
     for (i = 0; i < drinkData[0].length; i++) {
         dates[i] = drinkData[0][i].toDateString().substring(4);
@@ -85,8 +95,8 @@ function createDrinkPerHourPerDay(drinkData, allDrinks) {
           marginTop: 80,
           marginBottom: 80,
           plotBorderWidth: 1,
-          backgroundColor: false
-        //   margin: [80, 80, 80, 80]
+          backgroundColor: false,
+          margin: [80, 60, 80, 65]
         },
       
         title: {
@@ -97,9 +107,12 @@ function createDrinkPerHourPerDay(drinkData, allDrinks) {
         },
       
         xAxis: {
-//          categories: dates,
+         categories: dates,
         	labels: {
-        		enabled: false
+                enabled: true,
+                style: {
+                    fontSize: '.8rem'
+                }
         	},
           title: {
               text: "Date",
@@ -111,13 +124,18 @@ function createDrinkPerHourPerDay(drinkData, allDrinks) {
         },
       
         yAxis: {
-        //   categories: timeBuckets,
+          categories: timeBuckets,
             labels: {
-                enabled: false
+                enabled: true,
+                rotation: -45,
+                style: {
+                    fontSize: '.8rem'
+                }
             },
             title: {
               text: 'Time Window',
-              margin: 25,
+              enabled: false,
+              margin: 0,
           	  style: {
                   fontSize: '1.5rem'
               }
@@ -145,7 +163,7 @@ function createDrinkPerHourPerDay(drinkData, allDrinks) {
         tooltip: {
           formatter: function () {
             return '<b>' + this.series.xAxis.categories[this.point.x] + '</b> sold <br><b>' +
-              this.point.value + '</b> items on <br><b>' + this.series.yAxis.categories[this.point.y] + '</b>';
+              this.point.value + '</b> drinks from <br><b>' + this.series.yAxis.categories[this.point.y] + '</b>';
           }
         },
       
