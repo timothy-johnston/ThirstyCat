@@ -27,7 +27,27 @@ body {
 }
 
 /* MEDIA QUERIES */
-@media (max-width: 991px) {
+
+
+@media (max-width: 650px) {
+
+	#drinkPic-container, #drinkPic {
+		width: 400px !important;
+		height: 300px !important;
+	}
+	
+	#drink-info-container {
+		width: 400px !important;
+		height: auto !important;
+	}
+	
+	#drink-info-twitter {
+		margin-bottom: 20px;
+	}
+	
+}
+
+@media (min-width:650px) and (max-width: 991px) {
 	
 	.navbar-toggler {
 		z-index: 1;
@@ -41,9 +61,23 @@ body {
 		flex-grow: 2 !important;
 	}
 
+	#drinkPic-container, #drinkPic {
+		width: 600px !important;
+		height: 450px !important;
+	}
+	
+	#drink-info-container {
+		width: 600px !important;
+		height: auto !important;
+	}
+	
+	#drink-info-twitter {
+		margin-bottom: 20px;
+	}
+
   }
 
-@media (max-width: 1200px) {
+@media (min-width:992px) and (max-width: 1200px) {
 	
 	#drink-info-container {
 		width: 800px !important;
@@ -53,6 +87,10 @@ body {
 	
 	#logo-placeholder-text {
 		font-size: 6rem !important;
+	}
+
+	#drink-info-twitter {
+		margin-bottom: 20px;
 	}
 	
   }
