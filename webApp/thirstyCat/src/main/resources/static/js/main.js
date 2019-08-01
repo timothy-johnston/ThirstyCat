@@ -209,7 +209,7 @@ function updateDrinkInfo(latestDrink) {
 	var drinkStats = calculateDrinkDetails();
 
 	//Update drink count, time since last, and duration
-	var drinkCountString = "She has taken " + drinkStats[0] + " drinks today.";
+	var drinkCountString = "She has taken " + drinkStats[0] + " drinks so far today.";
 	var elapsedTimeString = drinkStats[1] + ", and she was at the fountain for " + drinkStats[2] + ((drinkStats[2] > 1) ? " minutes." : " minute.");
 	$('#drinkCount').text(drinkCountString);
 	$('#elapsedTime').text(elapsedTimeString);
