@@ -3,8 +3,8 @@
 var currentDrinkId;	//*
 var currentImageId;	//*
 var allDrinks = [];	//*
- var apiURL = "http://localhost:8080/api";
-// var apiURL = "https://www.thethirstycat.net/api";
+//  var apiURL = "http://localhost:8080/api";
+var apiURL = "https://www.thethirstycat.net/api";
 var apiPathLastDrink = "/drink/lastDrink";
 var apiPathAllDrinks = "/drink/allDrinks";
 var apiPathLastDrinkImage = "/image/lastImage";
@@ -29,7 +29,7 @@ $( document ).ready(function() {
 		//Try to redirect without adding entry to the browser history
 		//Doesn't work on all browsers though (like edge/IE), so catch error and navigate to https page as fallback
 		try {  
-//			window.location.replace("https://www.thethirstycat.net");
+			window.location.replace("https://www.thethirstycat.net");
 		} catch(e) {
 			window.location = "https://www.thethirstycat.net";
 		}
