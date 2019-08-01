@@ -281,7 +281,10 @@ function getDrinksToday() {
 	
 	//Loop through all drink start dates; sum all drinks ocurring so far today
 	for (i = 0; i < allDrinks.length; i++) {
-		if (currentDate.getDay() == new Date(allDrinks[i].startTime).getDay()) {
+		var dayEqual = (currentDate.getDay() == new Date(allDrinks[i].startTime).getDay());
+		var monthEqual = (currentDate.getMonth() == new Date(allDrinks[i].startTime).getMonth());
+		var yearEqual = (currentDate.getFullYear() == new Date(allDrinks[i].startTime).getFullYear());
+		if (dayEqual && monthEqual && yearEqual) {
 			drinksToday++;
 		}
 	}
