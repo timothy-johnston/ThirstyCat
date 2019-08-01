@@ -1,6 +1,6 @@
 # ThirstyCat
-##### A Raspberry Pi & Python powered cat detector + a full-stack Java and Spring Boot web app.
-###### Featuring my wonderful cat, Shasta. Because, well, I take the term *pet* project very seriously.
+### A Raspberry Pi & Python powered cat detector + a full-stack Java and Spring Boot web app.
+#### Featuring my wonderful cat, Shasta. Because, well, I take the term *pet* project very seriously.
 
 
 ## About
