@@ -3,8 +3,8 @@
 var currentDrinkId;	//*
 var currentImageId;	//*
 var allDrinks = [];	//*
- var apiURL = "http://localhost:8080/api";
-// var apiURL = "https://www.thethirstycat.net/api";
+//  var apiURL = "http://localhost:8080/api";
+var apiURL = "https://www.thethirstycat.net/api";
 var apiPathLastDrink = "/drink/lastDrink";
 var apiPathAllDrinks = "/drink/allDrinks";
 var apiPathLastDrinkImage = "/image/lastImage";
