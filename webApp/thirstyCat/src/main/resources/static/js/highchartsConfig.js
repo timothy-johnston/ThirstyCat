@@ -86,8 +86,7 @@ function createDrinkPerHourPerDay(drinkData, allDrinks) {
     for (i = 0; i < drinkData[0].length; i++) {
         dates[i] = drinkData[0][i].toDateString().substring(4);
     }
-    console.log(dates);
-
+    
     Highcharts.chart('graph-container', {
 
         chart: {
