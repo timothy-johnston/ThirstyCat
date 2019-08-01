@@ -2,7 +2,7 @@
 ##### A Raspberry Pi & Python powered cat detector + a full-stack Java and Spring Boot web app.
 ###### Featuring my wonderful cat, Shasta. Because, well, I take the term *pet* project very seriously.
 
-<br>
+
 ## About
 
 **ThirstyCat is a two part project, incorporating both hardware and software.**
@@ -12,13 +12,13 @@
 **The software component** is a full-stack Java and Spring boot web application deployed on AWS with Elastic Beanstalk. The application's back end is a REST API secured with JWT Bearer Authentication allowing for the persistence and retrieval of the photos captured by the PiCam. The front end is a fairly simple HTML, CSS, and JavaScript UI secured with Basic Authentication allowing users to create an account, view and save the automatically captured photos, and view CatStats (CatStats:  Pretty graphs detailing Shasta's drinking habits!).
 
 ## Setup and Installation
-#### Hardware
+### Hardware
 I've previously put together a guide on how to set up the Raspberry Pi, you can check it out and follow along here:
 https://github.com/timothy-johnston/timothy-johnston.github.io/blob/f6b6b4b173a30449ee70589b18a67e4837ba8eab/Old%20Jekyll%20Page/_posts/2018-07-17-how-i-built-a-cat-detecting-twitter-bot.markdown
 
-#### Software
+### Software
 Setup for this project is pretty simple and straightforward. You'll want to have installed Java, MySQL, and your IDE/editor of choice.
-##### Database
+#### Database
 All we need to do is create the database; Hibernate will handle the rest, including table creation. From the terminal, cd into /ThirstyCat/webApp/thirstyCat/database and run the following command:
 ```bash
 ./create-database.sh
@@ -27,7 +27,7 @@ Alternatively, you yourself can fire up a MySQL connection and manually create t
 ```sql
 CREATE DATABASE thirstycat;
 ```
-##### Java Source Code
+#### Java Source Code
 Nothing too tricky here, just a couple environment variables to set up:
 
 | Key  | Value Description |
