@@ -43,7 +43,7 @@ function createDrinkVsDay(drinkData) {
             }
         },
         xAxis: {
-            categories: xAxis,
+            categories: xAxis.slice(0, xAxis.length - 1),
             labels: {
                 style: {
                     fontSize: '.8rem'
@@ -72,7 +72,7 @@ function createDrinkVsDay(drinkData) {
         },
         series: [{
             showInLegend: false,
-            data: yAxis,
+            data: yAxis.slice(0, yAxis.length - 1),
             color: '#796ad1'
         }]
     });
@@ -161,7 +161,7 @@ function createDrinkPerHourPerDay(drinkData, allDrinks) {
       
         tooltip: {
           formatter: function () {
-            return '<b>' + this.series.xAxis.categories[this.point.x] + '</b> sold <br><b>' +
+            return '<b>' + this.series.xAxis.categories[this.point.x] + '</b>: <br><b>' +
               this.point.value + '</b> drinks from <br><b>' + this.series.yAxis.categories[this.point.y] + '</b>';
           }
         },

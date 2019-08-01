@@ -3,8 +3,8 @@
 var currentDrinkId;	//*
 var currentImageId;	//*
 var allDrinks = [];	//*
-//  var apiURL = "http://localhost:8080/api";
-var apiURL = "https://www.thethirstycat.net/api";
+ var apiURL = "http://localhost:8080/api";
+// var apiURL = "https://www.thethirstycat.net/api";
 var apiPathLastDrink = "/drink/lastDrink";
 var apiPathAllDrinks = "/drink/allDrinks";
 var apiPathLastDrinkImage = "/image/lastImage";
@@ -209,7 +209,7 @@ function updateDrinkInfo(latestDrink) {
 	var drinkStats = calculateDrinkDetails();
 
 	//Update drink count, time since last, and duration
-	var drinkCountString = "She has taken " + drinkStats[0] + (drinkStats[0] == 1 ? " drink" : " drinks") + " so far today.";
+	var drinkCountString = "She has taken " + drinkStats[0] + " drinks today.";
 	var elapsedTimeString = drinkStats[1] + ", and she was at the fountain for " + drinkStats[2] + ((drinkStats[2] > 1) ? " minutes." : " minute.");
 	$('#drinkCount').text(drinkCountString);
 	$('#elapsedTime').text(elapsedTimeString);
@@ -281,10 +281,7 @@ function getDrinksToday() {
 	
 	//Loop through all drink start dates; sum all drinks ocurring so far today
 	for (i = 0; i < allDrinks.length; i++) {
-		var dayEqual = (currentDate.getDate() == new Date(allDrinks[i].startTime).getDate());
-		var monthEqual = (currentDate.getMonth() == new Date(allDrinks[i].startTime).getMonth());
-		var yearEqual = (currentDate.getFullYear() == new Date(allDrinks[i].startTime).getFullYear());
-		if (dayEqual && monthEqual && yearEqual) {
+		if (currentDate.getDay() == new Date(allDrinks[i].startTime).getDay()) {
 			drinksToday++;
 		}
 	}
