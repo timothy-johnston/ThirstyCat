@@ -16,8 +16,7 @@
 
 ## Setup and Installation
 ### Hardware
-I've previously put together a guide on how to set up the Raspberry Pi, you can check it out and follow along here:
-https://github.com/timothy-johnston/timothy-johnston.github.io/blob/f6b6b4b173a30449ee70589b18a67e4837ba8eab/Old%20Jekyll%20Page/_posts/2018-07-17-how-i-built-a-cat-detecting-twitter-bot.markdown
+I've put together a guide on [how to set up the Raspberry Pi + force sensing resistor + PiCam](https://github.com/timothy-johnston/ThirstyCat/blob/master/cat-detector-how-to.md). 
 
 ### Software
 Setup for this project is pretty simple and straightforward. You'll want to have installed Java, MySQL, and your IDE/editor of choice.
