@@ -3,8 +3,8 @@
 var currentDrinkId;	//*
 var currentImageId;	//*
 var allDrinks = [];	//*
-//  var apiURL = "http://localhost:8080/api";
-var apiURL = "https://www.thethirstycat.net/api";
+  var apiURL = "http://localhost:8080/api";
+//var apiURL = "https://www.thethirstycat.net/api";
 var apiPathLastDrink = "/drink/lastDrink";
 var apiPathAllDrinks = "/drink/allDrinks";
 var apiPathLastDrinkImage = "/image/lastImage";
@@ -29,7 +29,7 @@ $( document ).ready(function() {
 		//Try to redirect without adding entry to the browser history
 		//Doesn't work on all browsers though (like edge/IE), so catch error and navigate to https page as fallback
 		try {  
-			window.location.replace("https://www.thethirstycat.net");
+//			window.location.replace("https://www.thethirstycat.net");
 		} catch(e) {
 			window.location = "https://www.thethirstycat.net";
 		}
@@ -200,7 +200,7 @@ function getAllDrinks(jwtToken) {
 function updateDrinkInfo(latestDrink) {
 	
 	//Update drink time
-	var drinkTime = formatDateToTime(new Date(latestDrink.startTime));
+	var drinkTime = formatDateToTime(dateSplitter(latestDrink.startTime));
 	var drinkTimeString = "Shasta took this drink at " + drinkTime + " EST.";
 	$('#drinkTime').text(drinkTimeString);
 
@@ -281,9 +281,9 @@ function getDrinksToday() {
 	
 	//Loop through all drink start dates; sum all drinks ocurring so far today
 	for (i = 0; i < allDrinks.length; i++) {
-		var dayEqual = (currentDate.getDate() == new Date(allDrinks[i].startTime).getDate());
-		var monthEqual = (currentDate.getMonth() == new Date(allDrinks[i].startTime).getMonth());
-		var yearEqual = (currentDate.getFullYear() == new Date(allDrinks[i].startTime).getFullYear());
+		var dayEqual = (currentDate.getDate() == (dateSplitter(allDrinks[i].startTime)).getDate());
+		var monthEqual = (currentDate.getMonth() == (dateSplitter(allDrinks[i].startTime)).getMonth());
+		var yearEqual = (currentDate.getFullYear() == (dateSplitter(allDrinks[i].startTime)).getFullYear());
 		if (dayEqual && monthEqual && yearEqual) {
 			drinksToday++;
 		}
@@ -295,7 +295,18 @@ function getDrinksToday() {
 //Calculate time between trips to the water fountain
 function getTimeSinceLastDrink() {
 
-	var elapsedMillis = new Date(allDrinks[allDrinks.length -1].startTime) - new Date(allDrinks[allDrinks.length - 2].endTime);
+	test1 = allDrinks[allDrinks.length -1].startTime;
+	test1split = dateSplitter(allDrinks[allDrinks.length -1].startTime);
+	test1splitdate = new Date(test1split);
+	
+	test2 = allDrinks[allDrinks.length - 2].endTime;
+	test2split = dateSplitter(allDrinks[allDrinks.length - 2].endTime);
+	test2splitdate = new Date(test2split);
+	
+	testDif = test2splitdate - test1splitdate;
+	
+	
+	var elapsedMillis = (dateSplitter(allDrinks[allDrinks.length -1].startTime)) - (dateSplitter(allDrinks[allDrinks.length - 2].endTime));
 
 	//Calculate hours and minutes
 	var hours = Math.floor(elapsedMillis / (1000 * 60 * 60));
@@ -322,7 +333,7 @@ function getDurationOfDrink() {
 
 	var lastDrink = allDrinks[allDrinks.length -1];
 
-	var durationMillis = new Date(lastDrink.endTime) - new Date(lastDrink.startTime);
+	var durationMillis = (dateSplitter(lastDrink.endTime)) - (dateSplitter(lastDrink.startTime));
 
 	var durationMinutes = Math.round(durationMillis / (1000 * 60));
 
@@ -342,7 +353,7 @@ function performStats() {
 
 //Builds and array of dates, 1 per day, beginning at the first data record until present
 function createElapsedDatesArray() {
-	var startDate = new Date(allDrinks[0].startTime);
+	var startDate = (dateSplitter(allDrinks[0].startTime));
 	var currentDate = new Date();
 	var allDates = [startDate];
 	while(true) {
@@ -372,12 +383,12 @@ function getDrinksPerDay(elapsedDates) {
 	//TODO: O(n^2), Can I refactor to not use nested loop
 	for (i = 0; i < elapsedDates.length - 1; i++) {
 		
-		var dateBracketLow = new Date(elapsedDates[i].getFullYear() + "-" + (elapsedDates[i].getMonth() + 1) + "-" + elapsedDates[i].getDate());
-		var dateBracketHigh = new Date(elapsedDates[i+1].getFullYear() + "-" + (elapsedDates[i+1].getMonth() + 1) + "-" + elapsedDates[i+1].getDate());
+		var dateBracketLow = new Date(elapsedDates[i].getFullYear(), (elapsedDates[i].getMonth() + 1), elapsedDates[i].getDate());
+		var dateBracketHigh = new Date(elapsedDates[i+1].getFullYear(), (elapsedDates[i+1].getMonth() + 1), elapsedDates[i+1].getDate());
 		
 		for (let drink of allDrinks) {
 
-			var dateStartTime = new Date(drink.startTime);
+			var dateStartTime = (dateSplitter(drink.startTime));
 
 			if (dateStartTime >= dateBracketLow && dateStartTime < dateBracketHigh) {
 				drinkCount[i] ++;
@@ -430,4 +441,18 @@ function getLikedImages() {
 
 }
 
+function dateSplitter(dateAsString) {
+
+	dateArray = []
+	
+	dateArray.push(dateAsString.substring(0,4));
+	dateArray.push(dateAsString.substring(5,7));
+	dateArray.push(dateAsString.substring(8,10));
+	dateArray.push(dateAsString.substring(11,13));
+	dateArray.push(dateAsString.substring(14,16));
+	dateArray.push(dateAsString.substring(17,19));
+
+	return new Date(dateArray[0], dateArray[1], dateArray[2], dateArray[3], dateArray[4], dateArray[5]);
+
+}
 
