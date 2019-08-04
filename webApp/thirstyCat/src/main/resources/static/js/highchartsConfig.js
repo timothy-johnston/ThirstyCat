@@ -198,7 +198,7 @@ function calculateDrinkPerHourPerDay(drinkData, allDrinks) {
     for (var i = 0; i < drinkData[0].length; i++) {
 
         var dateIteration = drinkData[0][i];
-        var dateMidnight = new Date(dateIteration.getFullYear() + "-" + (dateIteration.getMonth() + 1) + "-" + dateIteration.getDate());
+        var dateMidnight = new Date(dateIteration.getFullYear(), (dateIteration.getMonth()), dateIteration.getDate());
         var hourIncrement = 60 * 60 * 1000;
         var timeBucketWidth = 3;                      //Break day up into two hour chunks
         var timeBuckets = 24 / timeBucketWidth;       //# of buckets = 24 hours in a day / chunk size
@@ -214,7 +214,7 @@ function calculateDrinkPerHourPerDay(drinkData, allDrinks) {
             //Loop over drinks. When one falls in the current bucket, increment count
             for (var k = 0; k < allDrinks.length; k++) {
 
-                var drinkStart = new Date(allDrinks[k].startTime);
+                var drinkStart = new Date(dateSplitter(allDrinks[k].startTime));
 
                 if (drinkStart >= bucketLowerBound && drinkStart < bucketUpperBound) {
                     drinkCount++;

@@ -105,12 +105,15 @@ function initiateDrinkUpdate() {
 function getMostRecentDrinkId(allDrinks) {
 
 	var latestDrink = allDrinks[allDrinks.length - 1];
+	updateDrinkInfo(latestDrink);
 
 	//If most recent drink id differs from current drink id, update drink
-	if (latestDrink.id != currentDrinkId) {
-		currentDrinkId = latestDrink.id;
-		updateDrinkInfo(latestDrink);
-	}
+	// if (latestDrink.id != currentDrinkId) {
+	// 	currentDrinkId = latestDrink.id;
+	// 	updateDrinkInfo(latestDrink);
+	// }
+
+	
 
 }
 
@@ -190,6 +193,8 @@ function getAllDrinks(jwtToken) {
 			
 			getMostRecentDrinkId(allDrinks);
 
+			// updateDrinkInfo(latestDrink);
+
 		},
 		failure: function(result, status, xhr) {
 			jwtToken  = null;
@@ -230,6 +235,7 @@ function updateDrinkInfo(latestDrink) {
 function updateDrinkImage(latestImage) {
 	
 	currentImageId = latestImage.id;
+	currentDrinkId = latestImage.drinkId;
 	var imageBytes = latestImage.imageByteArray;
 
 	$('#drinkPic').show();
@@ -386,7 +392,7 @@ function getDrinksPerDay(elapsedDates) {
 		var dateBracketLow = new Date(elapsedDates[i].getFullYear(), (elapsedDates[i].getMonth()), elapsedDates[i].getDate());
 		var dateBracketHigh = new Date(elapsedDates[i+1].getFullYear(), (elapsedDates[i+1].getMonth()), elapsedDates[i+1].getDate());
 		
-		for (let drink of allDrinks) {
+		for (var drink of allDrinks) {
 
 			var dateStartTime = (dateSplitter(drink.startTime));
 
