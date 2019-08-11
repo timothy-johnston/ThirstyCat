@@ -257,7 +257,11 @@ function formatDateToTime(jsDate) {
 	var amPm = (jsDate.getHours() < 12) ? " AM" : " PM";
 
 	//Format from 24H to 12H time & concatenate minutes + AM||PM
-	var timeString = ((jsDate.getHours() + 11) % 12 + 1) + ":" + jsDate.getMinutes() + amPm;
+	var minutes = jsDate.getMinutes();
+	if (minutes.length == 1) {
+		minutes = "0" + minutes;
+	}
+	var timeString = ((jsDate.getHours() + 11) % 12 + 1) + ":" + minutes + amPm;
 
 	return timeString;
 }
