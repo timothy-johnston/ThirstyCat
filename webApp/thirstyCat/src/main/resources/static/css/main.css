@@ -381,6 +381,10 @@ color: white;
 	box-shadow: none;
 }
 
+#section-table {
+	background: #b8b8ff
+}
+
 #footer-section {
 	min-height: 25vh;
 	background:#796ad1;

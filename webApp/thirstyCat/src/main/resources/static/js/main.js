@@ -3,8 +3,8 @@
 var currentDrinkId;	//*
 var currentImageId;	//*
 var allDrinks = [];	//*
-//   var apiURL = "http://localhost:8080/api";
-var apiURL = "https://www.thethirstycat.net/api";
+  var apiURL = "http://localhost:8080/api";
+// var apiURL = "https://www.thethirstycat.net/api";
 var apiPathLastDrink = "/drink/lastDrink";
 var apiPathAllDrinks = "/drink/allDrinks";
 var apiPathLastDrinkImage = "/image/lastImage";
@@ -25,15 +25,15 @@ $( document ).ready(function() {
 	//	it redirects to https as expected. Must be related to cache/cookies/etc, but have not been able to find a proper solution.
 	//	So, this checks to see if the url has "http://". If it does, I want to send the page right to the https url
 	//	https works. Problem solving, right... ? :O
-	if (window.location.href.toLowerCase().includes("http://")) {
-		//Try to redirect without adding entry to the browser history
-		//Doesn't work on all browsers though (like edge/IE), so catch error and navigate to https page as fallback
-		try {  
-			window.location.replace("https://www.thethirstycat.net");
-		} catch(e) {
-			window.location = "https://www.thethirstycat.net";
-		}
-	}
+	// if (window.location.href.toLowerCase().includes("http://")) {
+	// 	//Try to redirect without adding entry to the browser history
+	// 	//Doesn't work on all browsers though (like edge/IE), so catch error and navigate to https page as fallback
+	// 	try {  
+	// 		window.location.replace("https://www.thethirstycat.net");
+	// 	} catch(e) {
+	// 		window.location = "https://www.thethirstycat.net";
+	// 	}
+	// }
 
 	//Flow Control-------------------------------------------------------------------
 
@@ -93,7 +93,6 @@ $( document ).ready(function() {
 		}
 		
 	});
-
 })
 
 //Check for new drink info/picture
@@ -190,6 +189,9 @@ function getAllDrinks(jwtToken) {
 			sessionStorage.setItem("jwt", xhr.getResponseHeader("auth"));
 			
 			allDrinks = result;
+
+			var $table = $('#table')
+    		$table.bootstrapTable({data: allDrinks})
 			
 			getMostRecentDrinkId(allDrinks);
 
