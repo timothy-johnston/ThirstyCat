@@ -382,7 +382,8 @@ color: white;
 }
 
 #section-table {
-	background: #b8b8ff
+	background: #b8b8ff;
+	padding-bottom: 65px;
 }
 
 #table {
