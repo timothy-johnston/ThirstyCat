@@ -385,6 +385,22 @@ color: white;
 	background: #b8b8ff
 }
 
+#table {
+	border: none;
+}
+
+thead {
+	background: #796ad1;
+}
+
+.th-inner {
+	color: #f8f7ff;
+	font-size: 1.6rem;
+	font-family: 'Josefin Sans', sans-serif;
+	font-weight: normal;
+	padding-top: 19px !important;
+}
+
 #table-container .bootstrap-table .fixed-table-pagination .pagination-detail .pagination-info {
 	color: #f8f7ff;
 	font-size: 1.4rem;
