@@ -190,8 +190,17 @@ function getAllDrinks(jwtToken) {
 			
 			allDrinks = result;
 
-			var $table = $('#table')
-    		$table.bootstrapTable({data: allDrinks})
+			var $table = $('#table');
+    		$table.bootstrapTable({
+				data: allDrinks,
+				formatShowingRows: function () {
+					return 'Records to display: ';
+				},
+				formatRecordsPerPage: function (pageNumber) {
+					return pageNumber;
+				},
+				paginationVAlign: "top"
+			});
 			
 			getMostRecentDrinkId(allDrinks);
 
