@@ -190,6 +190,10 @@ function getAllDrinks(jwtToken) {
 			
 			allDrinks = result;
 
+			//Bandaid fix for plotting
+			//See comments above this method
+			allDrinks = cutoffDataByDate(allDrinks);
+
 			initializeTable(allDrinks);
 			
 			getMostRecentDrinkId(allDrinks);
@@ -414,6 +418,16 @@ function getDrinksPerDay(elapsedDates) {
 
 function initiateChartCreation(arrayDrinksPerDay, allDrinks) {
 	createCharts(arrayDrinksPerDay, allDrinks, chartId);
+}
+
+//This is to manually prevent data from before some date to be plotted
+//The argument in slice is the first date in the time window that I want to plot
+//This is a total bandaid right now
+//Need to fix to always plot a one-month history of data
+function cutoffDataByDate(allDrinksArray) {
+
+	return allDrinksArray.slice(625);
+
 }
 
 function userIsLoggedIn() {
