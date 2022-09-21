@@ -1,47 +1,37 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="utf-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<script src="https://code.jquery.com/jquery-2.2.2.min.js"></script>
-<script src="http://cdn.jsdelivr.net/jquery.validation/1.15.0/jquery.validate.min.js"></script>
-<script src="http://cdn.jsdelivr.net/jquery.validation/1.15.0/additional-methods.js "></script>
-<script src="/js/registrationValidation.js"></script>
-<script src="event.js"></script>
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<script src="//code.jquery.com/jquery-2.2.2.min.js"></script>
+		<script src="//cdn.jsdelivr.net/jquery.validation/1.15.0/jquery.validate.min.js"></script>
+		<script src="//cdn.jsdelivr.net/jquery.validation/1.15.0/additional-methods.js "></script>
+		<script src="/js/registrationValidation.js"></script>
+		<!-- <script src="event.js"></script> -->
 
-<!-- Bootstrap required meta tags -->
-<meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<!-- Bootstrap required meta tags -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<!-- Import fonts -->
-<link href="https://fonts.googleapis.com/css?family=Maven+Pro|Patua+One"
-	rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Damion&display=swap"
-	rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Lato&display=swap"
-	rel="stylesheet">
-<link
-	href="https://fonts.googleapis.com/css?family=Josefin+Sans:300&display=swap"
-	rel="stylesheet">
+		<!-- Import fonts -->
+		<link href="https://fonts.googleapis.com/css?family=Maven+Pro|Patua+One" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Damion&display=swap" rel="stylesheet">
+<!-- 		<link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet"> -->
+		<link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300&display=swap" rel="stylesheet">
 
-<!-- Bootstrap stylesheet goes before any other stylesheets -->
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-	crossorigin="anonymous">
-<link rel="stylesheet" type="text/css" href="/css/main.css" />
-<link rel="stylesheet" type="text/css" href="/css/login.css" />
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<!-- Bootstrap stylesheet goes before any other stylesheets -->
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+		<link rel="stylesheet" type="text/css" href="/css/main.css" />
+		<link rel="stylesheet" type="text/css" href="/css/login.css" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+		<!-- Favicon -->
+		<link rel="shortcut icon" type="image/x-icon" href="/media/favicon_1.ico"/>
 
-
-<title>Registration</title>
-</head>
-<body>
-
+		<title>Registration</title>
+	</head>
+	<body>
 		<section class="section">
 			<!-- Navbar -->
 			<nav id="nav-home" class="navbar navbar-expand-lg bg-transparent navbar-dark">
@@ -63,13 +53,13 @@
 				<div class="collapse navbar-collapse" id="collapsibleNavbar">
 					<ul class="navbar-nav nav-ul">
 						<li class="nav-item">
-							<a class="nav-link" href="#">CatStats</a>
+							<a class="nav-link" href="login">Log In</a>
 						</li>  
 					</ul>
 				</div> 
-				<button id="spacer-nav-button" class="navbar-toggler">
+				<!-- <button id="spacer-nav-button" class="navbar-toggler">
 					<span class="navbar-toggler-icon"></span>
-				</button> 
+				</button>  -->
 			</nav>
 
 			<div id="section-login" class="section-form">
@@ -83,32 +73,43 @@
 						<h2 class="drinkInfo">Register</h2>
 					</div>
 					<div id="login-form-container">
-						<!-- <form id="registration-form" class="form" method="post" th:action="@{/registration}">
-						</form> -->
 						<form id="login-form" name="registration-form" class="form" th:action="@{/registration}" th:object="${user}" method="post">
-							<p class="error-message" th:if="${#fields.hasGlobalErrors()}" th:each="error : ${#fields.errors('global')}" th:text="${error}">
-								Validation error
-							</p>
-							<!-- <div class="form-group" th:classappend="${#fields.hasErrors('username')}? 'has-error':''"> -->
-								<input id="username" class="form-input" placeholder="Username" th:field="*{username}" />
-								<!-- <p class="error-message" th:each="error : ${#fields.errors('username')}" th:text="${error}">Validation error</p> -->
-							<!-- </div> -->
-							<!-- <div class="form-group" th:classappend="${#fields.hasErrors('password')}? 'has-error':''"> -->
-								<input id="password" class="form-input" type="password" placeholder="Password" th:field="*{password}" />
-								<!-- <p class="error-message" th:each="error : ${#fields.errors('password')}" th:text="${error}">Validation error</p> -->
-							<!-- </div> -->
+<!-- 							<p class="error-message" th:if="${#fields.hasGlobalErrors()}" th:each="error : ${#fields.errors('global')}" th:text="${error}"> -->
+<!-- 								Validation error -->
+<!-- 							</p> -->
+							<p class="drink-info" th:text="${error}"></p>
+							<input id="username" class="form-input" placeholder="Username" th:field="*{username}" />
+							<input id="password" class="form-input" type="password" placeholder="Password" th:field="*{password}" />
 							<button type="submit" class="form-input submit-btn">Register</button>
 							<p id="login-p">
 								<a id="register-link" class="formatted-link" target="" href="/" th:href="@{/login}">Already Registered? Click here to log in.</a>
 							</p>
 						</form>
-
 					</div>
 				</div>
-
 			</div>
-
 		</section>
 
-</body>
+		<section id="footer-section">
+            <div id="footer-content-container" class="container">
+                <h1 class="footer-content">Thanks for visiting!</h1>
+                <p class="footer-content">
+                    ThirstyCat is a project by Tim Johnston (and his cat Shasta). 
+                    Learn more about Tim by visiting <a class="formatted-link" target="_blank" href="http://www.timothyjohnston.me">timothyjohnston.me</a>
+                </p>
+                <p class="footer-content">Connect with Tim on LinkedIn, Twitter, or Github</p>
+                <div class="social-icon-container">
+                    <a class="fa fa-linkedin footer-icon" href="https://www.linkedin.com/in/timothyejohnston/" target="_blank"></a>
+                    <a class="fa fa-twitter footer-icon" href="https://twitter.com/TimJohnston_11" target="_blank"></a>
+                    <a class="fa fa-github footer-icon" href="https://github.com/timothy-johnston" target="_blank"></a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Javascript, Jquery, Bootstrap, my js scripts -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script async src="/js/main.js"></script>
+
+	</body>
 </html>

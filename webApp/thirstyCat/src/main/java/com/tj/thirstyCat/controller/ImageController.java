@@ -55,13 +55,6 @@ public class ImageController {
 		response = commonService.setResponseHeaderJWT(response);
 		return imageService.getAllImages();
 	}
-
-	@GetMapping("/image/{imageId}")
-	@ResponseBody
-	public Image getImage(@PathVariable Long imageId, HttpServletResponse response) {
-		response = commonService.setResponseHeaderJWT(response);
-		return imageService.getImageById(imageId);
-	}
 	
 	@GetMapping("/imageByDrink/{drinkId}")
 	@ResponseBody
@@ -84,8 +77,8 @@ public class ImageController {
 		
 		response = commonService.setResponseHeaderJWT(response);
 		
+		//Retrieve favorites for current user, add each id to the list of ids to return
 		List<Long> idList = new ArrayList<Long>();
-		
 		List<Favorite> favorites = imageService.getFavoritesByUsername(username);
 		
 		for(Favorite favorite : favorites) {

@@ -32,8 +32,7 @@ public class ImageService {
 	}
 
 	public Image getLastImage() {
-//		return imageRepository.getLastImage();
-		
+
 		List<Image> allImages = imageRepository.findAll();
 		
 		//Loop over images. Image with highest id is most recent;
@@ -54,11 +53,6 @@ public class ImageService {
 
 	public List<Image> getAllImages() {
 		return imageRepository.findAll();
-	}
-
-	public Image getImageById(Long imageId) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 	
 	@Transactional

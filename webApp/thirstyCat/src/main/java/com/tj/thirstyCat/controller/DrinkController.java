@@ -33,15 +33,6 @@ public class DrinkController {
 	@Autowired
 	private CommonService commonService;
 	
-	
-	/*
-	 * Post request format:
-		{
-		"startTime": "2019-06-04T03:57:53.558",
-		"endTime": "2019-06-04T03:59:53.558",
-		"createdBy": "test"
-		}
-	 */
 	@PostMapping("/addDrink")
 	@ResponseBody
 	public Drink persistDrink(@Valid @RequestBody Drink drink, HttpServletResponse response) {

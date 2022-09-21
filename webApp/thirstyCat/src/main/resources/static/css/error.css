@@ -1,0 +1,179 @@
+body {
+	background: #b8b8ff;
+}
+
+.section {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	min-height: 100vh;
+}
+
+h1 {
+	font-family: 'Patua One', cursive;
+}
+
+/* MEDIA QUERIES */
+@media (max-width: 991px) {
+	
+	.navbar-toggler {
+		z-index: 1;
+	}
+	
+	.navbar-collapse {
+	  background: #b8b8ff;
+	}
+
+	#logo-placeholder-container {
+		flex-grow: 2 !important;
+	}
+
+  }
+
+@media (max-width: 1200px) {
+	
+	#drink-info-container {
+		width: 800px !important;
+		height: 100% !important;
+		text-align: center;
+	}
+	
+	#logo-placeholder-text {
+		font-size: 6rem !important;
+	}
+	
+  }
+
+  #nav-home {
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	border-radius: 9000px;	
+}
+
+.nav-ul {
+	width: 80%;
+	margin-left: auto;
+	margin-right: auto;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
+
+.nav-link {
+	font-size: 1.6rem !important;
+	font-family: 'Damion', cursive;
+	color: #f8f7ff !important;
+}
+
+#spacer-nav-button {
+	opacity: 0.0;
+}
+
+#spacer-nav-button:hover {
+	cursor: default;
+}
+
+.social-icon-container {
+	display: flex;
+	justify-content: center;
+}
+
+.fa {
+	padding: 13px;
+	font-size: 1.4rem !important;
+	text-align: center;
+	text-decoration: none;
+	border-radius: 50%;
+	color: white;
+	width: 48px;
+	height: 48px;
+}
+
+.fa-twitter {
+	background: #55ACEE;
+}
+
+.fa-github {
+	background: #000000;
+}
+
+.fa-linkedin {
+	background: #0077B5;
+}
+
+.fa:hover {
+text-decoration: none;
+color: white;
+}
+
+.fa-twitter:hover {
+	background: #55aceecc;
+}
+
+.fa-github:hover {
+	background: #000000a2;
+}
+
+.fa-linkedin:hover {
+	background: rgba(49, 120, 158, 0.635);
+}
+
+#logo-placeholder-container {
+	display: flex;
+	justify-content: center;
+}
+
+#logo-placeholder {
+	margin-right: 0px;
+}
+
+#logo-placeholder-text {
+	font-size: 8rem;
+	color: #f8f7ff;
+}
+
+#error-message {
+    text-align: center;
+}
+
+.drink-info {
+	color: #f8f7ff;
+	font-size: 3rem;
+	font-family: 'Josefin Sans', sans-serif;
+	margin: 25px 25px 25px 25px;
+}
+
+.formatted-link {
+	color: #f8f7ff !important;
+	font-weight: bold;
+}
+
+#footer-section {
+	min-height: 25vh;
+	background:#796ad1;
+	display: flex;
+	flex-direction: colun;
+	justify-content: center;
+}
+
+#footer-content-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	padding: 20px;
+}
+
+.footer-content {
+	text-align: center;
+	color: #f8f7ff
+}
+
+.formatted-link {
+	color: #f8f7ff !important;
+	font-weight: bold;
+}
+
+.footer-icon {
+	margin: 0px 3px;
+}

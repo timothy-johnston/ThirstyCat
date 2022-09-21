@@ -13,7 +13,7 @@
         <!-- Import fonts -->
         <link href="https://fonts.googleapis.com/css?family=Maven+Pro|Patua+One" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Damion&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+<!--         <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet"> -->
         <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300&display=swap" rel="stylesheet">  
 
         <!-- Bootstrap stylesheet goes before any other stylesheets -->
@@ -26,6 +26,9 @@
         <script src="https://code.highcharts.com/highcharts.js"></script>
         <script src="https://code.highcharts.com/modules/heatmap.js"></script>
         <script src="https://code.highcharts.com/modules/exporting.js"></script>
+
+        <!-- Favicon -->
+        <link rel="shortcut icon" type="image/x-icon" href="/media/favicon_1.ico"/>
     
     </head>
 
@@ -55,66 +58,35 @@
                 <div class="collapse navbar-collapse" id="collapsibleNavbar">
                     <ul class="navbar-nav nav-ul">
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Favorite Pics</a>
+                            <a class="nav-link" href="favoritepics">Favorite Pics</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="login?logout">Log Out</a>
+                            <a class="nav-link" href="logout">Log Out</a>
                         </li>     
                     </ul>
                 </div> 
-                <button id="spacer-nav-button" class="navbar-toggler">
+                <!-- <button id="spacer-nav-button" class="navbar-toggler">
                     <span class="navbar-toggler-icon"></span>
-                </button> 
+                </button>  -->
             </nav>
 
 
 
             <div id="section-pics">
-
-                <div id="fav-pics-header-container" class="container">
-                        <p id="fav-pics-header">My Favorite Pics</p>
+                <div id="fav-pics-header" class="welcome-prompt-container drink-info container" sec:authorize="isAuthenticated()">
+                    <p><span sec:authentication="principal.username">User</span><span>'s Favorite Pictures</span><p>
                 </div>
                 <div id="featured-pic-container" class="container">
-                    <img id="featured-pic" src="/media/catPic.jpg" alt="Picture of Shasta taking a drink">
+                    <img id="featured-pic" src="" alt="Picture of Shasta taking a drink">
+                    <div hidden id="no-favs-container">
+                    	<p id="no-favs-prompt" class="drink-info">Hmmm, there's nothing here... Head to the <a class="formatted-link" target="" href="home">Home Page</a> and favorite a picture to start building your collection!</p>
+                    </div>
                 </div>
                 <div id="pic-grid-container" class="container">
-                    <div class="fav-pic-container">
-                        <img class="fav-pic" src="/media/catPic.jpg" alt="Picture of Shasta taking a drink">
-                    </div>
-                    <div class="fav-pic-container">
-                        <img class="fav-pic" src="/media/catPic.jpg" alt="Picture of Shasta taking a drink">
-                    </div>
-                    <div class="fav-pic-container">
-                        <img class="fav-pic" src="/media/catPic.jpg" alt="Picture of Shasta taking a drink">
-                    </div>
-                    <div class="fav-pic-container">
-                        <img class="fav-pic" src="/media/catPic.jpg" alt="Picture of Shasta taking a drink">
-                    </div>
-                    <div class="fav-pic-container">
-                        <img class="fav-pic" src="/media/catPic.jpg" alt="Picture of Shasta taking a drink">
-                    </div>
-                    <div class="fav-pic-container">
-                        <img class="fav-pic" src="/media/catPic.jpg" alt="Picture of Shasta taking a drink">
-                    </div>
-                    <div class="fav-pic-container">
-                        <img class="fav-pic" src="/media/catPic.jpg" alt="Picture of Shasta taking a drink">
-                    </div>
-                    <div class="fav-pic-container">
-                        <img class="fav-pic" src="/media/catPic.jpg" alt="Picture of Shasta taking a drink">
-                    </div>
-                    <div class="fav-pic-container">
-                        <img class="fav-pic" src="/media/catPic.jpg" alt="Picture of Shasta taking a drink">
-                    </div>
-                    <div class="fav-pic-container">
-                        <img class="fav-pic" src="/media/catPic.jpg" alt="Picture of Shasta taking a drink">
-                    </div>
-                    <div class="fav-pic-container">
-                        <img class="fav-pic" src="/media/catPic.jpg" alt="Picture of Shasta taking a drink">
-                    </div>
+                    <!-- Pictures will be inserted here by javascript function -->
                 </div>
             </div>
         </section>
-
         <section id="footer-section">
             <div id="footer-content-container" class="container">
                 <h1 class="footer-content">Thanks for visiting!</h1>
@@ -124,18 +96,12 @@
                 </p>
                 <p class="footer-content">Connect with Tim on LinkedIn, Twitter, or Github</p>
                 <div class="social-icon-container">
-                    <a class="fa fa-linkedin footer-icon" href="https://twitter.com/TimJohnston_11" target="_blank"></a>
+                    <a class="fa fa-linkedin footer-icon" href="https://www.linkedin.com/in/timothyejohnston/" target="_blank"></a>
                     <a class="fa fa-twitter footer-icon" href="https://twitter.com/TimJohnston_11" target="_blank"></a>
-                    <a class="fa fa-github footer-icon" href="https://twitter.com/TimJohnston_11" target="_blank"></a>
+                    <a class="fa fa-github footer-icon" href="https://github.com/timothy-johnston" target="_blank"></a>
                 </div>
             </div>
         </section>
-
-
-    
-    
-    
-    
         <div class="username-holder-div" style="display: none" sec:authorize="isAuthenticated()">
             <p class="username-holder" sec:authentication="principal.username">User</p>
         </div>
@@ -143,67 +109,18 @@
         <div class="username-holder-div" style="display: none" sec:authorize="isAnonymous()">
             <p class="username-holder"></p>
         </div>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!--         <p> -->
-<!--             Welcome <span sec:authentication="principal.username">User!!!</span> -->
-<!--         </p> -->
-    
-    
-    
-        <!-- Javascript, Jquery, Bootstrap -->
+ 
+        <!-- Javascript, Jquery, Bootstrap, Highcharts, my js scripts -->
         <script th:inline="javascript">
             sessionStorage.setItem('jwt',( /*[[${jwt}]]*/ 'default'));
         </script>
         <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-        <script async src="/js/main.js"></script>
-        <script async src="/js/favoritepics.js"></script>
+<!--         <script async src="/js/highchartsConfig.js"></script> -->
 <!--         <script async src="/js/main.js"></script> -->
-        
-        
+        <script async src="/js/favoritepics.js"></script>
+
     </body>
     
 </html>

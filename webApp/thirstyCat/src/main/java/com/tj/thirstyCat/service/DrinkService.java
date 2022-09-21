@@ -21,7 +21,8 @@ public class DrinkService {
 	}
 
 	public Optional<Drink> getLastDrink() {
-		return drinkRepository.findLastDrink();
+		Long lastDrinkId = drinkRepository.findLastDrinkId();
+		return drinkRepository.findById(lastDrinkId);
 	}
 
 	public List<Drink> getAllDrinks() {

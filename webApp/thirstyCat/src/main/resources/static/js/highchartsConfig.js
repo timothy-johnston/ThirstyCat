@@ -1,6 +1,11 @@
-function testScript() {
-    alert("success!");
-}
+Highcharts.setOptions({
+    chart: {
+        style: {
+            fontFamily: "'Josefin Sans', sans-serif"
+        }
+    }
+});
+
 
 function createCharts(drinkData, allDrinks, chartId) {
 
@@ -38,7 +43,12 @@ function createDrinkVsDay(drinkData) {
             }
         },
         xAxis: {
-            categories: xAxis,
+            categories: xAxis.slice(0, xAxis.length - 1),
+            labels: {
+                style: {
+                    fontSize: '.8rem'
+                }
+        	},
             title: {
             	enabled: 'true',
             	text: 'Date',
@@ -48,6 +58,11 @@ function createDrinkVsDay(drinkData) {
             }
         },
         yAxis: {
+            labels: {
+                style: {
+                    fontSize: '.8rem'
+                }
+        	},
             title: {
                 text: 'Number of Drinks',
             	style: {
@@ -57,7 +72,7 @@ function createDrinkVsDay(drinkData) {
         },
         series: [{
             showInLegend: false,
-            data: yAxis,
+            data: yAxis.slice(0, yAxis.length - 1),
             color: '#796ad1'
         }]
     });
@@ -66,21 +81,21 @@ function createDrinkVsDay(drinkData) {
 function createDrinkPerHourPerDay(drinkData, allDrinks) {
 
     var arrayDrinkPerHourPerDay = calculateDrinkPerHourPerDay(drinkData, allDrinks);
-    var timeBuckets = ["Midnight - 3AM", "3AM - 6AM", "6AM - 9AM", "9AM - 12PM", "12PM - 3PM", "3PM - 6PM", "6PM - 9PM", "9PM - Midnight"];
+    var timeBuckets = ["12AM - 3AM", "3AM - 6AM", "6AM - 9AM", "9AM - 12PM", "12PM - 3PM", "3PM - 6PM", "6PM - 9PM", "9PM - 12AM"];
     var dates = [];
     for (i = 0; i < drinkData[0].length; i++) {
         dates[i] = drinkData[0][i].toDateString().substring(4);
     }
-    console.log(dates);
-
+    
     Highcharts.chart('graph-container', {
 
         chart: {
           type: 'heatmap',
-          marginTop: 40,
+          marginTop: 80,
           marginBottom: 80,
           plotBorderWidth: 1,
           backgroundColor: false,
+          margin: [80, 60, 80, 65]
         },
       
         title: {
@@ -91,9 +106,16 @@ function createDrinkPerHourPerDay(drinkData, allDrinks) {
         },
       
         xAxis: {
-          categories: dates,
+         categories: dates,
+        	labels: {
+                enabled: true,
+                style: {
+                    fontSize: '.8rem'
+                }
+        	},
           title: {
-              text: 'Date',
+              text: "Date",
+              margin: 25,
           	  style: {
                   fontSize: '1.5rem'
               }
@@ -102,8 +124,17 @@ function createDrinkPerHourPerDay(drinkData, allDrinks) {
       
         yAxis: {
           categories: timeBuckets,
-          title: {
-        	  text: 'Time Slice',
+            labels: {
+                enabled: true,
+                rotation: -45,
+                style: {
+                    fontSize: '.8rem'
+                }
+            },
+            title: {
+              text: 'Time Window',
+              enabled: false,
+              margin: 0,
           	  style: {
                   fontSize: '1.5rem'
               }
@@ -114,6 +145,7 @@ function createDrinkPerHourPerDay(drinkData, allDrinks) {
           min: 0,
           minColor: '#FFFFFF',
           maxColor: '#796ad1',
+          margin: 95,
           reversed: true
         },
       
@@ -121,15 +153,16 @@ function createDrinkPerHourPerDay(drinkData, allDrinks) {
           align: 'right',
           layout: 'vertical',
           margin: 0,
-          verticalAlign: 'top',
+          verticalAlign: 'middle',
+          x: 25,
           y: 25,
           symbolHeight: 280
         },
       
         tooltip: {
           formatter: function () {
-            return '<b>' + this.series.xAxis.categories[this.point.x] + '</b> sold <br><b>' +
-              this.point.value + '</b> items on <br><b>' + this.series.yAxis.categories[this.point.y] + '</b>';
+            return '<b>' + this.series.xAxis.categories[this.point.x] + '</b>: <br><b>' +
+              this.point.value + '</b> drinks from <br><b>' + this.series.yAxis.categories[this.point.y] + '</b>';
           }
         },
       
@@ -142,7 +175,15 @@ function createDrinkPerHourPerDay(drinkData, allDrinks) {
             enabled: true,
             color: '#000000'
           }
-        }]
+        }],
+        responsive: {
+            rules: [{
+                condition: {
+                    maxWidth: 450
+                },
+
+            }]
+        }
       
       });
 
@@ -157,7 +198,7 @@ function calculateDrinkPerHourPerDay(drinkData, allDrinks) {
     for (var i = 0; i < drinkData[0].length; i++) {
 
         var dateIteration = drinkData[0][i];
-        var dateMidnight = new Date(dateIteration.getFullYear() + "-" + (dateIteration.getMonth() + 1) + "-" + dateIteration.getDate());
+        var dateMidnight = new Date(dateIteration.getFullYear(), (dateIteration.getMonth()), dateIteration.getDate());
         var hourIncrement = 60 * 60 * 1000;
         var timeBucketWidth = 3;                      //Break day up into two hour chunks
         var timeBuckets = 24 / timeBucketWidth;       //# of buckets = 24 hours in a day / chunk size
@@ -173,7 +214,7 @@ function calculateDrinkPerHourPerDay(drinkData, allDrinks) {
             //Loop over drinks. When one falls in the current bucket, increment count
             for (var k = 0; k < allDrinks.length; k++) {
 
-                var drinkStart = new Date(allDrinks[k].startTime);
+                var drinkStart = new Date(dateSplitter(allDrinks[k].startTime));
 
                 if (drinkStart >= bucketLowerBound && drinkStart < bucketUpperBound) {
                     drinkCount++;

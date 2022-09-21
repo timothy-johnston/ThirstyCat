@@ -28,7 +28,7 @@ public class RoutingController {
 			jwt = jwtTokenUtil.createAdminJWT();
 			mav.addObject("jwt", jwt.getToken());
 		} catch (Exception e) {
-			// TODO Replace console debug output with logging
+			//TODO: Implement logging rather than printing error to console (security vulnerability)
 			System.out.println("Error retrieving jwt (RoutingController) : " + e.getMessage());
 		}
 		
@@ -50,7 +50,7 @@ public class RoutingController {
 	public ModelAndView favoritePics() {
 		
 		//Credentials are needed for client side api calls, so pass them along in the model
-		ModelAndView mav = new ModelAndView("favoritePics");
+		ModelAndView mav = new ModelAndView("favoritepics");
 		
 		//Create admin token and pass to client
 		JwtResponse jwt;
@@ -58,7 +58,7 @@ public class RoutingController {
 			jwt = jwtTokenUtil.createAdminJWT();
 			mav.addObject("jwt", jwt.getToken());
 		} catch (Exception e) {
-			// TODO Replace console debug output with logging
+			//TODO: Implement logging rather than printing error to console (security vulnerability)
 			System.out.println("Error retrieving jwt (RoutingController) : " + e.getMessage());
 		}
 		

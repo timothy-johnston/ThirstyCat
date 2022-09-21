@@ -12,6 +12,8 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
@@ -28,7 +30,7 @@ public class JwtTokenUtil {
 	//This class is mostly copy/paste from the tutorial, but adding my own comments to show understanding
 	
 	//TODO: Why this value? Research, adapt/change to fit this project if needed
-	private static final long serianVersionUID = -2550185165626007488L;
+	private static final long serialVersionUID = -2550185165626007488L;
 	
 	//Token lifetime in milliseconds
 	private static final long JWT_TOKEN_VALIDITY = 10 * 60 * 1000;
@@ -72,7 +74,6 @@ public class JwtTokenUtil {
 	
 	//Parses the JWT into its individual Claims
 	private Claims getAllClaimsFromToken(String token) {
-		System.out.println(token);
 		return Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
 	}
 	
@@ -139,13 +140,25 @@ public class JwtTokenUtil {
 		//Check that user is Raspberry Pi or frontend
 		if (username.equalsIgnoreCase("TC_ADMIN_A") || username.equalsIgnoreCase("TC_ADMIN_B")) {
 			try {
-				authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
+				
+				UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(username, password);
+				
+				Authentication authentication = authenticationManager.authenticate(token);
+				
 			} catch (DisabledException e) {
 				throw new Exception("USER_DISABLED", e);
 			} catch (BadCredentialsException e) {
 				throw new Exception("INVALID_CREDENTIALS", e);
+			} catch (AuthenticationException e) {
+				//TODO: Implement logging rather than printing error to console (security vulnerability)
+				System.out.println("Ooops. Authentication exception: " + e.getMessage());
+				throw new Exception("AUTHENTICATION_EXCEPTION", e);
+			} catch (Exception e) {
+				//TODO: Implement logging rather than printing error to console (security vulnerability)
+				System.out.println("Something bad happened... : " + e.getMessage());
+				throw new Exception("A_BAD_THING_EXCEPTION", e);
 			}
-		} else {
+		} else {			
 			throw new Exception("INVALID_PERMISSIONS");
 		}
 		

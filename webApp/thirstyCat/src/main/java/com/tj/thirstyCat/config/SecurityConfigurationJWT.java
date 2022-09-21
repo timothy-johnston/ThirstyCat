@@ -8,7 +8,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -19,6 +18,7 @@ import com.tj.thirstyCat.security.JwtAuthenticationEntryPoint;
 import com.tj.thirstyCat.security.JwtRequestFilter;
 import com.tj.thirstyCat.service.UserService;
 
+//Order(n) is for prioritizing the two security methods: jwt (this class) and basic
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @Order(2)
@@ -53,13 +53,16 @@ public class SecurityConfigurationJWT extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
 		httpSecurity.antMatcher("/api/**")
 		.csrf().disable()
-			.authorizeRequests().antMatchers("/api/authenticateJWT").permitAll()
-			.anyRequest().authenticated().and()
+			.authorizeRequests()
+			.antMatchers("/api/authenticateJWT").permitAll()
+			.anyRequest().authenticated()
+			.and()
 			.exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and()
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 		
 		//Validate token filter
-		httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+		httpSecurity.addFilterAfter(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+
 	}
 
 }

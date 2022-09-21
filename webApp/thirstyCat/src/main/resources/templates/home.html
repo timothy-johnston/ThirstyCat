@@ -13,9 +13,9 @@
         <!-- Import fonts -->
         <link href="https://fonts.googleapis.com/css?family=Maven+Pro|Patua+One" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Damion&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+        <!-- <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet"> -->
         <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300&display=swap" rel="stylesheet">
-<!--         <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">  -->
+        <link href="https://unpkg.com/bootstrap-table@1.15.4/dist/bootstrap-table.min.css" rel="stylesheet">
 
         <!-- Bootstrap stylesheet goes before any other stylesheets -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -26,12 +26,18 @@
         <script src="https://code.highcharts.com/highcharts.js"></script>
         <script src="https://code.highcharts.com/modules/heatmap.js"></script>
         <script src="https://code.highcharts.com/modules/exporting.js"></script>
-    
+
+        <!-- Favicon -->
+        <link rel="shortcut icon" type="image/x-icon" href="/media/favicon_1.ico"/>
     </head>
 
     <body>
-
         <section id="landing" class="section">
+            <section id="section-notice">
+                <div id="notice-container" class="alert alert-warning" role="alert">
+                    Bad news - This site has become too expensive to maintain, and I have to bring it down. December 15th will be the site's last day, but I hope to bring it back up sometime in 2020!
+                </div>
+            </section>
             <!-- Navbar -->
             <nav id="nav-home" class="navbar navbar-expand-lg bg-transparent navbar-dark">
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
@@ -55,24 +61,29 @@
                 <div class="collapse navbar-collapse" id="collapsibleNavbar">
                     <ul class="navbar-nav nav-ul">
                         <li class="nav-item">
-                            <a class="nav-link" href="login" sec:authorize="isAnonymous()">Log In</a>
-                            <a class="nav-link" href="favoritepics" sec:authorize="isAuthenticated()">Favorite Pics</a>
+                            <a class="nav-link" href="favoritepics">Favorite Pics</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="registration" sec:authorize="isAnonymous()">Register</a>
-                            <a class="nav-link" href="login?logout" sec:authorize="isAuthenticated()">Sign Out</a>
+                            <a class="nav-link" href="login" sec:authorize="isAnonymous()">Log In</a>
+                            <a class="nav-link" href="logout" sec:authorize="isAuthenticated()">Log Out</a>
                         </li>     
                     </ul>
                 </div> 
-                <button id="spacer-nav-button" class="navbar-toggler">
+                <!-- <button id="spacer-nav-button" class="navbar-toggler">
                     <span class="navbar-toggler-icon"></span>
-                </button> 
+                </button>  -->
             </nav>
 
             <div id="section-home">
                 <div id="drink-container" class="container">
+                    <div class="welcome-prompt-container drink-info container" sec:authorize="isAuthenticated()">
+                        <p><span>Welcome back, </span><span sec:authentication="principal.username">User</span><span>! Check out the latest picture:</span><p>
+                    </div>
+                    <div class="welcome-prompt-container drink-info container" sec:authorize="isAnonymous()">
+                        <p><span>Welcome! Check out the latest picture:</span><p>
+                    </div>
                     <div id="drinkPic-container">
-                        <img id="drinkPic" src="/media/catPic.jpg" alt="Picture of Shasta taking a drink">
+                        <img id="drinkPic" src="" alt="Picture of Shasta taking a drink">
                         <div id="fav-container">
                             <div id="login-prompt-container" sec:authorize="isAnonymous()">
                                 <p id="login-prompt">
@@ -91,13 +102,13 @@
                         </div>
                         <div id="drink-info-body">
                             <div>
-                            <h5 id="drinkTime" class="drink-info">Shasta took this drink at _time_ EST.</h5>
-                            <h5 id="drinkCount" class="drink-info">It was her _count_ drink of the day.</h5>
-                            <h5 id="elapsedTime" class="drink-info">It had been _time-elapsed_ since her last drink, and she was at the water bowl for _duration_.</h5>
+                                <h5 id="drinkTime" class="drink-info">Loading data...</h5>
+                                <h5 id="elapsedTime" class="drink-info">Loading data...</h5>
+                                <h5 id="drinkCount" class="drink-info">Loading data...</h5>
                             </div>
                             <div>
                                 <h5 class="drink-info">Check back later or follow ThirstyCat on Twitter to see some more pictures!</h5>
-                                <div class="social-icon-container">
+                                <div id="drink-info-twitter" class="social-icon-container">
                                     <a class="fa fa-twitter" href="https://twitter.com/TimJohnston_11" target="_blank"></a>
                                 </div>
                             </div>
@@ -127,6 +138,22 @@
                 </form>
             </div>
         </section>
+        <section id="section-table">
+            <div id="table-container" class="container">
+                <label class="select-label" for="table">Most recent drinks:</label>
+                <table id="table" class="table-striped table-borderless" data-sort-name="drinkNo" data-sort-order="desc"
+                data-pagination="true"
+  				data-page-list="[10, 20, 50, 100, All]">
+                    <thead>
+                    <tr>
+                        <th data-field="drinkNo" data-sortable="true" data-halign="center" data-align="center">Drink Number</th>
+                        <th data-field="startTime" data-sortable="false" data-halign="center" data-align="center">Start Time</th>
+                        <th data-field="endTime" data-sortable="false" data-halign="center" data-align="center">End Time</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </section>
 
         <section id="footer-section">
             <div id="footer-content-container" class="container">
@@ -137,94 +164,30 @@
                 </p>
                 <p class="footer-content">Connect with Tim on LinkedIn, Twitter, or Github</p>
                 <div class="social-icon-container">
-                    <a class="fa fa-linkedin footer-icon" href="https://twitter.com/TimJohnston_11" target="_blank"></a>
+                    <a class="fa fa-linkedin footer-icon" href="https://www.linkedin.com/in/timothyejohnston/" target="_blank"></a>
                     <a class="fa fa-twitter footer-icon" href="https://twitter.com/TimJohnston_11" target="_blank"></a>
-                    <a class="fa fa-github footer-icon" href="https://twitter.com/TimJohnston_11" target="_blank"></a>
+                    <a class="fa fa-github footer-icon" href="https://github.com/timothy-johnston" target="_blank"></a>
                 </div>
             </div>
         </section>
 
-<!--         <p th:if="${#authentication.principal}"> -->
-<!--             Welcome <span sec:authentication="principal.username">User!!!</span> -->
-<!--         </p> -->
-    
-    
-    <!-- <div class="username-holder-div" style="display: none" sec:authorize="isAuthenticated()">
-        <p class="username-holder" sec:authentication="principal.username">User</p>
-    </div>
-
-	<div class="username-holder-div" style="display: none" sec:authorize="isAnonymous()">
-        <p class="username-holder"></p>
-    </div> -->
-    
-    <div class="username-holder-div" style="display: none" sec:authorize="isAuthenticated()">
+        <div class="username-holder-div" style="display: none" sec:authorize="isAuthenticated()">
             <p class="username-holder" sec:authentication="principal.username">User</p>
         </div>
-    
         <div class="username-holder-div" style="display: none" sec:authorize="isAnonymous()">
             <p class="username-holder"></p>
         </div>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-    
-    
-    
-        <!-- Javascript, Jquery, Bootstrap -->
+        <!-- Javascript, Jquery, Bootstrap, Highcharts, my js -->
         <script th:inline="javascript">
             sessionStorage.setItem('jwt',( /*[[${jwt}]]*/ 'default'));
-		</script>
+        </script>
         <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script src="https://unpkg.com/bootstrap-table@1.15.4/dist/bootstrap-table.min.js"></script>
         <script async src="/js/highchartsConfig.js"></script>
         <script async src="/js/main.js"></script>
-        
         
     </body>
     

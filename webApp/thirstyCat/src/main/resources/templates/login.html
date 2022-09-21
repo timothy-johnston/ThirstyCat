@@ -12,7 +12,7 @@
         <!-- Import fonts -->
         <link href="https://fonts.googleapis.com/css?family=Maven+Pro|Patua+One" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Damion&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+<!--         <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet"> -->
         <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300&display=swap" rel="stylesheet">  
 
         <!-- Bootstrap stylesheet goes before any other stylesheets -->
@@ -20,10 +20,12 @@
         <link rel="stylesheet" type="text/css" href="/css/main.css" />
         <link rel="stylesheet" type="text/css" href="/css/login.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+        <!-- Favicon -->
+        <link rel="shortcut icon" type="image/x-icon" href="/media/favicon_1.ico"/>
     </head>
 
     <body>
-
         <section class="section">
             <!-- Navbar -->
             <nav id="nav-home" class="navbar navbar-expand-lg bg-transparent navbar-dark">
@@ -45,13 +47,13 @@
                 <div class="collapse navbar-collapse" id="collapsibleNavbar">
                     <ul class="navbar-nav nav-ul">
                         <li class="nav-item">
-                            <a class="nav-link" href="home#section-stats">CatStats</a>
+                            <a class="nav-link" href="registration">Register</a>
                         </li>  
                     </ul>
                 </div> 
-                <button id="spacer-nav-button" class="navbar-toggler">
+                <!-- <button id="spacer-nav-button" class="navbar-toggler">
                     <span class="navbar-toggler-icon"></span>
-                </button> 
+                </button>  -->
             </nav>
         
             <div id="section-login">
@@ -60,62 +62,50 @@
       					You have been logged out.
       				</div>
      			</div>
-                <!-- <div id="login-container" class="container"> -->
-                    <div id="login-container" class="container">
-                        <div id="drinkInfo-header">
-                            <h2 class="drinkInfo">Log In</h2>
-                        </div>
-                        <div id="login-form-container">
-                            <form id="login-form" class="form" method="post" th:action="@{/login}">
-                                <div th:if="${param.error}">
-     								<div class="alert alert-danger">Invalid username or password.</div>
-     							</div>
-                                <input class="form-input" type="text" name="username" placeholder="Username" autofocus="autofocus" required>
-                                <input class="form-input" type="password" name="password" placeholder="Password" required>
-                                
-                                <div class="form-input">
-                                	<input class="aaaaform-input" type="checkbox" name="remember-me">
-                                	<label class="aaaaform-input" for="remember-me">Remember Me</label>
-                                </div>
-                                
-                                <input class="form-input submit-btn"type="submit" value="Log In">
-                                <p id="login-p">
-                                    <a id="register-link" class="formatted-link" target="" href="/" th:href="@{/registration}">No account? Click here to register.</a>
-                                </p>
-                            </form>
-                            <!-- <div>
-                            <h5 class="drink-info">Shasta took this drink at _time_ EST.</h5>
-                            <h5 class="drink-info">It was her _count_ drink of the day.</h5>
-                            <h5 class="drink-info">It had been _time-elapsed_ since her last drink, and she was at the water bowl for _duration_.</h5>
-                            </div>
-                            <div>
-                                <h5 class="drink-info">Check back later or follow ThirstyCat on Twitter to see some more pictures!</h5>
-                                <div class="social-icon-container">
-                                    <a class="fa fa-twitter" href="https://twitter.com/TimJohnston_11" target="_blank"></a>
-                                </div>
-                            </div> -->
-                        </div>
+                <div id="login-container" class="container">
+                    <div id="drinkInfo-header">
+                        <h2 class="drinkInfo">Log In</h2>
                     </div>
-                <!-- </div> -->
+                    <div id="login-form-container">
+                        <form id="login-form" class="form" method="post" th:action="@{/login}">
+                            <div th:if="${param.error}">
+                                <div class="alert alert-danger">Invalid username or password.</div>
+                            </div>
+                            <input class="form-input" type="text" name="username" placeholder="Username" autofocus="autofocus" required>
+                            <input class="form-input" type="password" name="password" placeholder="Password" required>
+                            
+                            <div class="form-input">
+                                <input class="aaaaform-input" type="checkbox" name="remember-me">
+                                <label class="aaaaform-input" for="remember-me">Remember Me</label>
+                            </div>
+                            
+                            <input class="form-input submit-btn"type="submit" value="Log In">
+                            <p id="login-p">
+                                <a id="register-link" class="formatted-link" target="" href="/" th:href="@{/registration}">No account? Click here to register.</a>
+                            </p>
+                        </form>
+                    </div>
+                </div>
             </div>
         </section>
 
+        <section id="footer-section">
+            <div id="footer-content-container" class="container">
+                <h1 class="footer-content">Thanks for visiting!</h1>
+                <p class="footer-content">
+                    ThirstyCat is a project by Tim Johnston (and his cat Shasta). 
+                    Learn more about Tim by visiting <a class="formatted-link" target="_blank" href="http://www.timothyjohnston.me">timothyjohnston.me</a>
+                </p>
+                <p class="footer-content">Connect with Tim on LinkedIn, Twitter, or Github</p>
+                <div class="social-icon-container">
+                    <a class="fa fa-linkedin footer-icon" href="https://www.linkedin.com/in/timothyejohnston/" target="_blank"></a>
+                    <a class="fa fa-twitter footer-icon" href="https://twitter.com/TimJohnston_11" target="_blank"></a>
+                    <a class="fa fa-github footer-icon" href="https://github.com/timothy-johnston" target="_blank"></a>
+                </div>
+            </div>
+        </section>
 
-
- 
-
-
-
-
-
-
-
-
-
-
-
-
-        <!-- Javascript, Jquery, Bootstrap -->
+        <!-- Javascript, Jquery, Bootstrap, my js scripts -->
         <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
